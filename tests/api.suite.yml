@@ -1,0 +1,19 @@
+# Codeception Test Suite Configuration
+#
+# Suite for API tests.
+
+class_name: ApiTester
+
+modules:
+    enabled:
+        - Db
+        - REST:
+            depends: Laravel5
+            url: http://api.dev/
+        - PhpBrowser:
+            url: http://api.dev/
+        - Laravel5:
+            environment_file: .env.testing
+        - MailCatcher:
+            url: 'http://citrex.ovh'
+            port: 22080
