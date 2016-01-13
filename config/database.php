@@ -48,7 +48,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'database' => 'bow',
+            'database' => 'irispass',
             'host' => env('DB_HOST', 'localhost'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),
@@ -60,7 +60,7 @@ return [
 
         'mysql_testing' => [
             'driver' => 'mysql',
-            'database' => 'bow_testing',
+            'database' => 'irispass_testing',
             'host' => env('DB_HOST', 'localhost'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),

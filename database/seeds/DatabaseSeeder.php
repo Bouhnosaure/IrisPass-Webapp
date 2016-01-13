@@ -17,27 +17,11 @@ class DatabaseSeeder extends Seeder
 
 
         if (App::environment() === 'production') {
-            $this->call('LicenceTableSeeder');
-            $this->call('TvaTableSeeder');
 
         } else {
-            $this->call('LicenceTableSeeder');
-
-            $this->call('TvaTableSeeder');
-
-            $this->call('OrganizationTableSeeder');
 
             $this->call('UserTableSeeder');
-
-            $this->call('OutletTableSeeder');
-
-            $this->call('ProductTableSeeder');
-
-            $this->call('PriceTableSeeder');
-
-            $this->call('LayoutTableSeeder');
-
-            $this->call('NotificationTableSeeder');
+            $this->call('OsjsUserTableSeeder');
 
         }
 

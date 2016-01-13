@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLicencesTable extends Migration
+class CreateOsjsUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreateLicencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('licences', function (Blueprint $table) {
+        //
+
+        Schema::create('osjs_users', function (Blueprint $table) {
             $table->increments('id');
-
+            $table->string('username')->unique();
+            $table->string('password', 60);
             $table->string('name');
-            $table->string('description');
-            $table->string('price');
-            $table->integer('outlet_number');
-
+            $table->text('groups');
+            $table->text('settings');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateLicencesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('licences');
+        Schema::drop('osjs_users');
     }
 }
