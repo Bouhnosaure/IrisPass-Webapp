@@ -1,47 +1,36 @@
 @extends('layouts.auth')
 
-<!-- Main Content -->
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {!! csrf_field() !!}
+    <div id="cl-wrapper" class="forgotpassword-container">
+        <div class="middle">
+            <div class="block-flat">
+                <div class="header">
+                    <h3 class="text-center"><img class="logo-img" src="images/logo.png" alt="logo"/></h3>
+                </div>
+                <div class="content">
+                    {!! Form::open(['url' => 'password/email', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                    @include('errors.auth')
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                    <h5 class="title text-center"><strong>{{ trans('auth.forgot') }}</strong></h5>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                    <!--- Email Field --->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                {!! Form::email('email', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope"></i>Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    {!! Form::submit(trans('auth.reset'), ['class' => 'btn btn-block btn-primary btn-rad btn-lg', 'name' => 'submit-reset', 'data-dismiss' => 'modal']) !!}
+
+                    {!! Form::close() !!}
                 </div>
             </div>
+            <div class="text-center out-links"><a href="#">&copy; 2016 {{ trans('general.appname') }}</a></div>
         </div>
     </div>
-</div>
 @endsection

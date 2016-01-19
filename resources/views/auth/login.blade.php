@@ -7,51 +7,43 @@
                 <div class="header">
                     <h3 class="text-center"><img class="logo-img" src="images/logo.png" alt="logo"/></h3>
                 </div>
-                <div>
+                <div class="content">
 
                     {!! Form::open(['url' => 'login', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
 
+                    <h4 class="title">{{ trans('auth.login') }}</h4>
 
-                    <div class="content">
-                        <h4 class="title">{{ trans('auth.login') }}</h4>
+                    @include('errors.auth')
 
-                        @include('errors.auth')
-
-                                <!--- Email Field --->
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    {!! Form::email('email', null, ['class' => 'form-control']) !!}
-                                </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                {!! Form::email('email', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-
-                        <!--- Password Field --->
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    {!! Form::password('password', ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--- Remember me Field --->
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('remember', null, ['class' => 'form-control']) !!}
-                                        {{ trans('auth.remember-field') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
-                    <!--- Submit Field --->
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                {!! Form::password('password', ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <div class="checkbox">
+                                <label>
+                                    {!! Form::checkbox('remember', null, ['class' => 'form-control']) !!}
+                                    {{ trans('auth.remember-field') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="foot">
                         <a href="{{ url('password/reset') }}">{{ trans('auth.forgot') }}</a>
                         <a class="btn btn-default" data-dismiss="modal" href="{{ url('register') }}">{{ trans('auth.register') }}</a>

@@ -7,10 +7,11 @@
                 <div class="header">
                     <h3 class="text-center"><img class="logo-img" src="images/logo.png" alt="logo"/></h3>
                 </div>
-                
-                {!! Form::open(['url' => 'register', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
 
                 <div class="content">
+                    {!! Form::open(['url' => 'register', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
+
+
                     <h5 class="title text-center"><strong>{{ trans('auth.register') }}</strong></h5>
 
                     @include('errors.auth')
@@ -56,8 +57,8 @@
 
                     {!! Form::submit(trans('auth.register'), ['class' => 'btn btn-block btn-success btn-rad btn-lg', 'name' => 'submit-register']) !!}
 
+                    {!! Form::close() !!}
                 </div>
-                {!! Form::close() !!}
             </div>
             <div class="text-center out-links"><a href="#">&copy; 2016 {{ trans('general.appname') }}</a></div>
         </div>
