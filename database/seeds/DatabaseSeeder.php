@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
+        Model::unguard();
+
+        if (App::environment() === 'production') {
+            //nothing for now
+        } else {
+            $this->call(UserTableSeeder::class);
+            $this->call(OsjsUserTableSeeder::class);
+        }
+
+        Model::reguard();
     }
 }

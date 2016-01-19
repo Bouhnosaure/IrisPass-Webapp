@@ -2,7 +2,13 @@
   <dictionary name="alexa">
     <words>
       <w>csrf</w>
+      <w>fontawesome</w>
       <w>guid</w>
+      <w>javascripts</w>
+      <w>jquerycookie</w>
+      <w>jquerygritter</w>
+      <w>jqueryui</w>
+      <w>nanoscroller</w>
       <w>tvas</w>
     </words>
   </dictionary>
