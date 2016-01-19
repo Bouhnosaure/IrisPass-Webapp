@@ -6,7 +6,7 @@
         <div class="middle">
             <div class="block-flat">
                 <div class="header">
-                    <h3 class="text-center"><img class="logo-img" src="images/theme/admin/logo.png" alt="logo"/></h3>
+                    <h3 class="text-center"><img class="logo-img" src="/images/theme/admin/logo.png" alt="logo"/></h3>
                 </div>
                 <div class="content">
                     {!! Form::open(['url' => 'password/email', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
