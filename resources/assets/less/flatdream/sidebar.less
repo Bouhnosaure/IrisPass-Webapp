@@ -25,7 +25,7 @@
 }
 
 .sidebar-logo{
-  background: @primary-color url(../images/logo.png) no-repeat 15px 19px;
+  background: @primary-color url("@{config-flatdream-image-path}/logo.png") no-repeat 15px 19px;
   padding:15px 20px;
   display: block;
   height: 64px;
@@ -144,7 +144,7 @@
 }
 .sb-collapsed .sidebar-logo{
   padding: 4px 0 5px;
-  background: url("../images/logo.png") no-repeat scroll 23px -48px @primary-color;
+  background: url("@{config-flatdream-image-path}/logo.png") no-repeat scroll 23px -48px @primary-color;
 }
 .sb-collapsed .sidebar-logo .logo a{
   content:" ";
@@ -333,7 +333,7 @@
 	
   
   #sub-menu-nav  ul:after{
-    background: url(../images/menu-tail-left.png) no-repeat right 10px;
+    background: url("@{config-flatdream-image-path}/menu-tail-left.png") no-repeat right 10px;
     top: 0px;
     content: "";
     display: inline-block;
