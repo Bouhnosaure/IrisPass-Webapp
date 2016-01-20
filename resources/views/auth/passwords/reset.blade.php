@@ -8,7 +8,7 @@
                     <h3 class="text-center"><img class="logo-img" src="/images/theme/admin/logo.png" alt="logo"/></h3>
                 </div>
                 <div class="content">
-                    {!! Form::open(['url' => 'password/reset', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
+                    {!! Form::open(['action' => 'Auth\PasswordController@reset', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
 
                     <h5 class="title text-center"><strong>{{ trans('auth.forgot') }}</strong></h5>
 

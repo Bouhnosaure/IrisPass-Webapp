@@ -9,7 +9,7 @@
                 </div>
                 <div class="content">
 
-                    {!! Form::open(['url' => 'login', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
+                    {!! Form::open(['action' => 'Auth\AuthController@login', 'method' => 'POST', 'class'=> 'form-horizontal', 'style' => 'margin-bottom: 0px !important;']) !!}
 
                     <h4 class="title">{{ trans('auth.login') }}</h4>
 

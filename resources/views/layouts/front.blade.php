@@ -48,9 +48,34 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/login">Inscription / Connexion</a>
-                </li>
+                @if (Auth::guest())
+                    <li>
+                        <a href="{{action('Auth\AuthController@showLoginForm')}}">{{ trans('auth.login') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{action('Auth\AuthController@showRegistrationForm')}}">{{ trans('auth.register') }}</a>
+                    </li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{action('DashboardController@index')}}">{{ trans('menu.dashboard') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{action('ProfileController@index')}}">{{ trans('menu.preferences') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{action('Auth\ConfirmationController@index')}}">{{ trans('menu.confirmation') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{action('Auth\AuthController@logout')}}">{{ trans('auth.logout') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -81,7 +106,7 @@
 
 <!-- Page Content -->
 
-<a  name="services"></a>
+<a name="services"></a>
 <div class="content-section-a">
 
     <div class="container">
@@ -147,7 +172,7 @@
 </div>
 <!-- /.content-section-a -->
 
-<a  name="contact"></a>
+<a name="contact"></a>
 <div class="banner">
 
     <div class="container">

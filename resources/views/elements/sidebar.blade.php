@@ -5,11 +5,10 @@
             <div class="content">
                 <div class="sidebar-logo">
                     <div class="logo">
-                        <a href="{{ action('HomeController@index') }}"></a>
+                        <a href="{{ action('DashboardController@index') }}"></a>
                     </div>
                 </div>
                 <div class="side-user">
-                    <div class="avatar"><img src="images/avatar6.jpg" alt="Avatar"/></div>
                     <div class="info">
                         <p>40 <b>GB</b> / 100 <b>GB</b><span><a href="#"><i class="fa fa-plus"></i></a></span></p>
                         <div class="progress progress-user">

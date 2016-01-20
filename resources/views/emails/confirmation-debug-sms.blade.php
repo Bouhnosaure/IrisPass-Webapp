@@ -1,0 +1,1 @@
+{{$user->email}}|{{ $code->confirmation_code }}

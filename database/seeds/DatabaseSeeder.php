@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             //nothing for now
         } else {
             $this->call(UserTableSeeder::class);
+            $this->call(UserProfileTableSeeder::class);
             $this->call(OsjsUserTableSeeder::class);
         }
 

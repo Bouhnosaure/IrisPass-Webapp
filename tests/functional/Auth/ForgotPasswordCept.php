@@ -16,7 +16,7 @@ $I->fillField(['name' => 'email'], $user->email);
 $I->click('submit-password');
 
 //step2
-$I->seeInLastEmail('admin@tawa.com');
+$I->seeInLastEmail('admin@irispass.fr');
 $I->seeInLastEmail('Your Password Reset Link');
 
 //step3

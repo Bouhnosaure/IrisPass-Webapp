@@ -15,19 +15,11 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create([
-            'username' => 'ci_trex',
-            'firstname' => 'Alexandre',
-            'lastname' => 'Mangin',
-            'phone' => '0616391876',
             'email' => 'alexandre.mangin@viacesi.fr',
             'password' => bcrypt('123123'),
         ]);
 
         User::create([
-            'username' => 'mnky_c',
-            'firstname' => 'Alan',
-            'lastname' => 'Corbel',
-            'phone' => '0616391876',
             'email' => 'alan.corbel@viacesi.fr',
             'password' => bcrypt('123123'),
         ]);
