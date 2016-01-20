@@ -71,10 +71,9 @@ class AuthController extends Controller
 
         $user->profile()->create(['user_id' => $user->id]);
 
-        $profile = $user->profile();
-        $profile->firstname = $data['firstname'];
-        $profile->lastname = $data['lastname'];
-        $profile->save();
+        $user->profile->firstname = $data['firstname'];
+        $user->profile->lastname = $data['lastname'];
+        $user->profile->save();
 
         return $user;
     }

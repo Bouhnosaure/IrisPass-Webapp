@@ -5,7 +5,7 @@ $I->am('an user');
 $I->wantTo('Update my profile');
 
 //setup
-$I->amLoggedAs(\App\User::find(1));
+$I->amAuthenticatedWithCredentials();
 $I->amOnAction('ProfileController@edit');
 
 $user = \App\User::find(1);

@@ -5,7 +5,10 @@ $I->resetEmails();
 //setup
 $I->am('a user');
 $I->wantTo('activate my email adress');
-$I->amLoggedAs(\App\User::find(1));
+
+$I->amAuthenticatedWithCredentials();
+$I->canSeeAuthentication();
+
 $I->amOnPage('/confirmation');
 
 //action

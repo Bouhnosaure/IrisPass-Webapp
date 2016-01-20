@@ -23,4 +23,16 @@ class FunctionalTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+
+    public function amAuthenticatedWithCredentials()
+    {
+        $I = $this;
+        $I->amOnPage('/logout');
+        $I->amOnPage('/login');
+        $I->see('Connexion');
+        $I->fillField(['name' => 'email'], 'alexandre.mangin@viacesi.fr');
+        $I->fillField(['name' => 'password'], '123123');
+        $I->click('submit-login');
+    }
+
 }

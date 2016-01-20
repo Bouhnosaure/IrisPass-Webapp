@@ -5,7 +5,7 @@ $I->resetEmails();
 //setup
 $I->am('a user');
 $I->wantTo('activate my phone number');
-$I->amLoggedAs(\App\User::find(1));
+$I->amAuthenticatedWithCredentials();
 $I->amOnPage('/confirmation');
 
 //action

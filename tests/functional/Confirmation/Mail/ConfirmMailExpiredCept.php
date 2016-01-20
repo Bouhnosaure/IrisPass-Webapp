@@ -1,10 +1,13 @@
 <?php
 $I = new FunctionalTester($scenario);
+$I->resetEmails();
 
 //setup
 $I->am('a user');
 $I->wantTo('activate my email adress with expired code');
-$I->amLoggedAs(\App\User::find(1));
+
+$I->amAuthenticatedWithCredentials();
+$I->canSeeAuthentication();
 
 $I->haveRecord('users_confirmations', [
     'type' => 'mail',

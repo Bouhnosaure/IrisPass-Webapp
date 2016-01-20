@@ -5,15 +5,15 @@ $I->resetEmails();
 //setup
 $I->am('a user');
 $I->wantTo('retrieve the password and change it from my account');
-$I->amOnPage('/password/email');
+$I->amOnPage('/password/reset');
 $I->cantSeeAuthentication();
 $user = \App\User::find(1);
 
 //action
 //step 1
-$I->see('mot de passe');
+$I->see('Mot de passe');
 $I->fillField(['name' => 'email'], $user->email);
-$I->click('submit-password');
+$I->click('submit-reset');
 
 //step2
 $I->seeInLastEmail('admin@irispass.fr');
