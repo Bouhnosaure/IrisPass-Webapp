@@ -1,0 +1,25 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+
+services:
+  - mysql
+  - redis-server
+
+before_script:
+  - cp .env.testing .env
+  - mysql -e 'create database irispass_testing;'
+  - composer self-update
+  - composer install --prefer-dist --no-interaction --dev
+  - php artisan migrate:install --database=mysql_testing --env=testing --no-interaction -vvv
+
+script:
+  - php artisan migrate --database=mysql_testing --env=testing --no-interaction -vvv
+  - php artisan db:seed --database=mysql_testing --env=testing --no-interaction -vvv
+  - vendor/bin/codecept run --env=testing
+
+notifications:
+    slack: n64:f8mvfwEBtuNrir37ky4bBFhC
