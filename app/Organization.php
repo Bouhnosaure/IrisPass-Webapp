@@ -32,9 +32,9 @@ class Organization extends Model
 
     protected $dates = ['date_start', 'date_end'];
 
-    public function admins()
+    public function owner()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function groups()

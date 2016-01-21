@@ -17,7 +17,8 @@ class OrganizationTableSeeder extends Seeder
         Organization::create([
             'name' => 'Gorilla LTD',
             'address' => '61 cours du médoc',
-            'address_comp' => 'appt 22 bat B'
+            'address_comp' => 'appt 22 bat B',
+            'user_id' => 2
         ]);
 
 

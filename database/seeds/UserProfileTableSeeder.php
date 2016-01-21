@@ -16,8 +16,6 @@ class UserProfileTableSeeder extends Seeder
     {
         DB::table('user_profiles')->delete();
 
-        $faker = Faker::create();
-
         UserProfile::create([
             'firstname' => 'Alexandre',
             'lastname' => 'Mangin',

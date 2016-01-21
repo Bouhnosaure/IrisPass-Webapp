@@ -1,19 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Requests\ImageRequest;
 use App\Http\Requests\OrganizationRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Repositories\OrganizationRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
-use App\Services\ImageService;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
-use Intervention\Image\Facades\Image;
 use Laracasts\Flash\Flash;
-use Spatie\Glide\GlideImage;
 
 class OrganizationController extends Controller
 {
@@ -23,7 +17,8 @@ class OrganizationController extends Controller
     private $organizationRepository;
 
     /**
-     * @param UserRepositoryInterface $userRepository
+     * @param OrganizationRepositoryInterface $organizationRepository
+     * @internal param UserRepositoryInterface $userRepository
      */
     public function __construct(OrganizationRepositoryInterface $organizationRepository)
     {

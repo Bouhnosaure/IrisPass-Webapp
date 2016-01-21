@@ -14,9 +14,9 @@ class CreateRelationUsersOrganizations extends Migration
     {
         //
 
-        Schema::table('users', function ($table) {
-            $table->integer('organization_id')->after('password')->unsigned()->nullable()->index();
-            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('set null');
+        Schema::table('organizations', function ($table) {
+            $table->integer('user_id')->after('date_end')->unsigned()->nullable()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
 
     }
@@ -28,9 +28,9 @@ class CreateRelationUsersOrganizations extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropForeign('organizations_organization_id_foreign');
-            $table->dropColumn('organization_id');
+        Schema::table('organizations', function ($table) {
+            $table->dropForeign('organizations_user_id_foreign');
+            $table->dropColumn('user_id');
         });
     }
 }

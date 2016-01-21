@@ -43,11 +43,11 @@ class User extends Authenticatable
     }
 
     /**
-     * An user has one or more organization
+     * An user has one organization
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function organization()
     {
-        return $this->belongsTo('App\Organization');
+        return $this->hasOne('App\Organization');
     }
 }
