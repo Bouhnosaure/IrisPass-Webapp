@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class OsjsUser extends Model
+class Organization extends Model
 {
 
     /**
@@ -17,23 +17,34 @@ class OsjsUser extends Model
      *
      * @var string
      */
-    protected $table = 'osjs_users';
+    protected $table = 'organizations';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['username', 'name', 'password', 'groups', 'settings'];
+    protected $fillable = ['name', 'address', 'address_comp', 'phone', 'email', 'is_active', 'max_users', 'date_start', 'date_end'];
 
-    public function organization()
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
+    protected $dates = ['date_start', 'date_end'];
+
+    public function admins()
     {
-        return $this->belongsTo('App\Organization');
+        return $this->hasMany('App\User');
     }
 
     public function groups()
     {
-        return $this->belongsToMany('App\OsjsGroup', 'osjs_users_groups', 'osjs_group_id', 'osjs_user_id');
+        return $this->hasMany('App\OsjsGroup');
+    }
+
+    public function users()
+    {
+        return $this->hasMany('App\OsjsUser');
     }
 
 }

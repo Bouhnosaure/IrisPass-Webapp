@@ -12,5 +12,6 @@ return [
     'dashboard'     => 'Dashboard',
     'preferences'     => 'Preferences',
     'confirmation'     => 'Validate',
+    'organization'     => 'My Organization',
 
 ];

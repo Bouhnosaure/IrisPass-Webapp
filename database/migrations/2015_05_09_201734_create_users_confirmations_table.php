@@ -17,13 +17,9 @@ class CreateUsersConfirmationsTable extends Migration {
 			$table->increments('id');
             $table->string('type')->nullable();
             $table->string('confirmation_code')->nullable();
-            $table->integer('user_id')->unsigned();
 			$table->timestamps();
 		});
 
-        Schema::table('users_confirmations', function ($table) {
-            $table->foreign('user_id')->references('id')->on('users');
-        });
 	}
 
 	/**

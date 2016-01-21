@@ -10,7 +10,7 @@
                 </div>
                 <div class="side-user">
                     <div class="info">
-                        <p>40 <b>GB</b> / 100 <b>GB</b><span><a href="#"><i class="fa fa-plus"></i></a></span></p>
+                        <p>4 / 10 <b>Comptes</b><span><a href="#"><i class="fa fa-plus"></i></a></span></p>
                         <div class="progress progress-user">
                             <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0"
                                  aria-valuemax="100" style="width: 40%">
@@ -20,11 +20,12 @@
                     </div>
                 </div>
                 <ul class="cl-vnavigation">
-                    <li><a href="#"><i class="fa fa-home"></i><span>Dashboard</span></a>
+                    <li><a href="{{action('DashboardController@index')}}"><i class="fa fa-home"></i><span>{{ trans('menu.dashboard') }}</span></a></li>
+                    <li><a href="#"><i class="fa fa-globe"></i><span>{{ trans('menu.organization') }}</span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.html">Version 1</a></li>
-                            <li><a href="dashboard2.html"><span class="label label-primary pull-right">New</span>Version
-                                    2</a></li>
+                            <li><a href="{{action('OrganizationController@index')}}">{{ trans('organization.index') }}</a></li>
+                            <li><a href="{{action('OrganizationController@edit')}}">{{ trans('organization.edit') }}</a></li>
+                            <li><a href="{{action('OrganizationController@subscriptions')}}">{{ trans('organization.subscriptions') }}</a></li>
                         </ul>
                     </li>
                 </ul>

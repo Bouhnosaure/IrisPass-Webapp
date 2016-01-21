@@ -21,14 +21,10 @@ class CreateUserProfilesTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->boolean('mail_confirmed')->default(0);
             $table->boolean('phone_confirmed')->default(0);
-            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
         });
 
-        Schema::table('user_profiles', function ($table) {
-            $table->foreign('user_id')->references('id')->on('users');
-        });
     }
 
     /**

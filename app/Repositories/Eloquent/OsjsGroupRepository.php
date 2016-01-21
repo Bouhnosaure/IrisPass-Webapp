@@ -1,10 +1,11 @@
 <?php namespace App\Repositories\Eloquent;
 
 use App\Event;
-use App\Repositories\OsjsUserRepositoryInterface;
+use App\OsjsGroup;
+use App\Repositories\OsjsGroupRepositoryInterface;
 use App\OsjsUser;
 
-class OsjsUserRepository implements OsjsUserRepositoryInterface
+class OsjsGroupRepository implements OsjsGroupRepositoryInterface
 {
     /**
      * @var Event
@@ -12,16 +13,16 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     private $model;
 
     /**
-     * @param OsjsUser $user
+     * @param OsjsGroup $group
      */
-    public function __construct(OsjsUser $user)
+    public function __construct(OsjsGroup $group)
     {
-        $this->model = $user;
+        $this->model = $group;
     }
 
 
     /**
-     * get all OsjsUser
+     * get all OsjsGroup
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
@@ -30,16 +31,16 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * get all OsjsUser in a list for a select box
+     * get all OsjsGroup in a list for a select box
      * @return mixed
      */
     public function getList()
     {
-        return $this->model->latest('created_at')->lists('username', 'id');
+        return $this->model->latest('created_at')->lists('name', 'id');
     }
 
     /**
-     * get OsjsUser by id
+     * get OsjsGroup by id
      * @param $id
      * @return mixed
      */
@@ -49,7 +50,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * create a new OsjsUser
+     * create a new OsjsGroup
      * @param array $data
      * @return static
      */
@@ -59,7 +60,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * update an OsjsUser
+     * update an OsjsGroup
      * @param $id
      * @param array $data
      * @return mixed
@@ -72,7 +73,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * delete a OsjsUser
+     * delete a OsjsGroup
      * @param $id
      * @return mixed
      */
@@ -82,7 +83,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * get all OsjsUser in paginated list
+     * get all OsjsGroup in paginated list
      * @param $number
      * @return mixed
      */

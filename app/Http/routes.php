@@ -47,15 +47,15 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('mail/{code}', array('uses' => 'Auth\ConfirmationController@confirmMailCode'));
     });
 
+    //Organization
+    Route::group(['prefix' => 'organization'], function () {
+        Route::get('/', array('uses' => 'OrganizationController@index'));
+        Route::get('/create', array('uses' => 'OrganizationController@create'));
+        Route::post('/', array('uses' => 'OrganizationController@store'));
+        Route::get('edit', array('uses' => 'OrganizationController@edit'));
+        Route::patch('edit', array('uses' => 'OrganizationController@update'));
 
-    Route::get('images/{dir}/{img}', function ($dir, $img) {
-        // serve an image with cache !
-        // determine a lifetime and return as object instead of string
-        $photo = Image::cache(function ($image) use ($dir, $img) {
-            return $image->make(storage_path() . '/app/images/' . $dir . '/' . $img);
-        }, 1, false);
-
-        return Response::make($photo, 200, array('Content-Type' => 'image/jpeg'));
+        Route::get('/subscriptions', array('uses' => 'OrganizationController@subscriptions'));
 
     });
 

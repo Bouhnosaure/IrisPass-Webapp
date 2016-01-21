@@ -12,5 +12,6 @@ return [
     'dashboard'     => 'Dashboard',
     'preferences'     => 'Préférences',
     'confirmation'     => 'Confirmer son profil',
+    'organization'     => 'Mon Organisation',
 
 ];

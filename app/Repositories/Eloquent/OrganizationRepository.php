@@ -1,27 +1,36 @@
 <?php namespace App\Repositories\Eloquent;
 
 use App\Event;
-use App\Repositories\OsjsUserRepositoryInterface;
+use App\Organization;
+use App\OsjsGroup;
+use App\Repositories\OrganizationRepositoryInterface;
+use App\Repositories\OsjsGroupRepositoryInterface;
 use App\OsjsUser;
+use App\User;
 
-class OsjsUserRepository implements OsjsUserRepositoryInterface
+class OrganizationRepository implements OrganizationRepositoryInterface
 {
     /**
      * @var Event
      */
     private $model;
 
+    private $user;
+
     /**
-     * @param OsjsUser $user
+     * @param Organization $organization
+     * @param User $user
+     * @internal param OsjsGroup $group
      */
-    public function __construct(OsjsUser $user)
+    public function __construct(Organization $organization, User $user)
     {
-        $this->model = $user;
+        $this->model = $organization;
+        $this->user = $user;
     }
 
 
     /**
-     * get all OsjsUser
+     * get all organizations
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
@@ -30,16 +39,16 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * get all OsjsUser in a list for a select box
+     * get all organizations in a list for a select box
      * @return mixed
      */
     public function getList()
     {
-        return $this->model->latest('created_at')->lists('username', 'id');
+        return $this->model->latest('created_at')->lists('name', 'id');
     }
 
     /**
-     * get OsjsUser by id
+     * get organization by id
      * @param $id
      * @return mixed
      */
@@ -49,7 +58,17 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * create a new OsjsUser
+     * get organization by id
+     * @param $id
+     * @return mixed
+     */
+    public function getByUserId($id)
+    {
+        return $this->user->findOrFail($id)->organization;
+    }
+
+    /**
+     * create a new organization
      * @param array $data
      * @return static
      */
@@ -59,7 +78,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * update an OsjsUser
+     * update an organization
      * @param $id
      * @param array $data
      * @return mixed
@@ -72,7 +91,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * delete a OsjsUser
+     * delete a organization
      * @param $id
      * @return mixed
      */
@@ -82,7 +101,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     }
 
     /**
-     * get all OsjsUser in paginated list
+     * get all organizations in paginated list
      * @param $number
      * @return mixed
      */

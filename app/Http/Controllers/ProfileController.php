@@ -68,4 +68,19 @@ class ProfileController extends Controller
         return redirect(action('ProfileController@edit'));
     }
 
+    /**
+     * Update the profile of the authenticated user
+     *
+     * @param UserProfileRequest $request
+     * @return Response
+     */
+    public function subscriptions(UserProfileRequest $request)
+    {
+        $this->userRepository->update(Auth::user()->id, $request->all());
+
+        Flash::success(Lang::get('profile.update-success'));
+
+        return redirect(action('ProfileController@edit'));
+    }
+
 }
