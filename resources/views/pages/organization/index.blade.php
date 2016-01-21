@@ -12,6 +12,11 @@
 
                     @if($organization)
                         "existe"
+
+                        <br>
+
+                        Création d'un dashboard a venir avec lien vers les utilisateur, groupes, etc
+
                     @else
                         "existe pas"
                         <br>

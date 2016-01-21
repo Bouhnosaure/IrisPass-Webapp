@@ -37,9 +37,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-
         return view('pages.organization.index')->with('organization', $this->organization);
-
     }
 
     /**
@@ -51,17 +49,11 @@ class OrganizationController extends Controller
     {
 
         if ($this->organization != null) {
-
             Flash::error(Lang::get('organization.fail-exists'));
-
             return redirect(action('OrganizationController@index'));
-
         } else {
-
             return view('pages.organization.create');
-
         }
-
     }
 
     /**
@@ -90,9 +82,7 @@ class OrganizationController extends Controller
      */
     public function edit()
     {
-
         return view('pages.organization.edit')->with('organization', $this->organization);
-
     }
 
     /**
@@ -103,7 +93,6 @@ class OrganizationController extends Controller
      */
     public function update(OrganizationRequest $request)
     {
-
         $this->organizationRepository->update($this->organization->id, $request->all());
 
         Flash::success(Lang::get('organization.update-success'));
@@ -117,10 +106,14 @@ class OrganizationController extends Controller
      */
     public function subscriptions()
     {
-
         return view('pages.organization.subscriptions');
-
     }
+
+    /*
+     * ADMIN AREA
+     */
+
+    #Get all and update this or this
 
 
 }
