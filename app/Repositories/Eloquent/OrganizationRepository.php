@@ -58,16 +58,6 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * get organization by id
-     * @param $id
-     * @return mixed
-     */
-    public function getByUserId($id)
-    {
-        return $this->user->findOrFail($id)->organization;
-    }
-
-    /**
      * create a new organization
      * @param array $data
      * @return static

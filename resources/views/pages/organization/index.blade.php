@@ -15,7 +15,7 @@
                     @else
                         "existe pas"
                         <br>
-                        <a href="{{action('OrganizationController@create')}}">{{ trans('organization.create') }}</a>
+                        <a class="btn btn-primary" href="{{action('OrganizationController@create')}}">{{ trans('organization.create') }}</a>
                     @endif
 
                 </div>

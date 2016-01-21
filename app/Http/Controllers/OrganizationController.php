@@ -15,6 +15,7 @@ class OrganizationController extends Controller
      * @var UserRepositoryInterface
      */
     private $organizationRepository;
+    private $organization;
 
     /**
      * @param OrganizationRepositoryInterface $organizationRepository
@@ -23,7 +24,10 @@ class OrganizationController extends Controller
     public function __construct(OrganizationRepositoryInterface $organizationRepository)
     {
         $this->middleware('auth');
+
         $this->organizationRepository = $organizationRepository;
+
+        $this->organization = Auth::user()->organization()->first();
     }
 
     /**
@@ -33,9 +37,9 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organization = Auth::user()->organization();
 
-        return view('pages.organization.index')->with('organization', $organization);
+        return view('pages.organization.index')->with('organization', $this->organization);
+
     }
 
     /**
@@ -45,13 +49,17 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        $organization = Auth::user()->organization();
 
-        if ($organization != null) {
+        if ($this->organization != null) {
+
             Flash::error(Lang::get('organization.fail-exists'));
+
             return redirect(action('OrganizationController@index'));
+
         } else {
+
             return view('pages.organization.create');
+
         }
 
     }
@@ -64,11 +72,11 @@ class OrganizationController extends Controller
      */
     public function store(OrganizationRequest $request)
     {
-        $organization = $this->organizationRepository->create($request->all());
+        $this->organization = $this->organizationRepository->create($request->all());
 
-        $user = Auth::user();
-        $user->organization()->attach($organization);
-        $user->save();
+        $this->organization->owner()->associate(Auth::user());
+
+        $this->organization->save();
 
         Flash::success(Lang::get('organization.create-success'));
 
@@ -82,9 +90,9 @@ class OrganizationController extends Controller
      */
     public function edit()
     {
-        $organization = Auth::user()->organization()->get();
 
-        return view('pages.organization.edit')->with('organization', $organization);
+        return view('pages.organization.edit')->with('organization', $this->organization);
+
     }
 
     /**
@@ -95,7 +103,8 @@ class OrganizationController extends Controller
      */
     public function update(OrganizationRequest $request)
     {
-        $this->organizationRepository->update(Auth::user()->id, $request->all());
+
+        $this->organizationRepository->update($this->organization->id, $request->all());
 
         Flash::success(Lang::get('organization.update-success'));
 

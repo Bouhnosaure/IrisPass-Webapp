@@ -8,8 +8,6 @@ interface OrganizationRepositoryInterface
 
     public function getById($id);
 
-    public function getByUserId($id);
-
     public function create(Array $data);
 
     public function update($id, Array $data);
