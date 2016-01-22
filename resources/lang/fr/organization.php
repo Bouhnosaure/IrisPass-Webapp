@@ -23,5 +23,6 @@ return [
     'create-success' => 'Votre organisation à été crée avec success',
     'create-update' => 'Votre organisation à été modifiée avec success',
     'fail-exists' => 'Vous possèdez déjà une organisation',
+    'fail-not-exist' => 'Vous devez créer une organisation pour utiliser cette fonction',
 
 ];

@@ -28,6 +28,11 @@
                             <li><a href="{{action('OrganizationController@subscriptions')}}">{{ trans('organization.subscriptions') }}</a></li>
                         </ul>
                     </li>
+                    <li><a href="#"><i class="fa fa-globe"></i><span>{{ trans('menu.osjs') }}</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="{{action('OsjsUsersController@index')}}">{{ trans('osjs_users.index') }}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

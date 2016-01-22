@@ -55,6 +55,10 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
      */
     public function create(Array $data)
     {
+
+        $data['password'] = bcrypt($data['password']);
+        $data['groups'] = '["api","application","vfs","upload","curl"]';
+
         return $this->model->create($data);
     }
 
@@ -66,6 +70,11 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
      */
     public function update($id, Array $data)
     {
+
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+
         $user = $this->model->findOrFail($id)->update($data);
 
         return $user;

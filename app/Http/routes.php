@@ -59,4 +59,18 @@ Route::group(['middleware' => 'web'], function () {
 
     });
 
+
+    //Organization
+    Route::group(['prefix' => 'virtualdesktop'], function () {
+
+        Route::get('users', array('uses' => 'OsjsUsersController@index'));
+        Route::get('users/create', array('uses' => 'OsjsUsersController@create'));
+        Route::post('users', array('uses' => 'OsjsUsersController@store'));
+        Route::get('users/{id}', array('uses' => 'OsjsUsersController@show'));
+        Route::get('users/{id}/edit', array('uses' => 'OsjsUsersController@edit'));
+        Route::patch('users/{id}/edit', array('uses' => 'OsjsUsersController@update'));
+        Route::delete('users/{id}', array('uses' => 'OsjsUsersController@destroy'));
+
+    });
+
 });
