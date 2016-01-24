@@ -26,4 +26,4 @@ $I->click('submit-osjs-groups-create');
 
 $I->amOnAction('OsjsGroupsController@index');
 
-$I->cantSeeInSource('test_groups_2');
+$I->see('test_groups_2');

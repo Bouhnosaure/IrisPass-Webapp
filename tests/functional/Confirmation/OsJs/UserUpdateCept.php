@@ -17,7 +17,8 @@ $I->amAuthenticatedWithCredentials();
 $I->amOnAction('OsjsUsersController@index');
 
 $I->click('josh');
-$I->click('users-edit');
+
+$I->click("Editer");
 
 
 //modify user
@@ -28,4 +29,4 @@ $I->click('submit-osjs-users-create');
 
 $I->amOnAction('OsjsUsersController@index');
 
-$I->cantSee('john');
+$I->see('john');
