@@ -15,8 +15,8 @@ return [
 
 	"password" => "Les mots de passe doivent comporter au moins six caractères et correspondre à la confirmation.",
 	"user" => "Nous ne pouvons pas trouver un utilisateur avec cette adresse e-mail.",
-	"token" => "Ce jeton de réinitialisation de mot ne est pas valide.",
-	"sent" => "Nous avons envoyé par courriel votre mot de passe lien de réinitialisation!",
-	"reset" => "Votre mot de passe a été réinitialisé!",
+	"token" => "Ce lien de réinitialisation n'est plus valide. Veuillez réitérer l'opération.",
+	"sent" => "Nous avons envoyé sur votre adresse email une demande de réinitialisation de mot de passe.",
+	"reset" => "Mot de passe réinitialisé !",
 
 ];

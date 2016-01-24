@@ -17,8 +17,8 @@ return [
 
     'submit-create' => 'Enregistrer',
 
-    'create-success' => 'Le groupe a été crée avec success',
-    'create-update' => 'Le groupe a été modifiée avec success',
-    'create-failed' => 'La création a échouée',
+    'create-success' => 'Le groupe a été créé avec success',
+    'create-update' => 'Le groupe a été modifié avec success',
+    'create-failed' => 'La création a échoué',
 
 ];

@@ -9,12 +9,12 @@ return [
     */
 
     'failed' => 'Ces identifiants ne sont pas dans notre base de données',
-    'throttle' => 'Vous avez fait trop d\'essais veuillez réessayer dans :seconds secondes.',
+    'throttle' => 'Vous avez fait trop d\'essais, veuillez réessayer dans :seconds secondes.',
 
     'login' => 'Connexion',
     'register'     => 'Inscription',
     'logout'     => 'Déconnexion',
-    'forgot'     => 'Mot de passe oublié?',
+    'forgot'     => 'Mot de passe oublié ?',
 
     'reset'     => 'Réinitialiser mon mot de passe',
 
@@ -22,11 +22,11 @@ return [
     'firstname-field'     => 'Prénom',
     'lastname-field'     => 'Nom',
     'email-field'     => 'Email',
-    'phone-field'     => 'Telephone',
+    'phone-field'     => 'Téléphone',
     'password-field'     => 'Mot de passe',
     'password-confirmation-field'     => 'Confirmer le mot de passe',
-    'remember-field'     => 'Se souvenir de moi ?',
+    'remember-field'     => 'Se souvenir de moi',
 
-    'error'     => '<strong>Whoops!</strong> Il y a quelque problèmes avec ce que vous avez entrés.<br><br>',
+    'error'     => '<strong>Oups !</strong> Il semble y avoir un problème avec les informations que vous avez entrées.<br><br>',
 
 ];

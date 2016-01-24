@@ -22,6 +22,6 @@ return [
 
     'create-success' => 'L\'utilisateur a été crée avec success',
     'create-update' => 'L\'utilisateur a été modifiée avec success',
-    'create-failed' => 'La création a échouée',
+    'create-failed' => 'La création a échoué',
 
 ];
