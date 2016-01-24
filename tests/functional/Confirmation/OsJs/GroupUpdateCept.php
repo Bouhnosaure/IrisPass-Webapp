@@ -17,8 +17,8 @@ $I->amAuthenticatedWithCredentials();
 $I->amOnAction('OsjsGroupsController@index');
 
 $I->click('test_group');
-$I->click('groups-edit');
 
+$I->click("Editer");
 
 //modify user
 $I->fillField(['name' => 'name'], 'test_groups_2');
@@ -26,6 +26,4 @@ $I->click('submit-osjs-groups-create');
 
 $I->amOnAction('OsjsGroupsController@index');
 
-$I->cantSee('test_groups_2');
-
-$I->seeInDatabase('osjs_groups',['name' => 'test_groups_2']);
+$I->cantSeeInSource('test_groups_2');

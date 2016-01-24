@@ -29,5 +29,3 @@ $I->click('submit-osjs-users-create');
 $I->amOnAction('OsjsUsersController@index');
 
 $I->cantSee('john');
-
-$I->seeInDatabase('osjs_users',['username' => 'john']);
