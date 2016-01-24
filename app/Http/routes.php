@@ -4,19 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', 'PagesController@index');
-
-/*
-|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -27,6 +14,8 @@ Route::get('/', 'PagesController@index');
 */
 
 Route::group(['middleware' => 'web'], function () {
+    Route::get('/', 'PagesController@index');
+
     Route::auth();
 
     Route::get('/home', 'DashboardController@index');
@@ -59,7 +48,6 @@ Route::group(['middleware' => 'web'], function () {
 
     });
 
-
     //Organization
     Route::group(['prefix' => 'virtualdesktop'], function () {
 
@@ -70,6 +58,14 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('users/{id}/edit', array('uses' => 'OsjsUsersController@edit'));
         Route::patch('users/{id}/edit', array('uses' => 'OsjsUsersController@update'));
         Route::delete('users/{id}', array('uses' => 'OsjsUsersController@destroy'));
+
+        Route::get('groups', array('uses' => 'OsjsGroupsController@index'));
+        Route::get('groups/create', array('uses' => 'OsjsGroupsController@create'));
+        Route::post('groups', array('uses' => 'OsjsGroupsController@store'));
+        Route::get('groups/{id}', array('uses' => 'OsjsGroupsController@show'));
+        Route::get('groups/{id}/edit', array('uses' => 'OsjsGroupsController@edit'));
+        Route::patch('groups/{id}/edit', array('uses' => 'OsjsGroupsController@update'));
+        Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
 
     });
 

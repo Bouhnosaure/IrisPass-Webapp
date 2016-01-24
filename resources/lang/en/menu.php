@@ -13,5 +13,7 @@ return [
     'preferences'     => 'Preferences',
     'confirmation'     => 'Validate',
     'organization'     => 'My Organization',
+    'osjs'     => 'Mon Bureau Virtuel',
+
 
 ];

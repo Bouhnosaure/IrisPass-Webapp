@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OsjsUserRequest;
+use App\Http\Requests\OsjsGroupRequest;
 use App\Repositories\OsjsGroupRepositoryInterface;
-use App\Repositories\OsjsUserRepositoryInterface;
 use App\Services\OsjsService;
-use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Laracasts\Flash\Flash;
@@ -21,8 +18,7 @@ class OsjsGroupsController extends Controller
     private $osjsGroupRepository;
 
     /**
-     * @internal param UserRepositoryInterface $userRepository
-     * @param OsjsUserRepositoryInterface $osjsUserRepository
+     * @param OsjsGroupRepositoryInterface $osjsGroupRepository
      */
     public function __construct(OsjsGroupRepositoryInterface $osjsGroupRepository)
     {
@@ -44,7 +40,7 @@ class OsjsGroupsController extends Controller
      */
     public function index()
     {
-        return view('pages.osjs_groups.index')->with('groups', $this->organization->users()->get());
+        return view('pages.osjs_groups.index')->with('groups', $this->organization->groups()->get());
     }
 
     /**
@@ -60,13 +56,12 @@ class OsjsGroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param OsjsUserRequest|Request $request
      * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
-    public function store(OsjsUserRequest $request, OsjsService $service)
+    public function store(OsjsGroupRequest $request, OsjsService $service)
     {
-        $group = $this->osjsUserRepository->create($request->all());
+        $group = $this->osjsGroupRepository->create($request->all());
 
         if ($service->createGroupDirectory($group->name)) {
 
@@ -90,9 +85,9 @@ class OsjsGroupsController extends Controller
      */
     public function show($id)
     {
-        $user = $this->osjsUserRepository->getById($id);
+        $group = $this->osjsGroupRepository->getById($id);
 
-        return view('pages.osjs_groups.show')->with('group', $user);
+        return view('pages.osjs_groups.show')->with('group', $group);
     }
 
     /**
@@ -103,21 +98,20 @@ class OsjsGroupsController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->osjsUserRepository->getById($id);
+        $group = $this->osjsGroupRepository->getById($id);
 
-        return view('pages.osjs_groups.edit')->with('group', $user);
+        return view('pages.osjs_groups.edit')->with('group', $group);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OsjsGroupRequest $request, $id)
     {
-        $this->osjsUserRepository->update($id, $request->all());
+        $this->osjsGroupRepository->update($id, $request->all());
 
         Flash::success(Lang::get('osjs_groups.update-success'));
 

@@ -10,7 +10,7 @@
                 </div>
                 <div class="content">
 
-                    <a class="btn btn-primary" href="{{action('OsjsGroupsController@create')}}">Créer un nouvel utilisateur</a>
+                    <a class="btn btn-primary" href="{{action('OsjsGroupsController@create')}}">{{ trans('osjs_groups.create') }}</a>
 
                     <ul>
                         @foreach($groups as $group)

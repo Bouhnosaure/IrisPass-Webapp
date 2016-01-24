@@ -10,7 +10,7 @@
                 </div>
                 <div class="content">
 
-                    <a class="btn btn-primary" href="{{action('OsjsUsersController@create')}}">Créer un nouvel utilisateur</a>
+                    <a class="btn btn-primary" href="{{action('OsjsUsersController@create')}}">{{ trans('osjs_users.create') }}</a>
 
                     <ul>
                         @foreach($users as $user)

@@ -48,7 +48,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+
                 @if (Auth::guest())
+                    guest
                     <li>
                         <a href="{{action('Auth\AuthController@showLoginForm')}}">{{ trans('auth.login') }}</a>
                     </li>
@@ -56,9 +58,10 @@
                         <a href="{{action('Auth\AuthController@showRegistrationForm')}}">{{ trans('auth.register') }}</a>
                     </li>
                 @else
+                    auth
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->profile->firstname }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
