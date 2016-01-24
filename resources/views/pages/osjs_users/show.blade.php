@@ -10,7 +10,7 @@
                 <div class="content">
                     <h1>{{$user->username}}</h1>
 
-                    <a class="btn btn-primary" href="{{action('OsjsUsersController@edit', ['id' => $user->id])}}">{{trans('osjs_users.edit')}}</a>
+                    <a class="btn btn-primary" id="users-edit" href="{{action('OsjsUsersController@edit', ['id' => $user->id])}}">{{trans('osjs_users.edit')}}</a>
                 </div>
             </div>
         </div>

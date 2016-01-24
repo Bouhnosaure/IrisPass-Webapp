@@ -19,7 +19,8 @@ var paths = {
     "fontawesome": "./vendor/bower_components/font-awesome/",
     "jquerycookie": "./vendor/bower_components/jquery.cookie/",
     "nanoscroller": "./vendor/bower_components/nanoscroller/",
-    "jquerygritter": "./vendor/bower_components/jquery.gritter/"
+    "jquerygritter": "./vendor/bower_components/jquery.gritter/",
+    "duallistbox": "./vendor/bower_components/bootstrap-duallistbox/",
 };
 
 
@@ -42,6 +43,7 @@ elixir(function (mix) {
         paths.nanoscroller + "bin/javascripts/jquery.nanoscroller.js",
         paths.jquerygritter + "js/jquery.gritter.js",
         paths.bootstrap + "dist/js/bootstrap.js",
+        paths.duallistbox + "dist/jquery.bootstrap-duallistbox.min.js",
         paths.assets + "js/core.js",
         paths.assets + "js/app.js"
     ], "public/js/app.js", "./");

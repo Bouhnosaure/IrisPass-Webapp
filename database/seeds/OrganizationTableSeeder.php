@@ -18,7 +18,7 @@ class OrganizationTableSeeder extends Seeder
             'name' => 'Gorilla LTD',
             'address' => '61 cours du médoc',
             'address_comp' => 'appt 22 bat B',
-            'user_id' => 2
+            'user_id' => 1
         ]);
 
 

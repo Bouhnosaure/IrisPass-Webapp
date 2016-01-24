@@ -128,4 +128,12 @@ class OsjsGroupsController extends Controller
     {
         // nothing now
     }
+
+    public function addUserToGroup($groupId, $userId)
+    {
+
+    }
+
+
+
 }

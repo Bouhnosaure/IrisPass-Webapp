@@ -8,6 +8,10 @@
     "font-awesome": "~4.5.0",
     "jquery.gritter": "~1.7.4",
     "nanoscroller": "~0.8.7",
-    "jquery.cookie": "~1.4.1"
+    "jquery.cookie": "~1.4.1",
+    "bootstrap-duallistbox": "~3.0.5"
+  },
+  "resolutions": {
+    "jquery": "~2.2.0"
   }
 }
