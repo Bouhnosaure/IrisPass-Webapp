@@ -48,6 +48,11 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        'osjs' => [
+            'driver' => 'local',
+            'root'   => env('OSJS_VFS_PATH'),
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

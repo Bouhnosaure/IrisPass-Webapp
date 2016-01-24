@@ -4,27 +4,30 @@ use Illuminate\Support\Facades\Storage;
 
 class OsjsService
 {
-    /**
-     * @var directory
-     */
-    protected $vfs_path;
 
-    protected $users_directory;
+    private $disk;
 
-    protected $groups_directory;
+    private $users_directory;
+
+    private $groups_directory;
+
+    private $is_testing;
 
     public function __construct()
     {
-        $this->vfs_path = config('osjs.vfs_path');
-        $this->users_directory = $this->vfs_path . DIRECTORY_SEPARATOR . 'home';
-        $this->groups_directory = $this->vfs_path . DIRECTORY_SEPARATOR . 'groups';
+        $this->disk = Storage::disk('osjs');
+        $this->users_directory = 'home';
+        $this->groups_directory = 'groups';
+
+        $this->is_testing = (env('APP_ENV') == 'testing') ? true : false;
     }
 
     public function createUserDirectory($username)
     {
+
         $path = $this->users_directory . DIRECTORY_SEPARATOR . $username;
 
-        if (mkdir($path, 0755, false)) {
+        if ($this->disk->makeDirectory($path, false, $this->is_testing)) {
             return $path;
         }
 
@@ -36,7 +39,7 @@ class OsjsService
     {
         $path = $this->groups_directory . DIRECTORY_SEPARATOR . $group_name;
 
-        if (mkdir($path, 0755, false)) {
+        if ($this->disk->makeDirectory($path, false, $this->is_testing)) {
             return $path;
         }
 

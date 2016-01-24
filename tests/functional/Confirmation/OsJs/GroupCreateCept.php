@@ -15,5 +15,3 @@ $I->click('submit-osjs-groups-create');
 
 $I->amOnAction('OsjsGroupsController@index');
 $I->canSee('group test');
-
-$I->seeInDatabase('osjs_groups',['name' => 'group test']);
