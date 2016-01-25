@@ -20,7 +20,8 @@ var paths = {
     "jquerycookie": "./vendor/bower_components/jquery.cookie/",
     "nanoscroller": "./vendor/bower_components/nanoscroller/",
     "jquerygritter": "./vendor/bower_components/jquery.gritter/",
-    "duallistbox": "./vendor/bower_components/bootstrap-duallistbox/",
+    "multiselect": "./vendor/bower_components/multiselect/",
+    "socketio": "./node_modules/socket.io-client/",
 };
 
 
@@ -43,7 +44,8 @@ elixir(function (mix) {
         paths.nanoscroller + "bin/javascripts/jquery.nanoscroller.js",
         paths.jquerygritter + "js/jquery.gritter.js",
         paths.bootstrap + "dist/js/bootstrap.js",
-        paths.duallistbox + "dist/jquery.bootstrap-duallistbox.min.js",
+        paths.multiselect + "js/jquery.multi-select.js",
+        paths.socketio + "socket.io.js",
         paths.assets + "js/core.js",
         paths.assets + "js/app.js"
     ], "public/js/app.js", "./");

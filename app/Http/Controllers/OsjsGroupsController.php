@@ -86,8 +86,9 @@ class OsjsGroupsController extends Controller
     public function show($id)
     {
         $group = $this->osjsGroupRepository->getById($id);
+        $users = $this->organization->users()->get();
 
-        return view('pages.osjs_groups.show')->with('group', $group);
+        return view('pages.osjs_groups.show')->with(compact('group', 'users'));
     }
 
     /**
@@ -133,7 +134,6 @@ class OsjsGroupsController extends Controller
     {
 
     }
-
 
 
 }

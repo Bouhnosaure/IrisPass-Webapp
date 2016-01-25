@@ -8,14 +8,27 @@
         basic_function: function (element) {
             $("#" + element).doSomething();
         },
+        mutliselect: function (element) {
+            $("#" + element).multiSelect();
+        },
+        track_and_submit: function (form, element) {
+            var form = $("#" + form);
 
-        dual_list: function(element) {
-            console.log("pop");
-            console.log(element);
-            $("#" + element).bootstrapDualListbox(); // j'ai tout revert et laissé quelque chose de SIMPLE.
-
-            $("#" + element).change(function () {
-
+            $("#" + element).change(function (e) {
+                form.submit();
+                e.preventDefault();
+            });
+        },
+        ajax_on_submit: function (form) {
+            var form = $("#" + form);
+            jQuery.ajax({
+                url: form.action,
+                method: form.method,
+                data: form.serialize()
+            }).done(function (response) {
+                // Do something with the response
+            }).fail(function () {
+                // Whoops; show an error.
             });
 
         }

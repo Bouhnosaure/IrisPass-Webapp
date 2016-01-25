@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'PagesController@index');
@@ -66,6 +68,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('groups/{id}/edit', array('uses' => 'OsjsGroupsController@edit'));
         Route::patch('groups/{id}/edit', array('uses' => 'OsjsGroupsController@update'));
         Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
+
+        Route::get('manage/groups', array('uses' => 'OsjsUserGroupsController@index'));
+        Route::post('manage/groups/add/{idUser}/group/{groupId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
+        Route::post('manage/groups/remove/{userId}/group/{groupId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
 
     });
 

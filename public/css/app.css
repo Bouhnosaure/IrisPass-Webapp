@@ -10495,76 +10495,79 @@ body .ui-tooltip {
   /* support: IE8 */
   border-radius: 8px;
 }
-/*
- *  Bootstrap Duallistbox - v3.0.5
- *  A responsive dual listbox widget optimized for Twitter Bootstrap. It works on all modern browsers and on touch devices.
- *  http://www.virtuosoft.eu/code/bootstrap-duallistbox/
- *
- *  Made by István Ujj-Mészáros
- *  Under Apache License v2.0 License
- */
-.bootstrap-duallistbox-container .buttons {
-  width: 100%;
-  margin-bottom: -1px;
+.ms-container {
+  background: transparent url('../img/switch.png') no-repeat 50% 50%;
+  width: 370px;
 }
-.bootstrap-duallistbox-container label {
+.ms-container:after {
+  content: ".";
   display: block;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  clear: both;
+  min-height: 0;
+  visibility: hidden;
 }
-.bootstrap-duallistbox-container .info {
-  display: inline-block;
-  margin-bottom: 5px;
-  font-size: 11px;
+.ms-container .ms-selectable,
+.ms-container .ms-selection {
+  background: #fff;
+  color: #555555;
+  float: left;
+  width: 45%;
 }
-.bootstrap-duallistbox-container .clear1,
-.bootstrap-duallistbox-container .clear2 {
-  display: none;
-  font-size: 10px;
+.ms-container .ms-selection {
+  float: right;
 }
-.bootstrap-duallistbox-container .box1.filtered .clear1,
-.bootstrap-duallistbox-container .box2.filtered .clear2 {
-  display: inline-block;
+.ms-container .ms-list {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  position: relative;
+  height: 200px;
+  padding: 0;
+  overflow-y: auto;
 }
-.bootstrap-duallistbox-container .move,
-.bootstrap-duallistbox-container .remove {
-  width: 60%;
+.ms-container .ms-list.ms-focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  outline: 0;
+  outline: thin dotted \9;
 }
-.bootstrap-duallistbox-container .btn-group .btn {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.bootstrap-duallistbox-container select {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.bootstrap-duallistbox-container .moveall,
-.bootstrap-duallistbox-container .removeall {
-  width: 40%;
-}
-.bootstrap-duallistbox-container.bs2compatible .btn-group > .btn + .btn {
-  margin-left: 0;
-}
-.bootstrap-duallistbox-container select {
-  width: 100%;
-  height: 300px;
+.ms-container ul {
+  margin: 0;
+  list-style-type: none;
   padding: 0;
 }
-.bootstrap-duallistbox-container .filter {
-  display: inline-block;
+.ms-container .ms-optgroup-container {
   width: 100%;
-  height: 31px;
-  margin: 0 0 5px 0;
-  box-sizing: border-box;
 }
-.bootstrap-duallistbox-container .filter.placeholder {
+.ms-container .ms-optgroup-label {
+  margin: 0;
+  padding: 5px 0px 0px 5px;
+  cursor: pointer;
+  color: #999;
+}
+.ms-container .ms-selectable li.ms-elem-selectable,
+.ms-container .ms-selection li.ms-elem-selection {
+  border-bottom: 1px #eee solid;
+  padding: 2px 10px;
+  color: #555;
+  font-size: 14px;
+}
+.ms-container .ms-selectable li.ms-hover,
+.ms-container .ms-selection li.ms-hover {
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  background-color: #08c;
+}
+.ms-container .ms-selectable li.disabled,
+.ms-container .ms-selection li.disabled {
+  background-color: #eee;
   color: #aaa;
-}
-.bootstrap-duallistbox-container.moveonselect .move,
-.bootstrap-duallistbox-container.moveonselect .remove {
-  display: none;
-}
-.bootstrap-duallistbox-container.moveonselect .moveall,
-.bootstrap-duallistbox-container.moveonselect .removeall {
-  width: 100%;
+  cursor: text;
 }
 /*LESS CSS pre-processor*/
 /*---------------------------------------------------
