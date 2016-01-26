@@ -56,6 +56,7 @@ class OsjsGroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param OsjsGroupRequest $request
      * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
@@ -107,6 +108,7 @@ class OsjsGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param OsjsGroupRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */

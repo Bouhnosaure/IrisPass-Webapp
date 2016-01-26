@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePivotOsjsUsersGroupsTable extends Migration
+class CreatePivotOsjsGroupOsjsUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreatePivotOsjsUsersGroupsTable extends Migration
     {
         //
 
-        Schema::create('osjs_users_groups', function (Blueprint $table) {
+        Schema::create('osjs_group_osjs_user', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreatePivotOsjsUsersGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('osjs_users_groups');
+        Schema::drop('osjs_group_osjs_user');
     }
 }

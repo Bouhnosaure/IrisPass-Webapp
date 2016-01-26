@@ -70,8 +70,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
 
         Route::get('manage/groups', array('uses' => 'OsjsUserGroupsController@index'));
-        Route::post('manage/groups/add/{idUser}/group/{groupId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
-        Route::post('manage/groups/remove/{userId}/group/{groupId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
+        Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
+        Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
 
     });
 

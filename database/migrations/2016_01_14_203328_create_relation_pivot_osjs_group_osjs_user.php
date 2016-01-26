@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelationPivotOsjsUsersGroups extends Migration
+class CreateRelationPivotOsjsGroupOsjsUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateRelationPivotOsjsUsersGroups extends Migration
     public function up()
     {
         //
-        Schema::table('osjs_users_groups', function (Blueprint $table) {
+        Schema::table('osjs_group_osjs_user', function (Blueprint $table) {
 
-            $table->integer('osjs_user_id')->after('id')->unsigned()->nullable()->index();
-            $table->foreign('osjs_user_id')->references('id')->on('osjs_users')->onDelete('set null');
+            $table->integer('osjs_user_id')->after('id')->unsigned()->index();
+            $table->foreign('osjs_user_id')->references('id')->on('osjs_users')->onDelete('cascade');
 
-            $table->integer('osjs_group_id')->after('osjs_user_id')->unsigned()->nullable()->index();
-            $table->foreign('osjs_group_id')->references('id')->on('osjs_groups')->onDelete('set null');
+            $table->integer('osjs_group_id')->after('osjs_user_id')->unsigned()->index();
+            $table->foreign('osjs_group_id')->references('id')->on('osjs_groups')->onDelete('cascade');
 
         });
 
@@ -32,7 +32,7 @@ class CreateRelationPivotOsjsUsersGroups extends Migration
      */
     public function down()
     {
-        Schema::table('osjs_users_groups', function ($table) {
+        Schema::table('osjs_group_osjs_user', function ($table) {
             $table->dropForeign('osjs_users_groups_osjs_user_id_foreign');
             $table->dropColumn('osjs_user_id');
 

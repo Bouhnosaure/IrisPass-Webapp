@@ -32,6 +32,7 @@
                         <ul class="sub-menu">
                             <li><a href="{{action('OsjsUsersController@index')}}">{{ trans('osjs_users.index') }}</a></li>
                             <li><a href="{{action('OsjsGroupsController@index')}}">{{ trans('osjs_groups.index') }}</a></li>
+                            <li><a href="{{action('OsjsUserGroupsController@index')}}">{{ trans('osjs_users_groups.index') }}</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -26,15 +26,24 @@ class OsjsGroup extends Model
      */
     protected $fillable = ['name', 'path'];
 
-
+    /**
+     * An os js group belongs to an organization
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function organization()
     {
         return $this->belongsTo('App\Organization');
     }
 
+    /**
+     * An os js group can have many users
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
-        return $this->belongsToMany('App\OsjsUser', 'osjs_users_groups', 'osjs_user_id', 'osjs_group_id');
+        return $this->belongsToMany('App\OsjsUser')->withTimestamps();
     }
 
 }

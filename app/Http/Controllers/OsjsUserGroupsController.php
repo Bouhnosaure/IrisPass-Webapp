@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OsjsGroupRequest;
-use App\Repositories\OsjsGroupRepositoryInterface;
-use App\Services\OsjsService;
-
 use App\Http\Requests;
+use App\OsjsGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Laracasts\Flash\Flash;
@@ -29,37 +26,50 @@ class OsjsUserGroupsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the groups of the organization
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $group = $this->organization->groups()->get();
+        $groups = $this->organization->groups()->get();
         $users = $this->organization->users()->get();
-        return view('pages.manage_osjs_groups.index')->with(compact('group', 'users'));
+        return view('pages.osjs_users_groups.index')->with(compact('groups', 'users'));
     }
 
     /**
-     * addUserToGroup
+     * Add an user to a specified group
      * @param $userId
      * @param $groupId
      * @return \Illuminate\Http\Response
      */
-    public function addUserToGroup($userId, $groupId)
+    public function addUserToGroup($groupId, $userId)
     {
-        return view('pages.osjs_groups.create');
+
+        $group = OsjsGroup::find($groupId);
+        $group->users()->attach($userId);
+
+        Flash::success(Lang::get('osjs_users_groups.update-success'));
+
+        return redirect(action('OsjsUserGroupsController@index'));
+
     }
 
     /**
-     * Remove user from group
+     * Remove user from a specified group
      *
      * @param $userId
      * @param $groupId
      * @return \Illuminate\Http\Response
      */
-    public function removeUserFromGroup($userId, $groupId)
+    public function removeUserFromGroup($groupId, $userId)
     {
+        $group = OsjsGroup::find($groupId);
+        $group->users()->detach($userId);
+
+        Flash::success(Lang::get('osjs_users_groups.update-success'));
+
+        return redirect(action('OsjsUserGroupsController@index'));
 
     }
 

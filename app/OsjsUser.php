@@ -26,14 +26,24 @@ class OsjsUser extends Model
      */
     protected $fillable = ['username', 'name', 'password', 'groups', 'settings'];
 
+    /**
+     * An os js user belongs to an organisation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function organization()
     {
         return $this->belongsTo('App\Organization');
     }
 
+    /**
+     * An os js user can be in many groups
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function groups()
     {
-        return $this->belongsToMany('App\OsjsGroup', 'osjs_users_groups', 'osjs_group_id', 'osjs_user_id');
+        return $this->belongsToMany('App\OsjsGroup')->withTimestamps();
     }
 
 }
