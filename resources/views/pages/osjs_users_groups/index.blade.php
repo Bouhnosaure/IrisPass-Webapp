@@ -39,11 +39,11 @@
                                             <td>
                                                 @if($group->users->contains('id', $user->id))
                                                     {!! Form::open(['method' => 'POST','action' => ['OsjsUserGroupsController@removeUserFromGroup', 'groupId' => $group->id,'userId' => $user->id]]) !!}
-                                                    <button class="btn btn-block btn-danger" type="submit">{{trans('osjs_users_groups.disable')}}</button>
+                                                    <button class="btn btn-block btn-danger" name="submit-disable" type="submit">{{trans('osjs_users_groups.disable')}}</button>
                                                     {!! Form::close() !!}
                                                 @else
                                                     {!! Form::open(['method' => 'POST','action' => ['OsjsUserGroupsController@addUserToGroup','groupId' => $group->id,'userId' => $user->id]]) !!}
-                                                    <button class="btn btn-block btn-primary" type="submit">{{trans('osjs_users_groups.enable')}}</button>
+                                                    <button class="btn btn-block btn-primary" name="submit-enable" type="submit">{{trans('osjs_users_groups.enable')}}</button>
                                                     {!! Form::close() !!}
 
                                                 @endif
