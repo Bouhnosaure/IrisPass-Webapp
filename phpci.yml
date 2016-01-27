@@ -47,4 +47,4 @@ failure:
         username: "PHPCI"
         icon: ":ghost:"
         message: "%PROJECT_TITLE% - build %BUILD% failed! :angry:"
-        show_status: false
+        show_status: true
