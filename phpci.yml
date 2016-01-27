@@ -9,14 +9,18 @@ setup:
         - "DROP DATABASE IF EXISTS irispass_testing;"
         - "CREATE DATABASE irispass_testing;"
     shell:
-        - "cd %BUILD_PATH% && cp resources/phpci/.env.phpci .env"
+        - "cd %BUILD_PATH% && cp resources/phpci/.env.testing .env.testing"
+        - "cd %BUILD_PATH% && cp .env.testing .env"
+        - "cd %BUILD_PATH% && cp resources/phpci/codeception.yml codeception.yml"
+        - "cd %BUILD_PATH% && cp resources/phpci/acceptance.suite.yml tests/acceptance.suite.yml"
+        - "cd %BUILD_PATH% && cp resources/phpci/functional.suite.yml tests/functional.suite.yml"
         - "cd %BUILD_PATH% && curl -sS https://getcomposer.org/installer | php"
         - "cd %BUILD_PATH% && php composer.phar install --prefer-dist --no-interaction --dev"
         - "cd %BUILD_PATH% && php artisan migrate --seed --database=mysql_testing --env=testing --no-interaction -vvv"
 
 test:
     codeception:
-        config: "codeception-phpci.yml"
+        config: "codeception.yml"
         path: "tests/_log"
 
 complete:
