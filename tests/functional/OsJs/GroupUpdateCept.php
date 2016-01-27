@@ -16,7 +16,7 @@ $I->haveRecord('osjs_groups', [
 $I->amAuthenticatedWithCredentials();
 $I->amOnAction('OsjsGroupsController@index');
 
-$I->click('test_group');
+$I->click("//*[text()[contains(.,'test_group')]]/following-sibling::td[2]/a[1]");
 
 $I->click("Editer");
 

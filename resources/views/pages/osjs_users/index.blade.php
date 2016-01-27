@@ -16,7 +16,6 @@
                             <thead class="no-border">
                             <tr>
                                 <th><strong>{{trans('osjs_users.username')}}</strong></th>
-                                <th><strong>{{trans('osjs_users.name')}}</strong></th>
                                 <th><strong>{{trans('osjs_users.groups_count')}}</strong></th>
                                 <th><strong>{{trans('osjs_users.action')}}</strong></th>
                             </tr>
@@ -25,7 +24,6 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{$user->username}}</td>
-                                    <td>{{$user->name}}</td>
                                     <td>{{$user->groups()->count()}}</td>
                                     <td><a class="btn btn-primary pull-right" href="{{action('OsjsUsersController@show',['id' => $user->id])}}">{{trans('osjs_users.show')}}</a></td>
                                 </tr>

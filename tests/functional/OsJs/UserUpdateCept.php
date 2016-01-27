@@ -16,10 +16,9 @@ $I->haveRecord('osjs_users', [
 $I->amAuthenticatedWithCredentials();
 $I->amOnAction('OsjsUsersController@index');
 
-$I->click('josh');
+$I->click("//*[text()[contains(.,'josh')]]/following-sibling::td[2]/a[1]");
 
 $I->click("Editer");
-
 
 //modify user
 $I->fillField(['name' => 'username'], 'john');
