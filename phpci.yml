@@ -16,8 +16,8 @@ setup:
 
 test:
     codeception:
-        config: "resources/phpci/codeception.yml"
-        path: "tests/_log"
+        config: "./resources/phpci/codeception.yml"
+        path: "./tests/_log"
 
 complete:
     mysql:
