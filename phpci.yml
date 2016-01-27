@@ -6,6 +6,7 @@ build_settings:
 
 setup:
     mysql:
+        - "DROP DATABASE IF EXISTS irispass_testing;"
         - "CREATE DATABASE irispass_testing;"
     shell:
         - "cd %BUILD_PATH% && php artisan migrate"
