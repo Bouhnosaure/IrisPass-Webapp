@@ -11,8 +11,9 @@ setup:
     shell:
         - "cd %BUILD_PATH% && php artisan migrate"
         - "cd %BUILD_PATH% && cp .env.testing .env"
-        - "composer self-update"
-        - "composer install --prefer-dist --no-interaction --dev"
+        - "cd %BUILD_PATH% && curl -sS https://getcomposer.org/installer | php"
+        - "cd %BUILD_PATH% && php composer.phar self-update"
+        - "cd %BUILD_PATH% && php composer.phar install --prefer-dist --no-interaction --dev"
         - "cd %BUILD_PATH% && php artisan migrate --seed --database=mysql_testing --env=testing --no-interaction -vvv"
 
 test:
@@ -47,4 +48,4 @@ failure:
         username: "PHPCI"
         icon: ":ghost:"
         message: "%PROJECT_TITLE% - build %BUILD% failed! :angry:"
-        show_status: true
+        show_status: false
