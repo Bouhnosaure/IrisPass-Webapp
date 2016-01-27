@@ -13,14 +13,14 @@
 <!--- password Field --->
 <div class="form-group">
     {!! Form::label('password', trans('osjs_users.password-field')) !!}
-    {!! Form::password('password', null, ['class' => 'form-control']) !!}
+    <input class="form-control" name="password" type="password" id="password">
 </div>
 
 
 <!--- password_confirmation Field --->
 <div class="form-group">
     {!! Form::label('password_confirmation', trans('osjs_users.password_confirmation-field')) !!}
-    {!! Form::password('password_confirmation', null, ['class' => 'form-control']) !!}
+    <input class="form-control" name="password_confirmation" type="password" id="password_confirmation">
 </div>
 
 

@@ -1,17 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+    <div class="row">
 
-                    <div class="panel-body">
-                        You are logged in!
-                    </div>
-                </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="fd-tile detail clean tile-prusia">
+                <div class="content"><h1 class="text-left">170</h1>
+                    <p>{{trans('dashboard.count_users')}}</p></div>
+                <div class="icon"><i class="fa fa-users"></i></div>
+                <a class="details" href="{{action('OsjsUsersController@index')}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
+
+
+        <div class="col-md-6 col-sm-6">
+            <div class="fd-tile detail clean tile-prusia">
+                <div class="content"><h1 class="text-left">170</h1>
+                    <p>{{trans('dashboard.count_groups')}}</p></div>
+                <div class="icon"><i class="fa fa-group"></i></div>
+                <a class="details" href="{{action('OsjsGroupsController@index')}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+            </div>
+        </div>
+
     </div>
 @endsection
