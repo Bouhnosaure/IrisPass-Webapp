@@ -28,6 +28,7 @@ class OrganizationController extends Controller
         $this->organizationRepository = $organizationRepository;
 
         $this->organization = Auth::user()->organization()->first();
+
     }
 
     /**
@@ -38,6 +39,7 @@ class OrganizationController extends Controller
     public function index()
     {
         return view('pages.organization.index')->with('organization', $this->organization);
+
     }
 
     /**
