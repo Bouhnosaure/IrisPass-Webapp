@@ -40,9 +40,13 @@ class OrganizationController extends Controller
      */
     public function index()
     {
+
         $organization = $this->organization;
-        $groups = $this->organization->groups()->get();
-        $users = $this->organization->users()->get();
+
+        if ($organization != null) {
+            $groups = $this->organization->groups()->get();
+            $users = $this->organization->users()->get();
+        }
 
         return view('pages.organization.index')->with(compact('organization', 'groups', 'users'));
 
