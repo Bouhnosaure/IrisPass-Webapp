@@ -31,7 +31,6 @@ test:
           - "design"
           - "naming"
           - "unusedcode"
-          - "somedir/customruleset.xml"
         zero_config: true
     codeception:
         config: "codeception.yml"
