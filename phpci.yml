@@ -19,6 +19,11 @@ setup:
         - "cd %BUILD_PATH% && php artisan migrate --seed --database=mysql_testing --env=testing --no-interaction -vvv"
 
 test:
+    php_parallel_lint:
+        directory: "app"
+        ignore:
+          - "vendor"
+          - "test"
     codeception:
         config: "codeception.yml"
         path: "tests/_log"
@@ -29,18 +34,18 @@ complete:
 
 success:
     slack_notify:
-        webhook_url: "https://hooks.slack.com/services/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"
+        webhook_url: "https://hooks.slack.com/services/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"
         room: "#irispass"
-        username: "PHPCI"
+        username: "phpci"
         icon: ":ghost:"
         message: "%PROJECT_TITLE% - build %BUILD% succeeded! :smiley:"
-        show_status: true
+        show_status: false
 
 failure:
     slack_notify:
-        webhook_url: "https://hooks.slack.com/services/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"
+        webhook_url: "https://hooks.slack.com/services/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"
         room: "#irispass"
-        username: "PHPCI"
+        username: "phpci"
         icon: ":ghost:"
         message: "%PROJECT_TITLE% - build %BUILD% failed! :angry:"
-        show_status: true
+        show_status: false
