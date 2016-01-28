@@ -19,6 +19,20 @@ setup:
         - "cd %BUILD_PATH% && php artisan migrate --seed --database=mysql_testing --env=testing --no-interaction -vvv"
 
 test:
+    php_mess_detector:
+        path: 'app'
+        ignore:
+          - 'vendor'
+        allowed_warnings: -1
+        rules:
+          - "cleancode"
+          - "controversial"
+          - "codesize"
+          - "design"
+          - "naming"
+          - "unusedcode"
+          - "somedir/customruleset.xml"
+        zero_config: true
     codeception:
         config: "codeception.yml"
         path: "tests/_log"
