@@ -18332,8 +18332,41 @@ ul.timeline li > .date {
     display: none;
   }
 }
-.logo-img > img {
-  height: 80px;
+/*IRISPASS*/
+.isp-label {
+  font-size: 14px;
+}
+.isp-value {
+  font-size: 14px;
+  font-weight: 700;
+}
+/*TABS*/
+.nav-tabs > li > a {
+  padding: 9px 15px;
+  font-size: 16px;
+  margin-right: 0;
+  min-width: 80px;
+  text-align: center;
+}
+/*TABLES*/
+table.information td {
+  font-size: 14px;
+  vertical-align: top;
+  padding: 6px;
+}
+/*PROFILES*/
+.profile-info .skills td {
+  font-size: 16px;
+}
+/*P*/
+.cont p {
+  color: #333;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 23px;
+}
+p {
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=app.css.map */

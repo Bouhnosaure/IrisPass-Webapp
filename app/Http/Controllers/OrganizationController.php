@@ -5,6 +5,7 @@ use App\Http\Requests\OrganizationRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Repositories\OrganizationRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Laracasts\Flash\Flash;
@@ -29,6 +30,7 @@ class OrganizationController extends Controller
 
         $this->organization = Auth::user()->organization()->first();
 
+        Carbon::setLocale('fr');
     }
 
     /**
@@ -38,7 +40,15 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        return view('pages.organization.index')->with('organization', $this->organization);
+
+        $organization = $this->organization;
+
+        if ($organization != null) {
+            $groups = $this->organization->groups()->get();
+            $users = $this->organization->users()->get();
+        }
+
+        return view('pages.organization.index')->with(compact('organization', 'groups', 'users'));
 
     }
 
