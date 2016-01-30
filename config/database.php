@@ -54,7 +54,14 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
+            'read' => [
+                'host' => env('DB_HOST_READ', 'localhost'),
+                'port' => env('DB_PORT_READ', '3306'),
+            ],
+            'write' => [
+                'host' => env('DB_HOST_WRITE', 'localhost'),
+                'port' => env('DB_PORT_WRITE', '3306'),
+            ],
             'database'  => 'irispass',
             'username'  => env('DB_USERNAME', ''),
             'password'  => env('DB_PASSWORD', ''),
@@ -66,7 +73,14 @@ return [
 
         'mysql_testing' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
+            'read' => [
+                'host' => env('DB_HOST_READ', 'localhost'),
+                'port' => env('DB_PORT_READ', '3306'),
+            ],
+            'write' => [
+                'host' => env('DB_HOST_WRITE', 'localhost'),
+                'port' => env('DB_PORT_WRITE', '3306'),
+            ],
             'database'  => 'irispass_testing',
             'username'  => env('DB_USERNAME', ''),
             'password'  => env('DB_PASSWORD', ''),
