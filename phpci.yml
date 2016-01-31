@@ -26,7 +26,6 @@ test:
           - "test"
     codeception:
         config: "codeception.yml"
-        path: "tests/_log"
 
 complete:
     mysql:
