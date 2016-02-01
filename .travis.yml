@@ -20,5 +20,7 @@ script:
   - php artisan db:seed --database=mysql_testing --env=testing --no-interaction -vvv
   - vendor/bin/codecept run --env=testing
 
+
+
 notifications:
     slack: n64:rMScyWuafH7BrnxKjSiPCfQM
