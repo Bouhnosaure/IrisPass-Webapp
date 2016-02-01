@@ -26,14 +26,11 @@ class OsjsUsersController extends Controller
     public function __construct(OsjsUserRepositoryInterface $osjsUserRepository)
     {
         $this->middleware('auth');
+        $this->middleware('hasOrganization');
 
         $this->osjsUserRepository = $osjsUserRepository;
         $this->organization = Auth::user()->organization()->first();
 
-        if ($this->organization == null) {
-            Flash::error(Lang::get('organization.fail-not-exist'));
-            return redirect(action('OrganizationController@index'));
-        }
     }
 
     /**

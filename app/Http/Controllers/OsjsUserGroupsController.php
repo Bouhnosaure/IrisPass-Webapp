@@ -16,13 +16,10 @@ class OsjsUserGroupsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('hasOrganization');
 
         $this->organization = Auth::user()->organization()->first();
 
-        if ($this->organization == null) {
-            Flash::error(Lang::get('organization.fail-not-exist'));
-            return redirect(action('OrganizationController@index'));
-        }
     }
 
     /**
