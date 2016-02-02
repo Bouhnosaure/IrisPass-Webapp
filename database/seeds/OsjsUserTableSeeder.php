@@ -2,6 +2,7 @@
 use App\OsjsUser;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class OsjsUserTableSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class OsjsUserTableSeeder extends Seeder
     public function run()
     {
         DB::table('osjs_users')->delete();
+        $statement = "ALTER TABLE osjs_users AUTO_INCREMENT = 1;";
+        DB::unprepared($statement);
 
         OsjsUser::create([
             'username' => 'ci_trex',

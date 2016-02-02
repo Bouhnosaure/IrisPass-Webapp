@@ -2,6 +2,7 @@
 use App\Organization;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationTableSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class OrganizationTableSeeder extends Seeder
     public function run()
     {
         DB::table('organizations')->delete();
+        $statement = "ALTER TABLE organizations AUTO_INCREMENT = 1;";
+        DB::unprepared($statement);
 
         Organization::create([
             'name' => 'Gorilla LTD',
