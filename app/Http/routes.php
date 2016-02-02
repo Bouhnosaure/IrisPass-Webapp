@@ -53,7 +53,6 @@ Route::group(['middleware' => 'web'], function () {
     //Organization
     Route::group(['prefix' => 'virtualdesktop'], function () {
 
-        Route::get('users', array('uses' => 'OsjsUsersController@index'));
         Route::get('users/create', array('uses' => 'OsjsUsersController@create'));
         Route::post('users', array('uses' => 'OsjsUsersController@store'));
         Route::get('users/{id}', array('uses' => 'OsjsUsersController@show'));
@@ -61,7 +60,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::patch('users/{id}/edit', array('uses' => 'OsjsUsersController@update'));
         Route::delete('users/{id}', array('uses' => 'OsjsUsersController@destroy'));
 
-        Route::get('groups', array('uses' => 'OsjsGroupsController@index'));
         Route::get('groups/create', array('uses' => 'OsjsGroupsController@create'));
         Route::post('groups', array('uses' => 'OsjsGroupsController@store'));
         Route::get('groups/{id}', array('uses' => 'OsjsGroupsController@show'));
@@ -69,7 +67,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::patch('groups/{id}/edit', array('uses' => 'OsjsGroupsController@update'));
         Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
 
-        Route::get('manage/groups', array('uses' => 'OsjsUserGroupsController@index'));
         Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
         Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
 

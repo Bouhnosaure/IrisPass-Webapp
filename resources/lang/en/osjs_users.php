@@ -24,4 +24,11 @@ return [
     'create-update' => 'This user was successfully updated',
     'create-failed' => 'The creation has failed',
 
+    'about' => 'Members of',
+    'identifier' => 'Identifier',
+    'username' => 'Username',
+    'creation' => 'Created',
+    'update' => 'Updated',
+    'no-user' => 'No user has been created yet for',
+
 ];

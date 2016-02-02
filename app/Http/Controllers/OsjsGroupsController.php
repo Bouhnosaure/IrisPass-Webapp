@@ -30,15 +30,6 @@ class OsjsGroupsController extends Controller
 
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('pages.osjs_groups.index')->with('groups', $this->organization->groups()->get());
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -67,7 +58,7 @@ class OsjsGroupsController extends Controller
             $group->save();
 
             Flash::success(Lang::get('osjs_groups.create-success'));
-            return redirect(action('OsjsGroupsController@index'));
+            return redirect(action('OrganizationController@index').'#orgagroups');
         } else {
             Flash::error(Lang::get('osjs_groups.create-failed'));
             return redirect(action('OsjsGroupsController@create'));

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OsjsUserRequest;
 use App\Repositories\OsjsUserRepositoryInterface;
 use App\Services\OsjsService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -31,17 +32,10 @@ class OsjsUsersController extends Controller
         $this->osjsUserRepository = $osjsUserRepository;
         $this->organization = Auth::user()->organization()->first();
 
+        Carbon::setLocale('fr');
+
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('pages.osjs_users.index')->with('users', $this->organization->users()->get());
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -70,7 +64,7 @@ class OsjsUsersController extends Controller
             $user->save();
 
             Flash::success(Lang::get('osjs_users.create-success'));
-            return redirect(action('OsjsUsersController@index'));
+            return redirect(action('OrganizationController@index').'#orgausers');
         } else {
             Flash::error(Lang::get('osjs_users.create-failed'));
             return redirect(action('OsjsUsersController@create'));

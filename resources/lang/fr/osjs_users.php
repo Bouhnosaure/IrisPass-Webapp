@@ -24,4 +24,11 @@ return [
     'create-update' => 'L\'utilisateur a été modifiée avec success',
     'create-failed' => 'La création a échoué',
 
+    'about' => 'Utilisateurs membres de',
+    'identifier' => 'Identifiant',
+    'username' => 'Nom d\'utilisateur',
+    'creation' => 'Créé le',
+    'update' => 'Dernière mise à jour le',
+    'no-user' => 'Aucun utilisateur n\'a encore été créé pour',
+
 ];

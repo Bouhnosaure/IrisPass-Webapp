@@ -23,18 +23,6 @@ class OsjsUserGroupsController extends Controller
     }
 
     /**
-     * Display a listing of the groups of the organization
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $groups = $this->organization->groups()->get();
-        $users = $this->organization->users()->get();
-        return view('pages.osjs_users_groups.index')->with(compact('groups', 'users'));
-    }
-
-    /**
      * Add an user to a specified group
      * @param $userId
      * @param $groupId
@@ -48,7 +36,7 @@ class OsjsUserGroupsController extends Controller
 
         Flash::success(Lang::get('osjs_users_groups.update-success'));
 
-        return redirect(action('OsjsUserGroupsController@index'));
+        return redirect(action('OrganizationController@index').'#orgagroupsaccess');
 
     }
 
@@ -66,7 +54,7 @@ class OsjsUserGroupsController extends Controller
 
         Flash::success(Lang::get('osjs_users_groups.update-success'));
 
-        return redirect(action('OsjsUserGroupsController@index'));
+        return redirect(action('OrganizationController@index').'#orgagroupsaccess');
 
     }
 

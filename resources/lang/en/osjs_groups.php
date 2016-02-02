@@ -20,5 +20,12 @@ return [
     'create-success' => 'This group was successfully created',
     'create-update' => 'This group was successfully updated',
     'create-failed' => 'The creation has failed',
+    'update-success' => 'Changes saved',
+
+    'name' => 'Name',
+    'creation' => 'Created',
+    'update' => 'Updated',
+    'users-allowed' => 'Access for users',
+    'no-group' => 'No group has been created yet',
 
 ];
