@@ -8,7 +8,7 @@
                 <div class="content"><h1 class="text-left">170</h1>
                     <p>{{trans('dashboard.count_users')}}</p></div>
                 <div class="icon"><i class="fa fa-users"></i></div>
-                <a class="details" href="{{action('OsjsUsersController@index')}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="{{action('OrganizationController@index').'#orgausers'}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
                 <div class="content"><h1 class="text-left">170</h1>
                     <p>{{trans('dashboard.count_groups')}}</p></div>
                 <div class="icon"><i class="fa fa-group"></i></div>
-                <a class="details" href="{{action('OsjsGroupsController@index')}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="{{action('OrganizationController@index').'#orgagroups'}}">{{trans('dashboard.show_detail')}}<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 

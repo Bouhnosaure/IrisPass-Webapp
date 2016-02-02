@@ -14,10 +14,10 @@ $I->haveRecord('osjs_groups', [
     'updated_at' => '2015-05-08 00:00:00'
 ]);
 
-$I->amOnAction('OsjsUserGroupsController@index');
+$I->amOnPage(action('OrganizationController@index'));
 
 $I->canSee('group_test');
 
-$I->click('submit-enable');
+$I->click('submit-usergroup-enable');
 
 $I->canSeeElement('.alert-success');

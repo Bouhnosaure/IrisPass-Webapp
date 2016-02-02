@@ -18,5 +18,5 @@ $I->fillField(['name' => 'password_confirmation'], '123123');
 
 $I->click('submit-osjs-users-create');
 
-$I->amOnAction('OsjsUsersController@index');
+$I->amOnAction('OrganizationController@index');
 $I->canSee('josh');

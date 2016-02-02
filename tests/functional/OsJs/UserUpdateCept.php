@@ -6,7 +6,7 @@ $I->wantTo('Update an user');
 
 $I->haveRecord('osjs_users', [
     'name' => 'josh',
-    'username' => 'josh',
+    'username' => 'josha',
     'organization_id' => 1,
     'created_at' => '2015-05-08 00:00:00',
     'updated_at' => '2015-05-08 00:00:00'
@@ -14,18 +14,18 @@ $I->haveRecord('osjs_users', [
 
 //setup
 $I->amAuthenticatedWithCredentials();
-$I->amOnAction('OsjsUsersController@index');
+$I->amOnAction('OrganizationController@index');
 
-$I->click("//*[text()[contains(.,'josh')]]/following-sibling::td[2]/a[1]");
+$I->click("//*[text()[contains(.,'josh')]]/following-sibling::td[4]/a[1]");
 
 $I->click("Editer");
 
 //modify user
 $I->fillField(['name' => 'username'], 'john');
-$I->fillField(['name' => 'name'], 'john');
+$I->fillField(['name' => 'name'], 'johna');
 
 $I->click('submit-osjs-users-create');
 
-$I->amOnAction('OsjsUsersController@index');
+$I->amOnAction('OrganizationController@index');
 
 $I->see('john');

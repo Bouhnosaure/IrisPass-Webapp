@@ -14,9 +14,9 @@ $I->haveRecord('osjs_groups', [
 
 //setup
 $I->amAuthenticatedWithCredentials();
-$I->amOnAction('OsjsGroupsController@index');
+$I->amOnPage(action('OrganizationController@index'));
 
-$I->click("//*[text()[contains(.,'test_group')]]/following-sibling::td[2]/a[1]");
+$I->click("//*[text()[contains(.,'test_group')]]/following-sibling::td[4]/a[1]");
 
 $I->click("Editer");
 
@@ -24,6 +24,6 @@ $I->click("Editer");
 $I->fillField(['name' => 'name'], 'test_groups_2');
 $I->click('submit-osjs-groups-create');
 
-$I->amOnAction('OsjsGroupsController@index');
+$I->amOnPage(action('OrganizationController@index'));
 
 $I->see('test_groups_2');

@@ -32,12 +32,11 @@ class CreateRelationPivotOsjsGroupOsjsUser extends Migration
      */
     public function down()
     {
-        Schema::table('osjs_group_osjs_user', function ($table) {
-            $table->dropForeign('osjs_users_groups_osjs_user_id_foreign');
-            $table->dropColumn('osjs_user_id');
-
-            $table->dropForeign('osjs_users_groups_osjs_group_id_foreign');
-            $table->dropColumn('osjs_group_id');
-        });
+        //    Schema::table('osjs_group_osjs_user', function ($table) {
+        //    $table->dropForeign('osjs_users_groups_osjs_group_id_foreign');
+        //    $table->dropColumn('osjs_group_id');
+        //    $table->dropForeign('osjs_users_groups_osjs_user_id_foreign');
+        //    $table->dropColumn('osjs_user_id');
+        //    });
     }
 }

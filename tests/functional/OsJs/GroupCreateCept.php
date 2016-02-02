@@ -13,5 +13,5 @@ $I->amOnAction('OsjsGroupsController@create');
 $I->fillField(['name' => 'name'], 'group test');
 $I->click('submit-osjs-groups-create');
 
-$I->amOnAction('OsjsGroupsController@index');
+$I->amOnPage(action('OrganizationController@index'));
 $I->canSee('group test');
