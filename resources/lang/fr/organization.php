@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'index' => 'Vue d\'ensemble',
+    'index' => 'Tableau de bord',
     'main-title' => 'Votre organisation',
     'edit' => 'Paramètres',
     'subscriptions' => 'Abonnements',
@@ -26,6 +26,7 @@ return [
     'create-update' => 'Votre organisation a été modifiée avec success',
     'fail-exists' => 'Vous possèdez déjà une organisation',
     'fail-not-exist' => 'Vous devez créer une organisation pour utiliser cette fonction',
+    'update-success' => 'Organisation mise à jour',
 
     /*
     |--------------------------------------------------------------------------

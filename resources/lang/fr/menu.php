@@ -9,10 +9,9 @@ return [
     */
 
     'about' => 'A propos',
-    'dashboard'     => 'Dashboard',
+    'dashboard'     => 'Accueil',
     'preferences'     => 'Préférences',
     'confirmation'     => 'Confirmer son profil',
-    'organization'     => 'Mon Organisation',
-    'osjs'     => 'Mon Bureau Virtuel',
+    'organization'     => 'Bureau virtuel',
 
 ];

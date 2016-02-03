@@ -9,11 +9,10 @@ return [
     */
 
     'about' => 'About',
-    'dashboard'     => 'Dashboard',
+    'dashboard'     => 'Home',
     'preferences'     => 'Preferences',
     'confirmation'     => 'Validate',
-    'organization'     => 'My Organization',
-    'osjs'     => 'Mon Bureau Virtuel',
+    'organization'     => 'Virtual desktop',
 
 
 ];

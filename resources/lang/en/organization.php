@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'index' => 'Manage',
+    'index' => 'Dashboard',
     'main-title' => 'Your organization',
     'edit' => 'Settings',
     'subscriptions' => 'Subscriptions',
@@ -26,6 +26,7 @@ return [
     'create-update' => 'Your organization was successfully updated',
     'fail-exists' => 'You have already an organization',
     'fail-not-exist' => 'You need an organization in order to use this functionality',
+    'update-success' => 'Organization updated',
 
     /*
     |--------------------------------------------------------------------------

@@ -24,7 +24,6 @@
                     <li><a href="#"><i class="fa fa-globe"></i><span>{{ trans('menu.organization') }}</span></a>
                         <ul class="sub-menu">
                             <li><a href="{{action('OrganizationController@index')}}">{{ trans('organization.index') }}</a></li>
-                            <li><a href="{{action('OrganizationController@edit')}}">{{ trans('organization.edit') }}</a></li>
                             <li><a href="{{action('OrganizationController@subscriptions')}}">{{ trans('organization.subscriptions') }}</a></li>
                         </ul>
                     </li>

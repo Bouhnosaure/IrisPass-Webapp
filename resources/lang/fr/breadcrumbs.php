@@ -22,6 +22,7 @@ return [
     */
 
     'overview' => 'Tableau de bord',
+    'edit' => 'Paramètres de l\'organisation',
     'group-creation' => 'Création de groupe',
     'user-creation' => 'Création d\'un utilisateur',
     'show-group'     => 'Vue d\'un groupe',

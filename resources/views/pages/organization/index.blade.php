@@ -9,7 +9,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-head">
-                <h3>{{ trans('organization.main-title') }}</h3>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <p style="font-size:28px;"><b>{{ trans('organization.main-title') }}</b></p>
+                    </div>
+                    <div class="col-md-9">
+                        <a class="btn btn-primary" href="{{action('OrganizationController@edit')}}">{{ trans('organization.edit') }}</a>
+                    </div>
+                </div>
+
+
             </div>
 
             @if($organization)
@@ -26,7 +36,8 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="personal">
-                                        <h1 class="name">{{$organization->name}}</h1>
+                                        <h3 class="name">{{$organization->name}}</h3>
+
 
                                         <table class="no-border no-strip skills">
                                             <tbody class="no-border-x no-border-y">
@@ -56,10 +67,10 @@
                     <div class="col-md-12">
                         <div class="tab-container">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#orgainfo">{{ trans('organization.infotab-label') }} :</a></li>
-                                <li><a data-toggle="tab" href="#orgagroups">{{ trans('organization.groupstab-label') }}:</a></li>
-                                <li><a data-toggle="tab" href="#orgausers">{{ trans('organization.userstab-label') }}:</a></li>
-                                <li><a data-toggle="tab" href="#orgagroupsaccess">{{ trans('organization.groupsaccesstab-label') }} :</a></li>
+                                <li class="active"><a data-toggle="tab" href="#orgainfo">{{ trans('organization.infotab-label') }}</a></li>
+                                <li><a data-toggle="tab" href="#orgagroups">{{ trans('organization.groupstab-label') }}</a></li>
+                                <li><a data-toggle="tab" href="#orgausers">{{ trans('organization.userstab-label') }}</a></li>
+                                <li><a data-toggle="tab" href="#orgagroupsaccess">{{ trans('organization.groupsaccesstab-label') }}</a></li>
                             </ul>
                             <div class="tab-content">
 

@@ -11,6 +11,12 @@ Breadcrumbs::register('organization', function ($breadcrumbs) {
     $breadcrumbs->push(trans('breadcrumbs.overview'), action('OrganizationController@index'));
 });
 
+// Organisation > Edit
+Breadcrumbs::register('organization_edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('organization');
+    $breadcrumbs->push(trans('breadcrumbs.edit'), action('OrganizationController@edit'));
+});
+
 // Organisation > Create group
 Breadcrumbs::register('create_group', function ($breadcrumbs) {
     $breadcrumbs->parent('organization');

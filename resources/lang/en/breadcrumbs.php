@@ -22,6 +22,7 @@ return [
     */
 
     'overview' => 'Dashboard',
+    'edit' => 'Organization settings',
     'group-creation' => 'Group creation',
     'user-creation' => 'User creation',
     'show-group'     => 'Group view',

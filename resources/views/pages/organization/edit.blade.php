@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('organization_edit') !!}
+@endsection
 @section('content')
 
     <div class="row">
