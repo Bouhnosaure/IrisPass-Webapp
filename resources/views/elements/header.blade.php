@@ -3,7 +3,7 @@
         <div class="navbar-collapse">
 
             @include('elements.partials.menu-header')
-
+            @yield('breadcrumbs')
             @include('elements.partials.notifications-header')
 
         </div>

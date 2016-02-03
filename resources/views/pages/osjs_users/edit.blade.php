@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('edit_user', $user->id) !!}
+@endsection
 @section('content')
 
     <div class="row">

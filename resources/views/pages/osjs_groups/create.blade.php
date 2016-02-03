@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('create_group') !!}
+@endsection
 
+@section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">

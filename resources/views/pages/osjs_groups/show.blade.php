@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('show_group', $group->id) !!}
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
