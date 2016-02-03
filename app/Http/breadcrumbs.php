@@ -7,51 +7,44 @@
  */
 
 // Organisation
-Breadcrumbs::register('organization', function($breadcrumbs)
-{
-    $breadcrumbs->push('Vue d\'ensemble', action('OrganizationController@index'));
+Breadcrumbs::register('organization', function ($breadcrumbs) {
+    $breadcrumbs->push(trans('breadcrumbs.overview'), action('OrganizationController@index'));
 });
 
 // Organisation > Create group
-Breadcrumbs::register('create_group', function($breadcrumbs)
-{
+Breadcrumbs::register('create_group', function ($breadcrumbs) {
     $breadcrumbs->parent('organization');
-    $breadcrumbs->push('Créer un groupe', action('OsjsGroupsController@create'));
+    $breadcrumbs->push(trans('breadcrumbs.group-creation'), action('OsjsGroupsController@create'));
 });
 
 // Organisation > Create user
-Breadcrumbs::register('create_user', function($breadcrumbs)
-{
+Breadcrumbs::register('create_user', function ($breadcrumbs) {
     $breadcrumbs->parent('organization');
-    $breadcrumbs->push('Créer un utilisateur', action('OsjsUsersController@create'));
+    $breadcrumbs->push(trans('breadcrumbs.user-creation'), action('OsjsUsersController@create'));
 });
 
 
 // Organisation > Show group
-Breadcrumbs::register('show_group', function($breadcrumbs, $id)
-{
+Breadcrumbs::register('show_group', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('organization');
-    $breadcrumbs->push('Voir un groupe', action('OsjsGroupsController@show', $id));
+    $breadcrumbs->push(trans('breadcrumbs.show-group'), action('OsjsGroupsController@show', $id));
 });
 
 // Organisation > Show user
-Breadcrumbs::register('show_user', function($breadcrumbs, $id)
-{
+Breadcrumbs::register('show_user', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('organization');
-    $breadcrumbs->push('Voir un utilisateur', action('OsjsUsersController@show', $id));
+    $breadcrumbs->push(trans('breadcrumbs.show-user'), action('OsjsUsersController@show', $id));
 });
 
 
 // Organisation > Edit group
-Breadcrumbs::register('edit_group', function($breadcrumbs, $id)
-{
+Breadcrumbs::register('edit_group', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('show_group', $id);
-    $breadcrumbs->push('Éditer un groupe', action('OsjsGroupsController@edit', $id));
+    $breadcrumbs->push(trans('breadcrumbs.edit-group'), action('OsjsGroupsController@edit', $id));
 });
 
 // Organisation > Edit user
-Breadcrumbs::register('edit_user', function($breadcrumbs, $id)
-{
+Breadcrumbs::register('edit_user', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('show_user', $id);
-    $breadcrumbs->push('Éditer un utilisateur', action('OsjsUsersController@edit', $id));
+    $breadcrumbs->push(trans('breadcrumbs.edit-user'), action('OsjsUsersController@edit', $id));
 });
