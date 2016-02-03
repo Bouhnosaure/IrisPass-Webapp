@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         if (App::environment() === 'production') {
-            //nothing for now
+            $this->call(UserTableSeeder::class);
+            $this->call(UserProfileTableSeeder::class);
         } else {
             $this->call(UserTableSeeder::class);
             $this->call(UserProfileTableSeeder::class);

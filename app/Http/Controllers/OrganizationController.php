@@ -25,6 +25,7 @@ class OrganizationController extends Controller
     public function __construct(OrganizationRepositoryInterface $organizationRepository)
     {
         $this->middleware('auth');
+        $this->middleware('hasOrganization', ['except' => ['index', 'create', 'store']]);
 
         $this->organizationRepository = $organizationRepository;
 
