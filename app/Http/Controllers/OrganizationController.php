@@ -119,7 +119,8 @@ class OrganizationController extends Controller
      */
     public function subscriptions()
     {
-        return view('pages.organization.subscriptions');
+        return view('pages.organization.subscriptions')->with('organization', $this->organization);
+
     }
 
     /*
