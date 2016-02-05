@@ -17,5 +17,5 @@ modules:
         Db:
             dsn: 'mysql:host=localhost;dbname=irispass_testing'
             user: 'root'
-            password: '!goosta!'
+            password: '!goost@!'
             dump: tests/_data/dump.sql
