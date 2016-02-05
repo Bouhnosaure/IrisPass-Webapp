@@ -2,7 +2,7 @@ build_settings:
     mysql:
         host: 'localhost'
         user: 'root'
-        pass: '!goosta!'
+        pass: '!goost@!'
 
 setup:
     mysql:
@@ -40,8 +40,8 @@ success:
         webhook_url: "https://hooks.slack.com/services/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"
         room: "#irispass"
         username: "phpci"
-        icon: ":ghost:"
-        message: "%PROJECT_TITLE% - build %BUILD% succeeded! :smiley:"
+        icon: ":gorilleok:"
+        message: "%PROJECT_TITLE% - build %BUILD% succeeded!"
         show_status: false
 
 failure:
@@ -49,6 +49,6 @@ failure:
         webhook_url: "https://hooks.slack.com/services/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"
         room: "#irispass"
         username: "phpci"
-        icon: ":ghost:"
-        message: "%PROJECT_TITLE% - build %BUILD% failed! :angry:"
+        icon: "	:gorilleko:"
+        message: "%PROJECT_TITLE% - build %BUILD% failed!"
         show_status: false
