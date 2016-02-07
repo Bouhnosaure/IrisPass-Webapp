@@ -33,7 +33,7 @@ complete:
 
 success:
     deployer:
-        webhook_url: "http://deployer.codosaure.ovh/deploy/GYDwnxhm6gTKSVSH7vbOyMlXtK96X9qAkNV290m6oMBvC75bgUSDPqrXYZ1W"
+        webhook_url: "http://deployer.codosaure.ovh/deploy/EHKdAqKZ1FdiTUPsLVXGcdpbvOzQE5vcGIVx1ISbJm0eavR1EPwVeBJctota"
         reason: "PHPCI Build #%BUILD% - %COMMIT_MESSAGE%"
         update_only: true
     slack_notify:

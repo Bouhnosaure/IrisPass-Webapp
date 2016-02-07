@@ -67,9 +67,9 @@ class OsjsGroupRepository implements OsjsGroupRepositoryInterface
      */
     public function update($id, Array $data)
     {
-        $user = $this->model->findOrFail($id)->update($data);
+        $group = $this->model->findOrFail($id)->update($data);
 
-        return $user;
+        return $group;
     }
 
     /**

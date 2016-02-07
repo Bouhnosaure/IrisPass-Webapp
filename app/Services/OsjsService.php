@@ -1,11 +1,14 @@
 <?php namespace App\Services;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
 class OsjsService
 {
 
     private $disk;
+
+    private $vfs_path;
 
     private $users_directory;
 
@@ -16,18 +19,34 @@ class OsjsService
     public function __construct()
     {
         $this->disk = Storage::disk('osjs');
+
+        $this->vfs_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('OSJS_VFS_PATH'));
         $this->users_directory = 'home';
         $this->groups_directory = 'groups';
+        $this->backup_directory = 'backup';
 
         $this->is_testing = (env('APP_ENV') == 'testing') ? true : false;
     }
 
-    public function createUserDirectory($username)
+    public function createDirectory($type, $name)
     {
 
-        $path = $this->users_directory . DIRECTORY_SEPARATOR . $username;
+        switch ($type) {
+            case 'user' :
+                $path = $this->users_directory . DIRECTORY_SEPARATOR . $name;
+                break;
+
+            case 'group' :
+                $path = $this->groups_directory . DIRECTORY_SEPARATOR . $name;
+                break;
+
+            default:
+                return null;
+                break;
+        }
 
         if ($this->disk->makeDirectory($path, false, $this->is_testing)) {
+            $path = str_replace(['\\', '/'], '.', $path);
             return $path;
         }
 
@@ -35,14 +54,54 @@ class OsjsService
 
     }
 
-    public function createGroupDirectory($group_name)
+    /**
+     * @param $type
+     * @param $old_name
+     * @param $new_name
+     * @param Filesystem $filesystem
+     * @return mixed|null
+     */
+    public function renameDirectory($type, $old_name, $new_name)
     {
-        $path = $this->groups_directory . DIRECTORY_SEPARATOR . $group_name;
 
-        if ($this->disk->makeDirectory($path, false, $this->is_testing)) {
+        $filesystem = new Filesystem();
+
+        if ($old_name == $new_name) {
+            return true;
+        }
+
+        switch ($type) {
+            case 'user' :
+                $old_path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->users_directory . DIRECTORY_SEPARATOR . $old_name;
+                $new_path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->users_directory . DIRECTORY_SEPARATOR . $new_name;
+                break;
+
+            case 'group' :
+                $old_path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->groups_directory . DIRECTORY_SEPARATOR . $old_name;
+                $new_path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->groups_directory . DIRECTORY_SEPARATOR . $new_name;
+                break;
+
+            default:
+                return null;
+                break;
+        }
+
+        if ($filesystem->copyDirectory($old_path, $new_path)) {
+
+            //make a backup in case of emergency
+            $filesystem->copyDirectory($old_path, $this->vfs_path . DIRECTORY_SEPARATOR . $this->backup_directory . DIRECTORY_SEPARATOR . $type . '-' . $old_name . '-' . time());
+
+            //delete the old one
+            $filesystem->deleteDirectory($old_path);
+
+            $path = str_replace(['\\', '/'], '.', $new_path);
+
             return $path;
         }
 
         return null;
+
     }
+
+
 }
