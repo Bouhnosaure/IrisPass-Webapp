@@ -57,7 +57,7 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     {
 
         $data['password'] = bcrypt($data['password']);
-        $data['groups'] = '["api","application","vfs","upload","curl"]';
+        $data['groups'] = '["api","application","fs","upload","curl"]';
 
         return $this->model->create($data);
     }
