@@ -21,36 +21,12 @@ class UserTableSeeder extends Seeder
             'id' => 1,
             'email' => 'alexandre.mangin@viacesi.fr',
             'password' => bcrypt('123123'),
-            'max_users' => 50,
-            'date_start' => '2016-01-01',
-            'date_end' => '2016-12-31',
         ]);
 
         User::create([
             'id' => 2,
             'email' => 'alan.corbel@viacesi.fr',
             'password' => bcrypt('123123'),
-            'max_users' => 50,
-            'date_start' => '2016-01-01',
-            'date_end' => '2016-12-31',
-        ]);
-
-        User::create([
-            'id' => 3,
-            'email' => 'romibeno@gmail.com',
-            'password' => bcrypt('123123'),
-            'max_users' => 5,
-            'date_start' => '',
-            'date_end' => '',
-        ]);
-
-        User::create([
-            'id' => 4,
-            'email' => 'wanpunman@gmail.com',
-            'password' => bcrypt('123123'),
-            'max_users' => 50,
-            'date_start' => '2016-01-01',
-            'date_end' => '2016-02-01',
         ]);
 
     }
