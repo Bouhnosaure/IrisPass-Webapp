@@ -52,13 +52,14 @@ class OsjsGroupsController extends Controller
     {
         $group = $this->osjsGroupRepository->create($request->all());
 
-        if ($service->createGroupDirectory($group->name)) {
+        if ($path = $service->createDirectory('group', $group->name)) {
 
+            $group->path = $path;
             $group->organization()->associate($this->organization);
             $group->save();
 
             Flash::success(Lang::get('osjs_groups.create-success'));
-            return redirect(action('OrganizationController@index').'#orgagroups');
+            return redirect(action('OrganizationController@index') . '#orgagroups');
         } else {
             Flash::error(Lang::get('osjs_groups.create-failed'));
             return redirect(action('OsjsGroupsController@create'));
@@ -98,13 +99,29 @@ class OsjsGroupsController extends Controller
      *
      * @param OsjsGroupRequest $request
      * @param  int $id
+     * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
-    public function update(OsjsGroupRequest $request, $id)
+    public function update(OsjsGroupRequest $request, $id, OsjsService $service)
     {
+        //get the old version
+        $group_old = $this->osjsGroupRepository->getById($id);
+
+        //update
         $this->osjsGroupRepository->update($id, $request->all());
 
-        Flash::success(Lang::get('osjs_groups.update-success'));
+        //get the new version
+        $group = $this->osjsGroupRepository->getById($id);
+
+        if ($path = $service->renameDirectory('group', $group_old->name, $group->name)) {
+
+            $group->path = $path;
+            $group->save();
+
+            Flash::success(Lang::get('osjs_groups.update-success'));
+        } else {
+            Flash::success(Lang::get('osjs_groups.update-failed'));
+        }
 
         return redirect(action('OsjsGroupsController@show', ['id' => $id]));
     }

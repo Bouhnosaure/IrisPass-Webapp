@@ -38,9 +38,9 @@ class OsjsUserRequest extends Request
     {
 
         $rules = [
-            'username' => 'required|max:255|unique:osjs_users',
+            'username' => 'required|max:255|unique:osjs_users,username,' . $this->id,
             'name' => 'required|max:255',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required_with:password_confirmation|min:6|confirmed'
         ];
 
         return $rules;

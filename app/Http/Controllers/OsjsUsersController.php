@@ -58,13 +58,14 @@ class OsjsUsersController extends Controller
     {
         $user = $this->osjsUserRepository->create($request->all());
 
-        if ($service->createUserDirectory($user->username)) {
+        if ($path = $service->createDirectory('user', $user->username)) {
 
+            $user->path = $path;
             $user->organization()->associate($this->organization);
             $user->save();
 
             Flash::success(Lang::get('osjs_users.create-success'));
-            return redirect(action('OrganizationController@index').'#orgausers');
+            return redirect(action('OrganizationController@index') . '#orgausers');
         } else {
             Flash::error(Lang::get('osjs_users.create-failed'));
             return redirect(action('OsjsUsersController@create'));
@@ -101,15 +102,29 @@ class OsjsUsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param OsjsUserRequest|Request $request
      * @param  int $id
+     * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OsjsUserRequest $request, $id, OsjsService $service)
     {
+        $old_user = $this->osjsUserRepository->getById($id);
+
         $this->osjsUserRepository->update($id, $request->all());
 
-        Flash::success(Lang::get('osjs_users.update-success'));
+        $user = $this->osjsUserRepository->getById($id);
+
+        if ($path = $service->renameDirectory('user', $old_user->username, $user->username)) {
+
+            $user->path = $path;
+            $user->save();
+
+            Flash::success(Lang::get('osjs_users.update-success'));
+        } else {
+            Flash::success(Lang::get('osjs_users.update-failed'));
+        }
+
 
         return redirect(action('OsjsUsersController@show', ['id' => $id]));
     }

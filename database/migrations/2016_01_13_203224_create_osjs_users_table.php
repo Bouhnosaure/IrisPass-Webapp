@@ -19,6 +19,7 @@ class CreateOsjsUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password', 60);
             $table->string('name');
+            $table->string('path');
             $table->text('groups');
             $table->text('settings');
             $table->timestamps();

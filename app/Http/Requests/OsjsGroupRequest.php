@@ -38,7 +38,7 @@ class OsjsGroupRequest extends Request
     {
 
         $rules = [
-            'name' => 'required|max:255|unique:osjs_groups',
+            'name' => 'required|max:255|unique:osjs_groups,name,' . $this->id,
         ];
 
         return $rules;
