@@ -36,6 +36,7 @@ success:
         webhook_url: "http://deployer.codosaure.ovh/deploy/EHKdAqKZ1FdiTUPsLVXGcdpbvOzQE5vcGIVx1ISbJm0eavR1EPwVeBJctota"
         reason: "PHPCI Build #%BUILD% - %COMMIT_MESSAGE%"
         update_only: true
+
     slack_notify:
         webhook_url: "https://hooks.slack.com/services/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"
         room: "#irispass"
