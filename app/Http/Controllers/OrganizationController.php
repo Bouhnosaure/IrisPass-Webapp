@@ -77,6 +77,12 @@ class OrganizationController extends Controller
      */
     public function store(OrganizationRequest $request)
     {
+
+        if (starts_with($request->get('name'), ['www']) || in_array($request->get('name'), ['cms', 'irispass', 'mail', 'desktop', 'bureau', 'chat', 'www', 'office', 'iris', 'only', 'admin'])) {
+            Flash::error(Lang::get('organization.fail-name'));
+            return redirect(action('OrganizationController@index'));
+        }
+
         $this->organization = $this->organizationRepository->create($request->all());
 
         $this->organization->owner()->associate(Auth::user());

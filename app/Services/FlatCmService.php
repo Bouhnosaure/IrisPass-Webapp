@@ -3,15 +3,17 @@
 namespace App\Services;
 
 
-use Illuminate\Filesystem\Filesystem;
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
 
-class FlatCmServices
+class FlatCmService
 {
     private $container_path;
+    private $disabled_path;
 
     public function __construct()
     {
+        $this->master_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_MASTER_PATH')) . DIRECTORY_SEPARATOR;
         $this->container_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR;
         $this->disabled_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR . 'disabled' . DIRECTORY_SEPARATOR;
     }
@@ -40,7 +42,8 @@ class FlatCmServices
 
         $dest = $this->container_path . $identifier;
 
-        exec('cd ' . $dest . ' && git clone https://github.com/Bouhnosaure/Typesetter.git . ');
+        $permissions = 0755;
+        $this->xcopy($this->master_path, $dest, $permissions);
 
         exec('chmod -R 777 ' . $dest);
         exec('chown -R www-data:www-data ' . $dest);
@@ -110,6 +113,7 @@ class FlatCmServices
     public function checkExistance($identifier)
     {
         $exists = false;
+
         $adapter = new Local($this->container_path);
         $filesystem = new Filesystem($adapter);
         $contents = $filesystem->listContents('/');
@@ -129,6 +133,7 @@ class FlatCmServices
                 return $exists;
             }
         }
+
         return $exists;
     }
 
@@ -145,6 +150,35 @@ class FlatCmServices
             }
         }
         return $exists;
+    }
+
+    public function xcopy($source, $dest, $permissions = 0755)
+    {
+        // Check for symlinks
+        if (is_link($source)) {
+            return symlink(readlink($source), $dest);
+        }
+        // Simple copy for a file
+        if (is_file($source)) {
+            return copy($source, $dest);
+        }
+        // Make destination directory
+        if (!is_dir($dest)) {
+            mkdir($dest, $permissions);
+        }
+        // Loop through the folder
+        $dir = dir($source);
+        while (false !== $entry = $dir->read()) {
+            // Skip pointers
+            if ($entry == '.' || $entry == '..') {
+                continue;
+            }
+            // Deep copy directories
+            $this->xcopy("$source/$entry", "$dest/$entry", $permissions);
+        }
+        // Clean up
+        $dir->close();
+        return true;
     }
 
     public static function hash512($arg)

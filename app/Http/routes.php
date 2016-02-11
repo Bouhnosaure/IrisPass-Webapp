@@ -51,7 +51,7 @@ Route::group(['middleware' => 'web'], function () {
 
     });
 
-    //Organization
+    //Virtual Desktop
     Route::group(['prefix' => 'virtualdesktop'], function () {
 
         Route::get('/', array('uses' => 'VirtualDesktopController@index'));
@@ -72,6 +72,15 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
         Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
+
+    });
+
+    //Website
+    Route::group(['prefix' => 'website'], function () {
+
+        Route::get('/', array('uses' => 'WebsiteController@index'));
+        Route::get('create', array('uses' => 'WebsiteController@create'));
+        Route::post('create', array('uses' => 'WebsiteController@store'));
 
     });
 

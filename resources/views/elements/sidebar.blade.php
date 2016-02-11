@@ -31,7 +31,7 @@
 
                     <li><a href="{{action('VirtualDesktopController@index')}}"><i class="fa fa-desktop"></i><span>{{ trans('menu.virtualdesktop') }}</span></a></li>
 
-                    <li><a href="{{action('VirtualDesktopController@index')}}"><i class="fa fa-globe"></i><span>{{ trans('menu.cms') }}</span></a></li>
+                    <li><a href="{{action('WebsiteController@index')}}"><i class="fa fa-globe"></i><span>{{ trans('menu.cms') }}</span></a></li>
 
                     <li><a href="{{action('VirtualDesktopController@index')}}"><i class="fa fa-users"></i><span>{{ trans('menu.crm') }}</span></a></li>
 

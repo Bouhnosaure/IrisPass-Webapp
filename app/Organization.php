@@ -24,7 +24,7 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'address_comp', 'phone', 'email', 'is_active', 'max_users', 'date_start', 'date_end'];
+    protected $fillable = ['name', 'address', 'address_comp', 'phone', 'email', 'is_active', 'max_users', 'date_start', 'date_end', 'is_active_cms', 'cms_url', 'is_active_crm', 'crm_url'];
 
     protected $casts = [
         'is_active' => 'boolean'
