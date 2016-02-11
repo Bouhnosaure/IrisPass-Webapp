@@ -36,7 +36,7 @@ class OsjsUserGroupsController extends Controller
 
         Flash::success(Lang::get('osjs_users_groups.update-success'));
 
-        return redirect(action('OrganizationController@index').'#orgagroupsaccess');
+        return redirect(action('VirtualDesktopController@index').'#orgagroupsaccess');
 
     }
 
@@ -54,7 +54,7 @@ class OsjsUserGroupsController extends Controller
 
         Flash::success(Lang::get('osjs_users_groups.update-success'));
 
-        return redirect(action('OrganizationController@index').'#orgagroupsaccess');
+        return redirect(action('VirtualDesktopController@index').'#orgagroupsaccess');
 
     }
 

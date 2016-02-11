@@ -22,7 +22,11 @@ return [
     */
 
     'overview' => 'Dashboard',
-    'edit' => 'Organization settings',
+
+    'organization' => 'My Organization',
+    'organization-edit' => 'Organization settings',
+
+    'virtualdesktop' => 'Virtual Desktop',
     'group-creation' => 'Group creation',
     'user-creation' => 'User creation',
     'show-group'     => 'Group view',

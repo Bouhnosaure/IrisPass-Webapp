@@ -9,9 +9,13 @@ return [
     */
 
     'about' => 'A propos',
-    'dashboard'     => 'Accueil',
-    'preferences'     => 'Préférences',
-    'confirmation'     => 'Confirmer son profil',
-    'organization'     => 'Bureau virtuel',
+    'dashboard' => 'Accueil',
+    'preferences' => 'Préférences',
+    'confirmation' => 'Confirmer son profil',
+    'organization' => 'Mon Organisation',
+    'virtualdesktop' => 'Bureau virtuel',
+    'cms' => 'Mon Site Web',
+    'crm' => 'Ma CRM',
+    'mail' => 'Service Mail',
 
 ];

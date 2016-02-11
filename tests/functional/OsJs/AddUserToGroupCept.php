@@ -14,7 +14,7 @@ $I->haveRecord('osjs_groups', [
     'updated_at' => '2015-05-08 00:00:00'
 ]);
 
-$I->amOnPage(action('OrganizationController@index'));
+$I->amOnPage(action('VirtualDesktopController@index'));
 
 $I->canSee('group_test');
 

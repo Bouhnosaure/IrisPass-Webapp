@@ -59,7 +59,7 @@ class OsjsGroupsController extends Controller
             $group->save();
 
             Flash::success(Lang::get('osjs_groups.create-success'));
-            return redirect(action('OrganizationController@index') . '#orgagroups');
+            return redirect(action('VirtualDesktopController@index') . '#orgagroups');
         } else {
             Flash::error(Lang::get('osjs_groups.create-failed'));
             return redirect(action('OsjsGroupsController@create'));

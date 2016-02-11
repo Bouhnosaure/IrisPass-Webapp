@@ -12,6 +12,7 @@
                     <h3>{{ trans('osjs_users.show') }}</h3>
                 </div>
                 <div class="content">
+
                     <h1>{{$user->username}}</h1>
 
                     <a class="btn btn-primary" id="users-edit" href="{{action('OsjsUsersController@edit', ['id' => $user->id])}}">{{trans('osjs_users.edit')}}</a>

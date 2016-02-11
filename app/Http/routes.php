@@ -40,6 +40,7 @@ Route::group(['middleware' => 'web'], function () {
 
     //Organization
     Route::group(['prefix' => 'organization'], function () {
+
         Route::get('/', array('uses' => 'OrganizationController@index'));
         Route::get('/create', array('uses' => 'OrganizationController@create'));
         Route::post('/', array('uses' => 'OrganizationController@store'));
@@ -52,6 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 
     //Organization
     Route::group(['prefix' => 'virtualdesktop'], function () {
+
+        Route::get('/', array('uses' => 'VirtualDesktopController@index'));
 
         Route::get('users/create', array('uses' => 'OsjsUsersController@create'));
         Route::post('users', array('uses' => 'OsjsUsersController@store'));
@@ -71,5 +74,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
 
     });
+
 
 });

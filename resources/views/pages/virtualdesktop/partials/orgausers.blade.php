@@ -1,4 +1,4 @@
-<div id="orgausers" class="tab-pane cont">
+<div id="orgausers" class="tab-pane active cont">
 
     @if($users->count() != 0)
 

@@ -14,7 +14,7 @@ $I->haveRecord('osjs_users', [
 
 //setup
 $I->amAuthenticatedWithCredentials();
-$I->amOnAction('OrganizationController@index');
+$I->amOnAction('VirtualDesktopController@index');
 
 $I->click("//*[text()[contains(.,'josh')]]/following-sibling::td[4]/a[1]");
 
@@ -26,6 +26,6 @@ $I->fillField(['name' => 'name'], 'johna');
 
 $I->click('submit-osjs-users-create');
 
-$I->amOnAction('OrganizationController@index');
+$I->amOnAction('VirtualDesktopController@index');
 
 $I->see('john');

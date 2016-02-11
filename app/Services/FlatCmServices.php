@@ -8,16 +8,19 @@ use League\Flysystem\Adapter\Local;
 
 class FlatCmServices
 {
+    private $container_path;
+
     public function __construct()
     {
-
+        $this->container_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR;
+        $this->disabled_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR . 'disabled' . DIRECTORY_SEPARATOR;
     }
 
-    public function process($identifier)
+    public function process($identifier, $username, $mail, $password)
     {
         if ($this->checkExistance($identifier) === false) {
             $this->copyCMS($identifier);
-            $this->sedReplace($identifier);
+            $this->sedReplace($identifier, $username, $mail, $password);
         } else {
             $this->reactivate($identifier);
         }
@@ -30,39 +33,46 @@ class FlatCmServices
      */
     public function copyCMS($identifier)
     {
-        //cd and git clone
-        //exec('git clone'); ?
 
-        $adapter = new Local('/var/www/cms_container');
+        $adapter = new Local($this->container_path);
         $filesystem = new Filesystem($adapter);
         $filesystem->createDir($identifier);
 
-        $source = "/var/www/cms-master";
-        $dest = "/var/www/cms_container/" . $identifier;
+        $dest = $this->container_path . $identifier;
 
-        $permissions = 0755;
-        $this->xcopy($source, $dest, $permissions);
+        exec('cd ' . $dest . ' && git clone https://github.com/Bouhnosaure/Typesetter.git . ');
 
         exec('chmod -R 777 ' . $dest);
         exec('chown -R www-data:www-data ' . $dest);
     }
 
     /*
-     * Step Three
+     * Step Two
      */
-    public function sedReplace($identifier)
+    public function sedReplace($identifier, $username, $mail, $password)
     {
-        $target_db = 'crm' . $identifier;
-        $target_db = str_replace('-', '', $target_db);
-        $path_to_directory = '/var/www/cms_container/' . $identifier . '/';
-        $path_to_file = $path_to_directory . 'config.inc.php';
 
+        $path_to_directory = $this->container_path . $identifier;
+
+        //data\_extra\Header.php
+        $path_to_file = $path_to_directory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . '_extra' . DIRECTORY_SEPARATOR . 'Header.php';
         $file_contents = file_get_contents($path_to_file);
+        $file_contents = str_replace('{SITENAME}', $identifier, $file_contents);
+        file_put_contents($path_to_file, $file_contents);
 
-        $file_contents = str_replace('$dbconfig[\'db_name\'] = \'crmmasterdb\'', '$dbconfig[\'db_name\'] = \'' . $target_db . '\'', $file_contents);
-        $file_contents = str_replace('$site_URL = \'http://master.bziiit.com/\'', '$site_URL = \'http://' . $identifier . '.crm.bziiit.com/\'', $file_contents);
-        $file_contents = str_replace('$root_directory = \'/var/www/crm-master-00/\'', '$root_directory = \'' . $path_to_directory . '\'', $file_contents);
+        //data\_site\config.php
+        $path_to_file = $path_to_directory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . '_site' . DIRECTORY_SEPARATOR . 'config.php';
+        $file_contents = file_get_contents($path_to_file);
+        $file_contents = str_replace('{EMAIL}', $mail, $file_contents);
+        $file_contents = str_replace('{SITENAME}', $identifier, $file_contents);
+        file_put_contents($path_to_file, $file_contents);
 
+        //data\_site\config.php
+        $path_to_file = $path_to_directory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . '_site' . DIRECTORY_SEPARATOR . 'users.php';
+        $file_contents = file_get_contents($path_to_file);
+        $file_contents = str_replace('{USERNAME}', $username, $file_contents);
+        $file_contents = str_replace('{PASSWORD}', $this->hash512($password), $file_contents);
+        $file_contents = str_replace('{EMAIL}', $mail, $file_contents);
         file_put_contents($path_to_file, $file_contents);
     }
 
@@ -71,11 +81,11 @@ class FlatCmServices
      */
     public function disable($identifier)
     {
-        $adapter = new Local('/var/www/cms_container');
+        $adapter = new Local($this->container_path);
         $filesystem = new Filesystem($adapter);
         $filesystem->createDir('disabled');
-        if ($this->checkExistance($identifier) === true && is_dir('/var/www/cms_container/' . $identifier)) {
-            exec('mv /var/www/cms_container/' . $identifier . ' /var/www/cms_container/disabled/');
+        if ($this->checkExistance($identifier) === true && is_dir($this->container_path . $identifier)) {
+            exec('mv ' . $this->container_path . $identifier . ' ' . $this->disabled_path);
             return true;
         } else {
             return 'error';
@@ -89,7 +99,7 @@ class FlatCmServices
     {
 
         if ($this->checkExistance($identifier) === true) {
-            exec('mv /var/www/cms_container/disabled/' . $identifier . ' /var/www/cms_container/');
+            exec('mv ' . $this->disabled_path . $identifier . ' ' . $this->container_path);
             return true;
         } else {
             return 'error';
@@ -100,7 +110,7 @@ class FlatCmServices
     public function checkExistance($identifier)
     {
         $exists = false;
-        $adapter = new Local('/var/www/cms_container');
+        $adapter = new Local($this->container_path);
         $filesystem = new Filesystem($adapter);
         $contents = $filesystem->listContents('/');
         foreach ($contents as $directory) {
@@ -110,7 +120,7 @@ class FlatCmServices
             }
         }
 
-        $adapter = new Local('/var/www/cms_container/disabled');
+        $adapter = new Local($this->disabled_path);
         $filesystem = new Filesystem($adapter);
         $contents = $filesystem->listContents('/');
         foreach ($contents as $directory) {
@@ -125,7 +135,7 @@ class FlatCmServices
     public function isActive($identifier)
     {
         $exists = false;
-        $adapter = new Local('/var/www/cms_container');
+        $adapter = new Local($this->container_path);
         $filesystem = new Filesystem($adapter);
         $contents = $filesystem->listContents('/');
         foreach ($contents as $directory) {
@@ -137,33 +147,21 @@ class FlatCmServices
         return $exists;
     }
 
-    public function xcopy($source, $dest, $permissions = 0755)
+    public static function hash512($arg)
     {
-        // Check for symlinks
-        if (is_link($source)) {
-            return symlink(readlink($source), $dest);
+        $arg = trim($arg);
+
+        //sha512: looped with dynamic salt
+        for ($i = 0; $i < 1000; $i++) {
+
+            $ints = preg_replace('#[a-f]#', '', $arg);
+            $salt_start = (int)substr($ints, 0, 1);
+            $salt_len = (int)substr($ints, 2, 1);
+            $salt = substr($arg, $salt_start, $salt_len);
+            $arg = hash('sha512', $arg . $salt);
         }
-        // Simple copy for a file
-        if (is_file($source)) {
-            return copy($source, $dest);
-        }
-        // Make destination directory
-        if (!is_dir($dest)) {
-            mkdir($dest, $permissions);
-        }
-        // Loop through the folder
-        $dir = dir($source);
-        while (false !== $entry = $dir->read()) {
-            // Skip pointers
-            if ($entry == '.' || $entry == '..') {
-                continue;
-            }
-            // Deep copy directories
-            $this->xcopy("$source/$entry", "$dest/$entry", $permissions);
-        }
-        // Clean up
-        $dir->close();
-        return true;
+
+        return $arg;
     }
 
 }

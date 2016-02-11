@@ -14,7 +14,7 @@ $I->haveRecord('osjs_groups', [
 
 //setup
 $I->amAuthenticatedWithCredentials();
-$I->amOnPage(action('OrganizationController@index'));
+$I->amOnPage(action('VirtualDesktopController@index'));
 
 $I->click("//*[text()[contains(.,'test_group')]]/following-sibling::td[4]/a[1]");
 
@@ -24,6 +24,6 @@ $I->click("Editer");
 $I->fillField(['name' => 'name'], 'test_groups_2');
 $I->click('submit-osjs-groups-create');
 
-$I->amOnPage(action('OrganizationController@index'));
+$I->amOnPage(action('VirtualDesktopController@index'));
 
 $I->see('test_groups_2');

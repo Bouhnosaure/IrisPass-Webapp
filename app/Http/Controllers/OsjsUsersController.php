@@ -65,7 +65,7 @@ class OsjsUsersController extends Controller
             $user->save();
 
             Flash::success(Lang::get('osjs_users.create-success'));
-            return redirect(action('OrganizationController@index') . '#orgausers');
+            return redirect(action('VirtualDesktopController@index') . '#orgausers');
         } else {
             Flash::error(Lang::get('osjs_users.create-failed'));
             return redirect(action('OsjsUsersController@create'));

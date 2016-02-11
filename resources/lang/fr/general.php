@@ -15,6 +15,7 @@ return [
     'close' => 'Fermer',
     'yes' => 'Oui',
     'no' => 'Non',
+    'go-back' => 'Retour',
 
     'about' => 'A propos',
     'lorem' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,
