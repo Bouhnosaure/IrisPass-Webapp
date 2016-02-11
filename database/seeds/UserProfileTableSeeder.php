@@ -33,6 +33,13 @@ class UserProfileTableSeeder extends Seeder
             'user_id' => 2,
         ]);
 
+        UserProfile::create([
+            'firstname' => 'Christophe',
+            'lastname' => 'Larquey',
+            'phone' => '0605040302',
+            'user_id' => 3,
+        ]);
+
     }
 
 }

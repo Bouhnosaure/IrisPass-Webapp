@@ -29,5 +29,11 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('123123'),
         ]);
 
+        User::create([
+            'id' => 2,
+            'email' => 'clarquey@irisit.fr',
+            'password' => bcrypt('123123'),
+        ]);
+
     }
 }

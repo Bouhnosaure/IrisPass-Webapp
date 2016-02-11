@@ -35,6 +35,8 @@ class DashboardController extends Controller
     public function index()
     {
         $organization = $this->organization;
+        $groups = null;
+        $users = null;
 
         if ($organization != null) {
             $groups = $this->organization->groups()->get();
