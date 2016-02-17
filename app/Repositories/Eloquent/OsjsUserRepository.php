@@ -71,6 +71,10 @@ class OsjsUserRepository implements OsjsUserRepositoryInterface
     public function update($id, Array $data)
     {
 
+        if ($data['password'] == "") {
+            unset($data["password"]);
+        }
+
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         }
