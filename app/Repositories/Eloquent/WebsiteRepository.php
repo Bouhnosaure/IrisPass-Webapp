@@ -1,33 +1,26 @@
 <?php namespace App\Repositories\Eloquent;
 
-use App\Organization;
-use App\Repositories\OrganizationRepositoryInterface;
-use App\User;
+use App\Repositories\WebsiteRepositoryInterface;
+use App\Website;
 
-class OrganizationRepository implements OrganizationRepositoryInterface
+class WebsiteRepository implements WebsiteRepositoryInterface
 {
     /**
      * @var Event
      */
     private $model;
 
-    private $user;
-
     /**
-     * @param Organization $organization
-     * @param User $user
-     * @param HashidsManager $hashids
-     * @internal param OsjsGroup $group
+     * @param Website $website
      */
-    public function __construct(Organization $organization, User $user)
+    public function __construct(Website $website)
     {
-        $this->model = $organization;
-        $this->user = $user;
+        $this->model = $website;
     }
 
 
     /**
-     * get all organizations
+     * get all $website
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
@@ -36,16 +29,16 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * get all organizations in a list for a select box
+     * get all $website in a list for a select box
      * @return mixed
      */
     public function getList()
     {
-        return $this->model->latest('created_at')->lists('name', 'id');
+        return $this->model->latest('created_at')->lists('identifier', 'id');
     }
 
     /**
-     * get organization by id
+     * get $website by id
      * @param $id
      * @return mixed
      */
@@ -55,31 +48,30 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * create a new organization
+     * create a new $website
      * @param array $data
      * @return static
      */
     public function create(Array $data)
     {
-        $data['uuid'] = uniqid();
         return $this->model->create($data);
     }
 
     /**
-     * update an organization
+     * update an $website
      * @param $id
      * @param array $data
      * @return mixed
      */
     public function update($id, Array $data)
     {
-        $user = $this->model->findOrFail($id)->update($data);
+        $website = $this->model->findOrFail($id)->update($data);
 
-        return $user;
+        return $website;
     }
 
     /**
-     * delete a organization
+     * delete a $website
      * @param $id
      * @return mixed
      */
@@ -89,7 +81,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * get all organizations in paginated list
+     * get all $website in paginated list
      * @param $number
      * @return mixed
      */

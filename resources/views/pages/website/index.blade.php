@@ -19,7 +19,7 @@
 
             </div>
 
-            @if($organization->is_active_cms)
+            @if($website && $website->is_active)
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -32,13 +32,21 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="personal">
-                                        <h3 class="name">{{$organization->name}}</h3>
+                                        <h3 class="name">{{$website->identifier}}</h3>
 
                                         <table class="no-border no-strip skills">
                                             <tbody class="no-border-x no-border-y">
                                             <tr>
                                                 <td style="width:25%; font-size:16px;"><b>{{ trans('website.url') }} :</b></td>
                                                 <td class="isp-value"><a target="_blank" href="http://{{str_slug($organization->name, "-").'.irispass.fr'}}">{{str_slug($organization->name, "-").'.irispass.fr'}}</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%; font-size:16px;"><b>{{ trans('website.email-field') }} :</b></td>
+                                                <td class="isp-value">{{$website->email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%; font-size:16px;"><b>{{ trans('website.username-field') }} :</b></td>
+                                                <td class="isp-value">{{$website->username}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

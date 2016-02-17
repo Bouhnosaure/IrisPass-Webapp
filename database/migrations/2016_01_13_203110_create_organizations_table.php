@@ -16,12 +16,14 @@ class CreateOrganizationsTable extends Migration
 
         Schema::create('organizations', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('address_comp')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            
+
+
             $table->boolean('is_active')->default(false);
             $table->integer('max_users')->default(false);
 

@@ -14,9 +14,11 @@
                     <div class="col-md-10">
                         <p style="font-size:28px;"><b>{{ trans('organization.main-title') }}</b></p>
                     </div>
-                    <div class="col-md-2">
-                        <a class="btn btn-primary btn-block pull-right" href="{{action('OrganizationController@edit')}}">{{ trans('organization.edit') }}</a>
-                    </div>
+                    @if($organization)
+                        <div class="col-md-2">
+                            <a class="btn btn-primary btn-block pull-right" href="{{action('OrganizationController@edit')}}">{{ trans('organization.edit') }}</a>
+                        </div>
+                    @endif
                 </div>
 
 

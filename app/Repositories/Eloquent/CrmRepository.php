@@ -1,33 +1,26 @@
 <?php namespace App\Repositories\Eloquent;
 
-use App\Organization;
-use App\Repositories\OrganizationRepositoryInterface;
-use App\User;
+use App\Crm;
+use App\Repositories\CrmRepositoryInterface;
 
-class OrganizationRepository implements OrganizationRepositoryInterface
+class CrmRepository implements CrmRepositoryInterface
 {
     /**
      * @var Event
      */
     private $model;
 
-    private $user;
-
     /**
-     * @param Organization $organization
-     * @param User $user
-     * @param HashidsManager $hashids
-     * @internal param OsjsGroup $group
+     * @param Website $crm
      */
-    public function __construct(Organization $organization, User $user)
+    public function __construct(Crm $crm)
     {
-        $this->model = $organization;
-        $this->user = $user;
+        $this->model = $crm;
     }
 
 
     /**
-     * get all organizations
+     * get all $crm
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
@@ -36,16 +29,16 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * get all organizations in a list for a select box
+     * get all $crm in a list for a select box
      * @return mixed
      */
     public function getList()
     {
-        return $this->model->latest('created_at')->lists('name', 'id');
+        return $this->model->latest('created_at')->lists('identifier', 'id');
     }
 
     /**
-     * get organization by id
+     * get $crm by id
      * @param $id
      * @return mixed
      */
@@ -55,31 +48,30 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * create a new organization
+     * create a new $crm
      * @param array $data
      * @return static
      */
     public function create(Array $data)
     {
-        $data['uuid'] = uniqid();
         return $this->model->create($data);
     }
 
     /**
-     * update an organization
+     * update an $crm
      * @param $id
      * @param array $data
      * @return mixed
      */
     public function update($id, Array $data)
     {
-        $user = $this->model->findOrFail($id)->update($data);
+        $crm = $this->model->findOrFail($id)->update($data);
 
-        return $user;
+        return $crm;
     }
 
     /**
-     * delete a organization
+     * delete a $crm
      * @param $id
      * @return mixed
      */
@@ -89,7 +81,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * get all organizations in paginated list
+     * get all $crm in paginated list
      * @param $number
      * @return mixed
      */

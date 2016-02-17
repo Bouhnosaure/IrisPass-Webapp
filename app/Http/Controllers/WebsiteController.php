@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WebsiteRequest;
+use App\Jobs\CreateWebsite;
+use App\Repositories\WebsiteRepositoryInterface;
 use App\Services\FlatCmService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,7 @@ use Laracasts\Flash\Flash;
 
 class WebsiteController extends Controller
 {
+    use DispatchesJobs;
 
     private $organization;
 
@@ -41,7 +44,9 @@ class WebsiteController extends Controller
 
         $organization = $this->organization;
 
-        return view('pages.website.index')->with(compact('organization'));
+        $website = $organization->website()->first();
+
+        return view('pages.website.index')->with(compact('organization', 'website'));
 
     }
 
@@ -58,11 +63,12 @@ class WebsiteController extends Controller
     /**
      *
      * Activate CMS INSTANCE
-     * @param FlatCmService $service
      * @param WebsiteRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @internal param FlatCmService $service
+     * @internal param WebsiteRepositoryInterface $websiteRepository
      */
-    public function store(FlatCmService $service, WebsiteRequest $request)
+    public function store(WebsiteRequest $request)
     {
 
         $identifier = str_slug($this->organization->name, "-");
@@ -70,18 +76,11 @@ class WebsiteController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 
-        if ($service->process($identifier, $username, $email, $password)) {
+        $this->dispatch(new CreateWebsite($this->organization->id, $identifier, $username, $email, $password));
 
-            $this->organization->crm_url = $identifier;
-            $this->organization->is_active_cms = true;
-            $this->organization->save();
+        Flash::success(Lang::get('website.create-success'));
+        return redirect(action('WebsiteController@index'));
 
-            Flash::success(Lang::get('website.create-success'));
-            return redirect(action('WebsiteController@index'));
-        } else {
-            Flash::error(Lang::get('website.create-failed'));
-            return redirect(action('WebsiteController@create'));
-        }
     }
 
 }
