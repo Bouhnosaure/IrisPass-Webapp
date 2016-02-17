@@ -133,10 +133,23 @@ class OsjsUsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, OsjsService $service)
     {
-        // nothing now
+        $user = $this->osjsUserRepository->getById($id);
+
+        if ($path = $service->deleteDirectory('user', $user->username)) {
+
+            $user->delete();
+
+            Flash::success(Lang::get('osjs_users.destroy-success'));
+        } else {
+            Flash::success(Lang::get('osjs_users.destroy-failed'));
+        }
+
+        return redirect(action('VirtualDesktopController@index') . '#orgausers');
+
     }
 }

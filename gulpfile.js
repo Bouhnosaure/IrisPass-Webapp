@@ -47,6 +47,7 @@ elixir(function (mix) {
         paths.multiselect + "js/jquery.multi-select.js",
         paths.socketio + "socket.io.js",
         paths.assets + "js/core.js",
+        paths.assets + "js/laravel.js",
         paths.assets + "js/app.js"
     ], "public/js/app.js", "./");
 

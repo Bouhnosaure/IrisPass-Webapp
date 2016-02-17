@@ -18,6 +18,7 @@
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.userstab-username') }}</b></td>
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.userstab-creation') }}</b></td>
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.userstab-update') }}</b></td>
+                            <td style="width:20%; font-size:14px;"><b>{{ trans('organization.userstab-destroy') }}</b></td>
                         </tr>
                         </thead>
                         <tbody class="no-border-x no-border-y">
@@ -30,6 +31,15 @@
                                 <td class="isp-value">{{$user->created_at->diffForHumans()}}</td>
                                 <td class="isp-value">{{$user->updated_at->diffForHumans()}}</td>
                                 <td><a class="btn btn-primary pull-right" href="{{action('OsjsUsersController@show',['id' => $user->id])}}">{{trans('osjs_users.show')}}</a></td>
+                                <td>
+                                    <a class="btn btn-danger pull-right"
+                                       href="{{action('OsjsUsersController@destroy',['id' => $user->id])}}"
+                                       data-method="DELETE"
+                                       data-token="{{csrf_token()}}"
+                                       data-confirm="{{trans('osjs_users.destroy_confirmation')}}">
+                                        {{trans('osjs_users.destroy')}}
+                                    </a>
+                                </td>
                             </tr>
 
                         @endforeach

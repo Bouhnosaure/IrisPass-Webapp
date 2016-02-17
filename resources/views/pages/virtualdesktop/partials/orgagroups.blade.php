@@ -18,6 +18,7 @@
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.groupstab-users-allowed') }}</b></td>
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.groupstab-creation') }}</b></td>
                             <td style="width:20%; font-size:14px;"><b>{{ trans('organization.groupstab-update') }}</b></td>
+                            <td style="width:20%; font-size:14px;"><b>{{ trans('organization.groupstab-destroy') }}</b></td>
                         </tr>
                         </thead>
                         <tbody class="no-border-x no-border-y">
@@ -30,6 +31,15 @@
                                 <td class="isp-value">{{$group->created_at->diffForHumans()}}</td>
                                 <td class="isp-value">{{$group->updated_at->diffForHumans()}}</td>
                                 <td><a class="btn btn-primary pull-right" href="{{action('OsjsGroupsController@show',['id' => $group->id])}}">{{trans('osjs_groups.show')}}</a></td>
+                                <td>
+                                    <a class="btn btn-danger pull-right"
+                                       href="{{action('OsjsGroupsController@destroy',['id' => $group->id])}}"
+                                       data-method="DELETE"
+                                       data-token="{{csrf_token()}}"
+                                       data-confirm="{{trans('osjs_groups.destroy_confirmation')}}">
+                                        {{trans('osjs_groups.destroy')}}
+                                    </a>
+                                </td>
                             </tr>
 
                         @endforeach

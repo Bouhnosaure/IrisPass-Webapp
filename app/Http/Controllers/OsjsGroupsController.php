@@ -137,16 +137,25 @@ class OsjsGroupsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     * @param OsjsService $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, OsjsService $service)
     {
-        // nothing now
-    }
+        $group = $this->osjsGroupRepository->getById($id);
 
-    public function addUserToGroup($groupId, $userId)
-    {
+        $name = $this->organization->uuid . "-" . $group->name;
 
+        if ($path = $service->deleteDirectory('group', $name)) {
+
+            $group->delete();
+
+            Flash::success(Lang::get('osjs_groups.destroy-success'));
+        } else {
+            Flash::success(Lang::get('osjs_groups.destroy-failed'));
+        }
+
+        return redirect(action('VirtualDesktopController@index') . '#orgagroups');
     }
 
 
