@@ -17,7 +17,9 @@ class CreateOsjsGroupsTable extends Migration
         Schema::create('osjs_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->text('name');
+            $table->text('realname');
             $table->text('path');
+            $table->uuid('organization_uuid');
             $table->timestamps();
         });
 

@@ -51,9 +51,12 @@ class OsjsGroupsController extends Controller
     public function store(OsjsGroupRequest $request, OsjsService $service)
     {
         $group = $this->osjsGroupRepository->create($request->all());
+        $name = $this->organization->uuid . "-" . $group->name;
 
-        if ($path = $service->createDirectory('group', $group->name)) {
+        if ($path = $service->createDirectory('group', $name)) {
 
+            $group->organization_uuid = $this->organization->uuid;
+            $group->realname = $name;
             $group->path = $path;
             $group->organization()->associate($this->organization);
             $group->save();
@@ -106,15 +109,19 @@ class OsjsGroupsController extends Controller
     {
         //get the old version
         $group_old = $this->osjsGroupRepository->getById($id);
+        $old_name = $this->organization->uuid . "-" . $group_old->name;
 
         //update
         $this->osjsGroupRepository->update($id, $request->all());
 
         //get the new version
         $group = $this->osjsGroupRepository->getById($id);
+        $name = $this->organization->uuid . "-" . $group->name;
 
-        if ($path = $service->renameDirectory('group', $group_old->name, $group->name)) {
+        if ($path = $service->renameDirectory('group', $old_name, $name)) {
 
+            $group->organization_uuid = $this->organization->uuid;
+            $group->realname = $name;
             $group->path = $path;
             $group->save();
 

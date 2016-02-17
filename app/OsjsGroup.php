@@ -24,7 +24,7 @@ class OsjsGroup extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'path'];
+    protected $fillable = ['name', 'realname', 'path', 'organization_uuid'];
 
     /**
      * An os js group belongs to an organization
