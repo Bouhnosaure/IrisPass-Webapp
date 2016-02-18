@@ -57,6 +57,43 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#websiteactiontab">{{ trans('website.actions-label') }}</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="websiteactiontab" class="tab-pane active cont">
+                                    <table class="no-border no-strip skills">
+                                        <thead>
+                                        <tr>
+                                            <td style="width:20%; font-size:14px;"><b>{{ trans('website.websiteactiontab-identifier') }}</b></td>
+                                            <td style="width:20%; font-size:14px;"><b>{{ trans('website.websiteactiontab-destroy') }}</b></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="no-border-x no-border-y">
+                                        <tr>
+                                            <td class="isp-value">{{$website->identifier}}</td>
+                                            <td>
+                                                <a class="btn btn-danger pull-right"
+                                                   href="{{action('WebsiteController@destroy',['id' => $website->id])}}"
+                                                   data-method="DELETE"
+                                                   data-token="{{csrf_token()}}"
+                                                   data-confirm="{{trans('website.destroy-confirmation')}}">
+                                                    {{trans('website.destroy-button')}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="md-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+
             @else
 
                 <p class="isp-label"> {{trans('website.info-no-cms')}}

@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block-flat">
-                    <h3>{{ trans('osjs_users_groups.index') }}</h3>
-                    <p>{{ trans('osjs_users_groups.description') }}</p>
+                    <h3>{{ trans('virtualdesktop.groupaccesstab-index') }}</h3>
+                    <p>{{ trans('virtualdesktop.groupaccesstab-description') }}</p>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
                                     <table class="table no-border hover">
                                         <thead class="no-border">
                                         <tr>
-                                            <th><strong>{{trans('osjs_users_groups.username')}}</strong></th>
-                                            <th><strong>{{trans('osjs_users_groups.status')}}</strong></th>
+                                            <th><strong>{{trans('virtualdesktop.groupaccesstab-username')}}</strong></th>
+                                            <th><strong>{{trans('virtualdesktop.groupaccesstab-status')}}</strong></th>
                                         </tr>
                                         </thead>
                                         <tbody class="no-border-y">
@@ -39,11 +39,11 @@
                                                 <td>
                                                     @if($group->users->contains('id', $user->id))
                                                         {!! Form::open(['method' => 'POST','action' => ['OsjsUserGroupsController@removeUserFromGroup', 'groupId' => $group->id,'userId' => $user->id]]) !!}
-                                                        <button class="btn btn-block btn-danger" name="submit-usergroup-disable" type="submit">{{trans('osjs_users_groups.disable')}}</button>
+                                                        <button class="btn btn-block btn-danger" name="submit-usergroup-disable" type="submit">{{trans('virtualdesktop.groupaccesstab-disable')}}</button>
                                                         {!! Form::close() !!}
                                                     @else
                                                         {!! Form::open(['method' => 'POST','action' => ['OsjsUserGroupsController@addUserToGroup','groupId' => $group->id,'userId' => $user->id]]) !!}
-                                                        <button class="btn btn-block btn-primary" name="submit-usergroup-enable" type="submit">{{trans('osjs_users_groups.enable')}}</button>
+                                                        <button class="btn btn-block btn-primary" name="submit-usergroup-enable" type="submit">{{trans('virtualdesktop.groupaccesstab-enable')}}</button>
                                                         {!! Form::close() !!}
 
                                                     @endif
@@ -61,14 +61,14 @@
         @endforeach
 
     @elseif($users->count() == 0 && $groups->count() == 0)
-        {{ trans('organization.groupaccesstab-no-user-no-group') }}
+        {{ trans('virtualdesktop.groupaccesstab-no-user-no-group') }}
         <a class="btn btn-primary pull-right" href="{{action('OsjsGroupsController@create')}}">{{ trans('osjs_groups.create') }}</a>
         <a class="btn btn-primary pull-right" href="{{action('OsjsUsersController@create')}}">{{ trans('osjs_users.create') }}</a>
     @elseif($users->count() == 0)
-        {{ trans('organization.groupaccesstab-no-user') }}
+        {{ trans('virtualdesktop.groupaccesstab-no-user') }}
         <a class="btn btn-primary pull-right" href="{{action('OsjsUsersController@create')}}">{{ trans('osjs_users.create') }}</a>
     @elseif($groups->count() == 0)
-        {{ trans('organization.groupaccesstab-no-group') }}
+        {{ trans('virtualdesktop.groupaccesstab-no-group') }}
         <a class="btn btn-primary pull-right" href="{{action('OsjsGroupsController@create')}}">{{ trans('osjs_groups.create') }}</a>
     @endif
 </div>

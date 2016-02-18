@@ -5,17 +5,20 @@ namespace App\Services;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\ZipArchive\ZipArchiveAdapter;
 
 class FlatCmService
 {
     private $container_path;
     private $disabled_path;
+    private $archives_path;
 
     public function __construct()
     {
         $this->master_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_MASTER_PATH')) . DIRECTORY_SEPARATOR;
         $this->container_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR;
         $this->disabled_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR . 'disabled' . DIRECTORY_SEPARATOR;
+        $this->archives_path = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, env('CMS_PATH')) . DIRECTORY_SEPARATOR . 'archives' . DIRECTORY_SEPARATOR;
     }
 
     public function process($identifier, $username, $mail, $password)
@@ -196,6 +199,49 @@ class FlatCmService
         }
 
         return $arg;
+    }
+
+    public function saveAsZip($identifier)
+    {
+        //initialize variables
+        $archives = new Filesystem(new Local($this->container_path));
+        $local = new Filesystem(new Local($this->container_path . $identifier));
+        $zip = new Filesystem(new ZipArchiveAdapter($this->archives_path . time() . '-' . $identifier . '.zip'));
+
+        //make sure the directory exists
+        $archives->createDir('archives');
+
+        //list dir for CMS
+        $contents = $local->listContents('', true);
+
+        foreach ($contents as $info) {
+            if ($info['type'] === 'dir') {
+                continue;
+            }
+
+            $zip->write($info['path'], $local->read($info['path']));
+        }
+
+        // This will trigger saving the zip.
+        $zip = null;
+
+        return true;
+    }
+
+    public function destroyCMS($identifier)
+    {
+
+        $adapter = new Local($this->container_path);
+        $filesystem = new Filesystem($adapter);
+
+        if ($this->checkExistance($identifier)) {
+            if ($this->saveAsZip($identifier)) {
+                $filesystem->deleteDir($identifier);
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

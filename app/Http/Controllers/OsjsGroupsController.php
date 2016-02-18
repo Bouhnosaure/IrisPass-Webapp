@@ -127,7 +127,7 @@ class OsjsGroupsController extends Controller
 
             Flash::success(Lang::get('osjs_groups.update-success'));
         } else {
-            Flash::success(Lang::get('osjs_groups.update-failed'));
+            Flash::error(Lang::get('osjs_groups.update-failed'));
         }
 
         return redirect(action('OsjsGroupsController@show', ['id' => $id]));
@@ -152,7 +152,7 @@ class OsjsGroupsController extends Controller
 
             Flash::success(Lang::get('osjs_groups.destroy-success'));
         } else {
-            Flash::success(Lang::get('osjs_groups.destroy-failed'));
+            Flash::error(Lang::get('osjs_groups.destroy-failed'));
         }
 
         return redirect(action('VirtualDesktopController@index') . '#orgagroups');

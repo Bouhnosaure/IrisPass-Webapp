@@ -122,7 +122,7 @@ class OsjsUsersController extends Controller
 
             Flash::success(Lang::get('osjs_users.update-success'));
         } else {
-            Flash::success(Lang::get('osjs_users.update-failed'));
+            Flash::error(Lang::get('osjs_users.update-failed'));
         }
 
 
@@ -146,7 +146,7 @@ class OsjsUsersController extends Controller
 
             Flash::success(Lang::get('osjs_users.destroy-success'));
         } else {
-            Flash::success(Lang::get('osjs_users.destroy-failed'));
+            Flash::error(Lang::get('osjs_users.destroy-failed'));
         }
 
         return redirect(action('VirtualDesktopController@index') . '#orgausers');

@@ -81,6 +81,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/', array('uses' => 'WebsiteController@index'));
         Route::get('create', array('uses' => 'WebsiteController@create'));
         Route::post('create', array('uses' => 'WebsiteController@store'));
+        Route::delete('delete', array('uses' => 'WebsiteController@destroy'));
 
     });
 

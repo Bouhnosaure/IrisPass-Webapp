@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WebsiteRequest;
 use App\Jobs\CreateWebsite;
+use App\Organization;
 use App\Repositories\WebsiteRepositoryInterface;
 use App\Services\FlatCmService;
 use Carbon\Carbon;
@@ -64,11 +65,13 @@ class WebsiteController extends Controller
      *
      * Activate CMS INSTANCE
      * @param WebsiteRequest $request
+     * @param FlatCmService $service
+     * @param WebsiteRepositoryInterface $websiteRepository
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @internal param FlatCmService $service
      * @internal param WebsiteRepositoryInterface $websiteRepository
      */
-    public function store(WebsiteRequest $request)
+    public function store(WebsiteRequest $request, FlatCmService $service, WebsiteRepositoryInterface $websiteRepository)
     {
 
         $identifier = str_slug($this->organization->name, "-");
@@ -76,9 +79,47 @@ class WebsiteController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 
-        $this->dispatch(new CreateWebsite($this->organization->id, $identifier, $username, $email, $password));
+        //$this->dispatch(new CreateWebsite($this->organization->id, $identifier, $username, $email, $password));
 
-        Flash::success(Lang::get('website.create-success'));
+        if ($service->process($identifier, $username, $email, $password)) {
+
+            $website = $websiteRepository->create([
+                'identifier' => $identifier,
+                'username' => $username,
+                'email' => $email,
+                'is_active' => true,
+                'url' => 'http://' . $identifier . '.' . env('CMS_BASE_URL')
+            ]);
+
+            $organization = Organization::findOrFail($this->organization->id);
+            $website->organization()->associate($organization);
+            $website->save();
+
+            Flash::success(Lang::get('website.create-success'));
+        } else {
+            Flash:error:
+            (Lang::get('website.create-failed'));
+        }
+
+        return redirect(action('WebsiteController@index'));
+
+    }
+
+    public function destroy(FlatCmService $service, WebsiteRepositoryInterface $websiteRepository)
+    {
+        $identifier = str_slug($this->organization->name, "-");
+
+        if ($service->destroyCMS($identifier)) {
+
+            $website = $this->organization->website;
+            $website->delete();
+
+
+            Flash::success(Lang::get('website.destroy-success'));
+        } else {
+            Flash::error(Lang::get('website.destroy-failed'));
+        }
+
         return redirect(action('WebsiteController@index'));
 
     }
