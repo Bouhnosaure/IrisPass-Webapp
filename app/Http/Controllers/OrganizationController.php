@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Helpers\Plans;
 use App\Http\Requests;
 use App\Http\Requests\OrganizationRequest;
 use App\Http\Requests\UserProfileRequest;
@@ -117,16 +118,6 @@ class OrganizationController extends Controller
         Flash::success(Lang::get('organization.update-success'));
 
         return redirect(action('OrganizationController@edit'));
-    }
-
-
-    /**
-     * Subscription options and billing
-     */
-    public function subscriptions()
-    {
-        return view('pages.organization.subscriptions')->with('organization', $this->organization);
-
     }
 
     /*

@@ -47,8 +47,16 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('edit', array('uses' => 'OrganizationController@edit'));
         Route::patch('edit', array('uses' => 'OrganizationController@update'));
 
-        Route::get('/subscriptions', array('uses' => 'OrganizationController@subscriptions'));
+    });
 
+    //Organization
+    Route::group(['prefix' => 'subscriptions'], function () {
+        Route::get('/', array('uses' => 'SubscriptionController@index'));
+        Route::get('create/{planid}', array('uses' => 'SubscriptionController@create'));
+        Route::post('pay', array('uses' => 'SubscriptionController@initializeBilling'));
+
+        Route::get('handle/webhook', array('uses' => 'SubscriptionController@handleWebhook'));
+        Route::get('handle/redirect', array('uses' => 'SubscriptionController@handleRedirect'));
     });
 
     //Virtual Desktop

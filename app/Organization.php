@@ -18,13 +18,20 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $fillable = ['uuid', 'name', 'address', 'address_comp', 'phone', 'email', 'is_active', 'max_users', 'date_start', 'date_end'];
+    protected $fillable = ['uuid', 'name', 'address', 'address_comp', 'phone', 'email', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean'
     ];
 
-    protected $dates = ['date_start', 'date_end'];
+    /**
+     * An organization belongs to an Subscription
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subscription()
+    {
+        return $this->hasOne('App\Subscription');
+    }
 
     /**
      * An organization belongs to an user
@@ -54,7 +61,7 @@ class Organization extends Model
     }
 
     /**
-     * An user has one website
+     * An organization has one website
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function website()
@@ -63,7 +70,7 @@ class Organization extends Model
     }
 
     /**
-     * An user has one crm
+     * An organization has one crm
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function crm()

@@ -25,7 +25,7 @@
                     <li><a href="#"><i class="fa fa-building"></i><span>{{ trans('menu.organization') }}</span></a>
                         <ul class="sub-menu">
                             <li><a href="{{action('OrganizationController@index')}}">{{ trans('organization.index') }}</a></li>
-                            <li><a href="{{action('OrganizationController@subscriptions')}}">{{ trans('organization.subscriptions') }}</a></li>
+                            <li><a href="{{action('SubscriptionController@index')}}">{{ trans('organization.subscriptions') }}</a></li>
                         </ul>
                     </li>
 
