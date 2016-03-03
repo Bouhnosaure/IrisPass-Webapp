@@ -22,4 +22,4 @@ $code = $I->grabRecord('users_confirmations', ['user_id' => 1, 'type' => 'mail']
 $I->amOnPage('/confirmation/mail/' . $code->confirmation_code);
 
 $I->seeElement('#submit-mail-code');
-$I->dontSeeRecord('user_profiles', ['user_id' => 1, 'mail_confirmed' => 1]);
+$I->dontSeeRecord('users_profiles', ['user_id' => 1, 'mail_confirmed' => 1]);

@@ -2,16 +2,10 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class Organization extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -24,27 +18,64 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'address_comp', 'phone', 'email', 'is_active', 'max_users', 'date_start', 'date_end'];
+    protected $fillable = ['uuid', 'name', 'address', 'address_comp', 'phone', 'email', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean'
     ];
 
-    protected $dates = ['date_start', 'date_end'];
+    /**
+     * An organization belongs to an Subscription
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subscription()
+    {
+        return $this->hasOne('App\Subscription');
+    }
 
+    /**
+     * An organization belongs to an user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function owner()
     {
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    /**
+     * An organization has many groups
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function groups()
     {
-        return $this->hasMany('App\OsjsGroup');
+        return $this->hasMany('App\UserGroup');
     }
 
+    /**
+     * An organization has many users
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
-        return $this->hasMany('App\OsjsUser');
+        return $this->hasMany('App\User');
+    }
+
+    /**
+     * An organization has one website
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function website()
+    {
+        return $this->hasOne('App\Website');
+    }
+
+    /**
+     * An organization has one crm
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function crm()
+    {
+        return $this->hasOne('App\Crm');
     }
 
 }

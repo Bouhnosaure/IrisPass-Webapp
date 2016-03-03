@@ -38,4 +38,4 @@ $I->fillField(['id' => 'phone'], $_phone);
 $I->click('submit-edit');
 
 $I->seeInDatabase('users',['email' => $_email]);
-$I->seeInDatabase('user_profiles',['phone' => $_phone]);
+$I->seeInDatabase('users_profiles',['phone' => $_phone]);

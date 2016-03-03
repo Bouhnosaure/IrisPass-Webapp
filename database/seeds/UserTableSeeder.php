@@ -21,12 +21,21 @@ class UserTableSeeder extends Seeder
             'id' => 1,
             'email' => 'alexandre.mangin@viacesi.fr',
             'password' => bcrypt('123123'),
+            'organization_id' => 1,
         ]);
 
         User::create([
             'id' => 2,
             'email' => 'alan.corbel@viacesi.fr',
             'password' => bcrypt('123123'),
+            'organization_id' => 1,
+        ]);
+
+        User::create([
+            'id' => 3,
+            'email' => 'clarquey@irisit.fr',
+            'password' => bcrypt('123123'),
+            'organization_id' => 1,
         ]);
 
     }

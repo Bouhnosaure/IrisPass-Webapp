@@ -25,6 +25,7 @@ return [
     'create-success' => 'Your organization was successfully created',
     'create-update' => 'Your organization was successfully updated',
     'fail-exists' => 'You have already an organization',
+    'fail-name' => 'This name is not valid',
     'fail-not-exist' => 'You need an organization in order to use this functionality',
     'update-success' => 'Organization updated',
 

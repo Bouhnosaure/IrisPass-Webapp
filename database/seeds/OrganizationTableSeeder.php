@@ -1,7 +1,6 @@
 <?php
 use App\Organization;
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
 
 class OrganizationTableSeeder extends Seeder
@@ -18,6 +17,7 @@ class OrganizationTableSeeder extends Seeder
         DB::unprepared($statement);
 
         Organization::create([
+            'uuid' => uniqid(),
             'name' => 'Gorilla LTD',
             'address' => '61 cours du médoc',
             'address_comp' => 'appt 22 bat B',

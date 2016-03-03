@@ -40,36 +40,73 @@ Route::group(['middleware' => 'web'], function () {
 
     //Organization
     Route::group(['prefix' => 'organization'], function () {
+
         Route::get('/', array('uses' => 'OrganizationController@index'));
         Route::get('/create', array('uses' => 'OrganizationController@create'));
         Route::post('/', array('uses' => 'OrganizationController@store'));
         Route::get('edit', array('uses' => 'OrganizationController@edit'));
         Route::patch('edit', array('uses' => 'OrganizationController@update'));
 
-        Route::get('/subscriptions', array('uses' => 'OrganizationController@subscriptions'));
-
     });
 
     //Organization
-    Route::group(['prefix' => 'virtualdesktop'], function () {
+    Route::group(['prefix' => 'subscriptions'], function () {
+        Route::get('/', array('uses' => 'SubscriptionController@index'));
+        Route::get('create/{planid}', array('uses' => 'SubscriptionController@create'));
+        Route::post('pay', array('uses' => 'SubscriptionController@initializeBilling'));
 
-        Route::get('users/create', array('uses' => 'OsjsUsersController@create'));
-        Route::post('users', array('uses' => 'OsjsUsersController@store'));
-        Route::get('users/{id}', array('uses' => 'OsjsUsersController@show'));
-        Route::get('users/{id}/edit', array('uses' => 'OsjsUsersController@edit'));
-        Route::patch('users/{id}/edit', array('uses' => 'OsjsUsersController@update'));
-        Route::delete('users/{id}', array('uses' => 'OsjsUsersController@destroy'));
+        Route::get('handle/webhook', array('uses' => 'SubscriptionController@handleWebhook'));
+        Route::get('handle/redirect', array('uses' => 'SubscriptionController@handleRedirect'));
+    });
 
-        Route::get('groups/create', array('uses' => 'OsjsGroupsController@create'));
-        Route::post('groups', array('uses' => 'OsjsGroupsController@store'));
-        Route::get('groups/{id}', array('uses' => 'OsjsGroupsController@show'));
-        Route::get('groups/{id}/edit', array('uses' => 'OsjsGroupsController@edit'));
-        Route::patch('groups/{id}/edit', array('uses' => 'OsjsGroupsController@update'));
-        Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
 
-        Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
-        Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
+    //Users
+    Route::group(['prefix' => 'management'], function () {
+
+        Route::get('/', array('uses' => 'UsersManagementController@index'));
+
+        Route::get('users/create', array('uses' => 'UsersController@create'));
+        Route::post('users', array('uses' => 'UsersController@store'));
+        Route::get('users/{id}', array('uses' => 'UsersController@show'));
+        Route::get('users/{id}/edit', array('uses' => 'UsersController@edit'));
+        Route::patch('users/{id}/edit', array('uses' => 'UsersController@update'));
+        Route::delete('users/{id}', array('uses' => 'UsersController@destroy'));
+
+        Route::get('groups/create', array('uses' => 'GroupsController@create'));
+        Route::post('groups', array('uses' => 'GroupsController@store'));
+        Route::get('groups/{id}', array('uses' => 'GroupsController@show'));
+        Route::get('groups/{id}/edit', array('uses' => 'GroupsController@edit'));
+        Route::patch('groups/{id}/edit', array('uses' => 'GroupsController@update'));
+        Route::delete('groups/{id}', array('uses' => 'GroupsController@destroy'));
+
+        Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'UsersGroupsController@addUserToGroup'));
+        Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'UsersGroupsController@removeUserFromGroup'));
 
     });
+
+    //Website
+    Route::group(['prefix' => 'website'], function () {
+
+        Route::get('/', array('uses' => 'WebsiteController@index'));
+        Route::get('create', array('uses' => 'WebsiteController@create'));
+        Route::post('create', array('uses' => 'WebsiteController@store'));
+        Route::delete('delete', array('uses' => 'WebsiteController@destroy'));
+
+    });
+
+    //CRM
+    Route::group(['prefix' => 'crm'], function () {
+
+        Route::get('/', array('uses' => 'CrmController@index'));
+        Route::post('crm/activate/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@activateCRM']);
+        Route::post('crm/create/user/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@createUser']);
+        Route::post('crm/disable/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@disableCRM']);
+        Route::post('crm/reactivate/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@reactivateCRM']);
+        Route::get('crm/status/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@checkAvailabilityCRM']);
+        Route::post('crm/users/{id}/toogle/{user}', ['as' => 'crm.activate', 'uses' => 'CrmController@toogleUserCRM']);
+        Route::get('crm/users/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@getUsersCRM']);
+
+    });
+
 
 });

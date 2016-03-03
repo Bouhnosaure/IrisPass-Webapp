@@ -26,4 +26,4 @@ $I->fillField(['name' => 'code'], $code->confirmation_code);
 $I->click('submit-confirmation-code');
 
 $I->dontSee('#submit-phone-code');
-$I->seeRecord('user_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);
+$I->seeRecord('users_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);

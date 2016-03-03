@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\OrganizationRequest;
 use App\Http\Requests\UserProfileRequest;
-use App\Repositories\OrganizationRepositoryInterface;
+use App\Organization;
 use App\Repositories\UserRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,22 +15,16 @@ class OrganizationController extends Controller
     /**
      * @var UserRepositoryInterface
      */
-    private $organizationRepository;
     private $organization;
 
     /**
-     * @param OrganizationRepositoryInterface $organizationRepository
      * @internal param UserRepositoryInterface $userRepository
      */
-    public function __construct(OrganizationRepositoryInterface $organizationRepository)
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('hasOrganization', ['except' => ['index', 'create', 'store']]);
-
-        $this->organizationRepository = $organizationRepository;
-
         $this->organization = Auth::user()->organization()->first();
-
         Carbon::setLocale('fr');
     }
 
@@ -77,7 +71,13 @@ class OrganizationController extends Controller
      */
     public function store(OrganizationRequest $request)
     {
-        $this->organization = $this->organizationRepository->create($request->all());
+
+        if (starts_with($request->get('name'), ['www']) || in_array($request->get('name'), ['cms', 'irispass', 'mail', 'desktop', 'bureau', 'chat', 'www', 'office', 'iris', 'only', 'admin'])) {
+            Flash::error(Lang::get('organization.fail-name'));
+            return redirect(action('OrganizationController@index'));
+        }
+
+        $this->organization = Organization::create($request->all());
 
         $this->organization->owner()->associate(Auth::user());
 
@@ -106,21 +106,15 @@ class OrganizationController extends Controller
      */
     public function update(OrganizationRequest $request)
     {
-        $this->organizationRepository->update($this->organization->id, $request->all());
+        $this->organization = Organization::findOrFail($this->organization->id);
+
+        $this->organization->update($request->all());
+
+        $this->organization->save();
 
         Flash::success(Lang::get('organization.update-success'));
 
         return redirect(action('OrganizationController@edit'));
-    }
-
-
-    /**
-     * Subscription options and billing
-     */
-    public function subscriptions()
-    {
-        return view('pages.organization.subscriptions')->with('organization', $this->organization);
-
     }
 
     /*

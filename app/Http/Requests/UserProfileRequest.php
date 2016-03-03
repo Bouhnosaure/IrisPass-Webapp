@@ -40,9 +40,10 @@ class UserProfileRequest extends Request
 
         $rules = [
             'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'required_with:password_confirmation|min:6|confirmed',
             'profile.firstname' => 'required|max:255',
             'profile.lastname' => 'required|max:255',
-            'profile.phone' => 'required|min:10|unique:user_profiles,phone,' . $id . ',user_id'
+            'profile.phone' => 'required|min:10|unique:users_profiles,phone,' . $id . ',user_id'
         ];
 
         return $rules;

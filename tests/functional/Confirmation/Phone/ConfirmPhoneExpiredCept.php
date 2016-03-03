@@ -27,4 +27,4 @@ $I->click('submit-confirmation-code');
 //step5
 $I->seeCurrentUrlEquals('/confirmation');
 $I->seeElement('#submit-phone-code');
-$I->dontSeeRecord('user_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);
+$I->dontSeeRecord('users_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);

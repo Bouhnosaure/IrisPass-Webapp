@@ -9,7 +9,7 @@ class UserProfile extends Model
      *
      * @var string
      */
-    protected $table = 'user_profiles';
+    protected $table = 'users_profiles';
 
     /**
      * The attributes that are mass assignable.

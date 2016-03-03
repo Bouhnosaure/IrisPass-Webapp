@@ -21,12 +21,23 @@
                 </div>
                 <ul class="cl-vnavigation">
                     <li><a href="{{action('DashboardController@index')}}"><i class="fa fa-home"></i><span>{{ trans('menu.dashboard') }}</span></a></li>
-                    <li><a href="#"><i class="fa fa-globe"></i><span>{{ trans('menu.organization') }}</span></a>
+
+                    <li><a href="#"><i class="fa fa-building"></i><span>{{ trans('menu.organization') }}</span></a>
                         <ul class="sub-menu">
                             <li><a href="{{action('OrganizationController@index')}}">{{ trans('organization.index') }}</a></li>
-                            <li><a href="{{action('OrganizationController@subscriptions')}}">{{ trans('organization.subscriptions') }}</a></li>
+                            <li><a href="{{action('SubscriptionController@index')}}">{{ trans('organization.subscriptions') }}</a></li>
                         </ul>
                     </li>
+
+                    <li><a href="{{action('UsersManagementController@index')}}"><i class="fa fa-users"></i><span>{{ trans('menu.usersmanagement') }}</span></a></li>
+
+                    <li><a href="{{action('WebsiteController@index')}}"><i class="fa fa-globe"></i><span>{{ trans('menu.cms') }}</span></a></li>
+
+                    <li><a href="{{action('UsersManagementController@index')}}"><i class="fa fa-users"></i><span>{{ trans('menu.crm') }}</span></a></li>
+
+                    <li><a href="{{action('UsersManagementController@index')}}"><i class="fa fa-envelope"></i><span>{{ trans('menu.mail') }}</span></a></li>
+
+
                 </ul>
             </div>
         </div>

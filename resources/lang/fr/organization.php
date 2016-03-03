@@ -25,6 +25,7 @@ return [
     'create-success' => 'Votre organisation a été créée avec success',
     'create-update' => 'Votre organisation a été modifiée avec success',
     'fail-exists' => 'Vous possèdez déjà une organisation',
+    'fail-name' => 'Ce nom n\'est pas valide',
     'fail-not-exist' => 'Vous devez créer une organisation pour utiliser cette fonction',
     'update-success' => 'Organisation mise à jour',
 

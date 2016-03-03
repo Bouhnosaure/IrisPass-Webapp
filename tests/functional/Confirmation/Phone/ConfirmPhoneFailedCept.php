@@ -28,4 +28,4 @@ $I->seeCurrentUrlEquals('/confirmation/phone');
 //step5
 $I->amOnPage('/confirmation');
 $I->seeElement('#submit-phone-code');
-$I->dontSeeRecord('user_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);
+$I->dontSeeRecord('users_profiles', ['user_id' => 1, 'phone_confirmed' => 1]);

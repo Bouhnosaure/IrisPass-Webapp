@@ -103,5 +103,35 @@ class OsjsService
 
     }
 
+    public function deleteDirectory($type, $name)
+    {
+
+        $filesystem = new Filesystem();
+
+        switch ($type) {
+            case 'user' :
+                $path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->users_directory . DIRECTORY_SEPARATOR . $name;
+                break;
+
+            case 'group' :
+                $path = $this->vfs_path . DIRECTORY_SEPARATOR . $this->groups_directory . DIRECTORY_SEPARATOR . $name;
+                break;
+
+            default:
+                return null;
+                break;
+        }
+
+        //make a backup in case of emergency
+        $filesystem->copyDirectory($path, $this->vfs_path . DIRECTORY_SEPARATOR . $this->backup_directory . DIRECTORY_SEPARATOR . $type . '-' . $name . '-' . time());
+
+        //delete the old one
+        $filesystem->deleteDirectory($path);
+
+
+        return true;
+
+    }
+
 
 }
