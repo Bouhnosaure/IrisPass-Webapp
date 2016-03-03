@@ -3,39 +3,24 @@
 use App\Billing;
 use App\Http\Requests;
 use App\Http\Requests\InitializeBillingRequest;
-use App\Http\Requests\OrganizationRequest;
-use App\Http\Requests\UserProfileRequest;
-use App\Repositories\OrganizationRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Lang;
-use Laracasts\Flash\Flash;
 
 class SubscriptionController extends Controller
 {
     /**
      * @var UserRepositoryInterface
      */
-    private $organizationRepository;
     private $organization;
 
-    /**
-     * @param OrganizationRepositoryInterface $organizationRepository
-     * @internal param UserRepositoryInterface $userRepository
-     */
-    public function __construct(OrganizationRepositoryInterface $organizationRepository)
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('hasOrganization');
-
-        $this->organizationRepository = $organizationRepository;
-
         $this->organization = Auth::user()->organization()->first();
-
         Carbon::setLocale('fr');
     }
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WebsiteRequest;
-use App\Jobs\CreateWebsite;
 use App\Organization;
 use App\Repositories\WebsiteRepositoryInterface;
 use App\Services\FlatCmService;

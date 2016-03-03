@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OsjsGroupRequest;
-use App\Repositories\OsjsGroupRepositoryInterface;
+use App\OsjsGroup;
 use App\Services\OsjsService;
 
 use App\Http\Requests;
@@ -15,19 +15,13 @@ class OsjsGroupsController extends Controller
 {
 
     private $organization;
-    private $osjsGroupRepository;
 
-    /**
-     * @param OsjsGroupRepositoryInterface $osjsGroupRepository
-     */
-    public function __construct(OsjsGroupRepositoryInterface $osjsGroupRepository)
+
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('hasOrganization');
-
-        $this->osjsGroupRepository = $osjsGroupRepository;
         $this->organization = Auth::user()->organization()->first();
-
     }
 
 
@@ -50,7 +44,7 @@ class OsjsGroupsController extends Controller
      */
     public function store(OsjsGroupRequest $request, OsjsService $service)
     {
-        $group = $this->osjsGroupRepository->create($request->all());
+        $group = OsjsGroup::create($request->all());
         $name = $this->organization->uuid . "-" . $group->name;
 
         if ($path = $service->createDirectory('group', $name)) {
@@ -78,7 +72,7 @@ class OsjsGroupsController extends Controller
      */
     public function show($id)
     {
-        $group = $this->osjsGroupRepository->getById($id);
+        $group = OsjsGroup::findOrFail($id);
         $users = $this->organization->users()->get();
 
         return view('pages.osjs_groups.show')->with(compact('group', 'users'));
@@ -92,7 +86,7 @@ class OsjsGroupsController extends Controller
      */
     public function edit($id)
     {
-        $group = $this->osjsGroupRepository->getById($id);
+        $group = OsjsGroup::findOrFail($id);
 
         return view('pages.osjs_groups.edit')->with('group', $group);
     }
@@ -108,14 +102,15 @@ class OsjsGroupsController extends Controller
     public function update(OsjsGroupRequest $request, $id, OsjsService $service)
     {
         //get the old version
-        $group_old = $this->osjsGroupRepository->getById($id);
+        $group_old = OsjsGroup::findOrFail($id);
         $old_name = $this->organization->uuid . "-" . $group_old->name;
 
         //update
-        $this->osjsGroupRepository->update($id, $request->all());
+        $group = OsjsGroup::findOrFail($id);
+        $group->update($request->all());
+        $group->save();
 
         //get the new version
-        $group = $this->osjsGroupRepository->getById($id);
         $name = $this->organization->uuid . "-" . $group->name;
 
         if ($path = $service->renameDirectory('group', $old_name, $name)) {
@@ -142,7 +137,7 @@ class OsjsGroupsController extends Controller
      */
     public function destroy($id, OsjsService $service)
     {
-        $group = $this->osjsGroupRepository->getById($id);
+        $group = OsjsGroup::findOrFail($id);
 
         $name = $this->organization->uuid . "-" . $group->name;
 

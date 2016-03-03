@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Repositories\OrganizationRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    private $organizationRepository;
     private $organization;
 
     /**
@@ -17,14 +14,10 @@ class DashboardController extends Controller
      *
      * @return void
      */
-    public function __construct(OrganizationRepositoryInterface $organizationRepository)
+    public function __construct()
     {
         $this->middleware('auth');
-
-        $this->organizationRepository = $organizationRepository;
-
         $this->organization = Auth::user()->organization()->first();
-
     }
 
     /**

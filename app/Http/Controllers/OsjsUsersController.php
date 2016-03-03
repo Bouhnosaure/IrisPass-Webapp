@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OsjsUserRequest;
-use App\Repositories\OsjsUserRepositoryInterface;
+use App\OsjsUser;
 use App\Services\OsjsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Laracasts\Flash\Flash;
@@ -18,18 +17,15 @@ class OsjsUsersController extends Controller
 {
 
     private $organization;
-    private $osjsUserRepository;
 
     /**
      * @internal param UserRepositoryInterface $userRepository
-     * @param OsjsUserRepositoryInterface $osjsUserRepository
      */
-    public function __construct(OsjsUserRepositoryInterface $osjsUserRepository)
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('hasOrganization');
 
-        $this->osjsUserRepository = $osjsUserRepository;
         $this->organization = Auth::user()->organization()->first();
 
         Carbon::setLocale('fr');
@@ -56,7 +52,11 @@ class OsjsUsersController extends Controller
      */
     public function store(OsjsUserRequest $request, OsjsService $service)
     {
-        $user = $this->osjsUserRepository->create($request->all());
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        $data['groups'] = '["admin"]';
+
+        $user = OsjsUser::create($data);
 
         if ($path = $service->createDirectory('user', $user->username)) {
 
@@ -81,7 +81,7 @@ class OsjsUsersController extends Controller
      */
     public function show($id)
     {
-        $user = $this->osjsUserRepository->getById($id);
+        $user = OsjsUser::findOrFail($id);
 
         return view('pages.osjs_users.show')->with('user', $user);
     }
@@ -94,7 +94,7 @@ class OsjsUsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->osjsUserRepository->getById($id);
+        $user = OsjsUser::findOrFail($id);
 
         return view('pages.osjs_users.edit')->with('user', $user);
     }
@@ -109,11 +109,22 @@ class OsjsUsersController extends Controller
      */
     public function update(OsjsUserRequest $request, $id, OsjsService $service)
     {
-        $old_user = $this->osjsUserRepository->getById($id);
+        $old_user = OsjsUser::findOrFail($id);
 
-        $this->osjsUserRepository->update($id, $request->all());
+        $user = OsjsUser::findOrFail($id);
+        $data = $request->all();
+        if ($data['password'] == "") {
+            unset($data["password"]);
+        }
 
-        $user = $this->osjsUserRepository->getById($id);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        $user->update($data);
+        $user->save();
+
+        $user = OsjsUser::findOrFail($id);
 
         if ($path = $service->renameDirectory('user', $old_user->username, $user->username)) {
 
@@ -138,7 +149,7 @@ class OsjsUsersController extends Controller
      */
     public function destroy($id, OsjsService $service)
     {
-        $user = $this->osjsUserRepository->getById($id);
+        $user = OsjsUser::findOrFail($id);
 
         if ($path = $service->deleteDirectory('user', $user->username)) {
 

@@ -38,10 +38,5 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserConfirmationRepositoryInterface::class, UserConfirmationRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(OsjsUserRepositoryInterface::class, OsjsUserRepository::class);
-        $this->app->bind(OsjsGroupRepositoryInterface::class, OsjsGroupRepository::class);
-        $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
-        $this->app->bind(WebsiteRepositoryInterface::class, WebsiteRepository::class);
-        $this->app->bind(CrmRepositoryInterface::class, CrmRepository::class);
     }
 }
