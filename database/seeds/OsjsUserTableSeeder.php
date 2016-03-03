@@ -23,6 +23,7 @@ class OsjsUserTableSeeder extends Seeder
             'password' => bcrypt('123123'),
             'groups' => '["admin"]',
             'organization_id' => 1,
+            'user_id' => 1,
         ]);
 
         OsjsUser::create([
@@ -31,6 +32,7 @@ class OsjsUserTableSeeder extends Seeder
             'password' => bcrypt('123123'),
             'groups' => '["admin"]',
             'organization_id' => 1,
+            'user_id' => 2,
         ]);
 
     }

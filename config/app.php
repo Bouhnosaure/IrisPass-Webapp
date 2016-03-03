@@ -165,6 +165,7 @@ return [
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -219,6 +220,7 @@ return [
         'Activity'  => Spatie\Activitylog\ActivitylogFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
