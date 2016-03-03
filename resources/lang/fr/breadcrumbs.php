@@ -26,7 +26,7 @@ return [
     'organization' => 'Mon Organisation',
     'organization-edit' => 'Paramètres de l\'organisation',
 
-    'virtualdesktop' => 'Bureau Virtuel',
+    'usersmanagement' => 'Gestion utilisateurs',
     'group-creation' => 'Création de groupe',
     'user-creation' => 'Création d\'un utilisateur',
     'show-group'     => 'Vue d\'un groupe',

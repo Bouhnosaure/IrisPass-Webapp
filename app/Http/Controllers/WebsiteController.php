@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WebsiteRequest;
 use App\Organization;
-use App\Repositories\WebsiteRepositoryInterface;
 use App\Services\FlatCmService;
+use App\Website;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -70,7 +70,7 @@ class WebsiteController extends Controller
      * @internal param FlatCmService $service
      * @internal param WebsiteRepositoryInterface $websiteRepository
      */
-    public function store(WebsiteRequest $request, FlatCmService $service, WebsiteRepositoryInterface $websiteRepository)
+    public function store(WebsiteRequest $request, FlatCmService $service)
     {
 
         $identifier = str_slug($this->organization->name, "-");
@@ -82,7 +82,7 @@ class WebsiteController extends Controller
 
         if ($service->process($identifier, $username, $email, $password)) {
 
-            $website = $websiteRepository->create([
+            $website = Website::create([
                 'identifier' => $identifier,
                 'username' => $username,
                 'email' => $email,
@@ -104,7 +104,7 @@ class WebsiteController extends Controller
 
     }
 
-    public function destroy(FlatCmService $service, WebsiteRepositoryInterface $websiteRepository)
+    public function destroy(FlatCmService $service)
     {
         $identifier = str_slug($this->organization->name, "-");
 

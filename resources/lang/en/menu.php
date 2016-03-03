@@ -13,7 +13,7 @@ return [
     'preferences' => 'Preferences',
     'confirmation' => 'Validate',
     'organization' => 'My Organization',
-    'virtualdesktop' => 'Virtual desktop',
+    'usersmanagement' => 'User Management',
     'cms' => 'My Website',
     'crm' => 'My CRM',
     'mail' => 'Mail Service',

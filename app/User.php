@@ -44,11 +44,30 @@ class User extends Authenticatable
     }
 
     /**
+     * An user has one profile
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function apps()
+    {
+        return $this->hasOne('App\UserApp');
+    }
+
+    /**
      * An user has one organization
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function organization()
     {
         return $this->hasOne('App\Organization');
+    }
+
+    /**
+     * An os js user can be in many groups
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany('App\OsjsGroup', 'groups_users_pivot', 'user_id', 'group_id')->withTimestamps();
     }
 }

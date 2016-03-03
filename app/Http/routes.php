@@ -59,27 +59,28 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('handle/redirect', array('uses' => 'SubscriptionController@handleRedirect'));
     });
 
-    //Virtual Desktop
-    Route::group(['prefix' => 'virtualdesktop'], function () {
 
-        Route::get('/', array('uses' => 'VirtualDesktopController@index'));
+    //Users
+    Route::group(['prefix' => 'management'], function () {
 
-        Route::get('users/create', array('uses' => 'OsjsUsersController@create'));
-        Route::post('users', array('uses' => 'OsjsUsersController@store'));
-        Route::get('users/{id}', array('uses' => 'OsjsUsersController@show'));
-        Route::get('users/{id}/edit', array('uses' => 'OsjsUsersController@edit'));
-        Route::patch('users/{id}/edit', array('uses' => 'OsjsUsersController@update'));
-        Route::delete('users/{id}', array('uses' => 'OsjsUsersController@destroy'));
+        Route::get('/', array('uses' => 'UsersManagementController@index'));
 
-        Route::get('groups/create', array('uses' => 'OsjsGroupsController@create'));
-        Route::post('groups', array('uses' => 'OsjsGroupsController@store'));
-        Route::get('groups/{id}', array('uses' => 'OsjsGroupsController@show'));
-        Route::get('groups/{id}/edit', array('uses' => 'OsjsGroupsController@edit'));
-        Route::patch('groups/{id}/edit', array('uses' => 'OsjsGroupsController@update'));
-        Route::delete('groups/{id}', array('uses' => 'OsjsGroupsController@destroy'));
+        Route::get('users/create', array('uses' => 'UsersController@create'));
+        Route::post('users', array('uses' => 'UsersController@store'));
+        Route::get('users/{id}', array('uses' => 'UsersController@show'));
+        Route::get('users/{id}/edit', array('uses' => 'UsersController@edit'));
+        Route::patch('users/{id}/edit', array('uses' => 'UsersController@update'));
+        Route::delete('users/{id}', array('uses' => 'UsersController@destroy'));
 
-        Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'OsjsUserGroupsController@addUserToGroup'));
-        Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'OsjsUserGroupsController@removeUserFromGroup'));
+        Route::get('groups/create', array('uses' => 'GroupsController@create'));
+        Route::post('groups', array('uses' => 'GroupsController@store'));
+        Route::get('groups/{id}', array('uses' => 'GroupsController@show'));
+        Route::get('groups/{id}/edit', array('uses' => 'GroupsController@edit'));
+        Route::patch('groups/{id}/edit', array('uses' => 'GroupsController@update'));
+        Route::delete('groups/{id}', array('uses' => 'GroupsController@destroy'));
+
+        Route::post('manage/groups/{groupId}/add/{userId}', array('uses' => 'UsersGroupsController@addUserToGroup'));
+        Route::post('manage/groups/{groupId}/remove/{userId}', array('uses' => 'UsersGroupsController@removeUserFromGroup'));
 
     });
 

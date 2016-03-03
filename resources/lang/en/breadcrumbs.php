@@ -26,7 +26,7 @@ return [
     'organization' => 'My Organization',
     'organization-edit' => 'Organization settings',
 
-    'virtualdesktop' => 'Virtual Desktop',
+    'usersmanagement' => 'User Management',
     'group-creation' => 'Group creation',
     'user-creation' => 'User creation',
     'show-group'     => 'Group view',

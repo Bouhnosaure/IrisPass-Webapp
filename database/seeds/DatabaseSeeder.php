@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             $this->call(UserTableSeeder::class);
             $this->call(UserProfileTableSeeder::class);
             $this->call(OrganizationTableSeeder::class);
-            $this->call(OsjsUserTableSeeder::class);
         }
 
         Model::reguard();

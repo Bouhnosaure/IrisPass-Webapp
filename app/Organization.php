@@ -48,7 +48,7 @@ class Organization extends Model
      */
     public function groups()
     {
-        return $this->hasMany('App\OsjsGroup');
+        return $this->hasMany('App\UserGroup');
     }
 
     /**
@@ -57,7 +57,7 @@ class Organization extends Model
      */
     public function users()
     {
-        return $this->hasMany('App\OsjsUser');
+        return $this->hasMany('App\User');
     }
 
     /**

@@ -18,45 +18,45 @@ Breadcrumbs::register('organization_edit', function ($breadcrumbs) {
 });
 
 
-// VirtualDesktop
-Breadcrumbs::register('virtualdesktop', function ($breadcrumbs) {
-    $breadcrumbs->push(trans('breadcrumbs.virtualdesktop'), action('VirtualDesktopController@index'));
+// usersmanagement
+Breadcrumbs::register('usersmanagement', function ($breadcrumbs) {
+    $breadcrumbs->push(trans('breadcrumbs.usersmanagement'), action('UsersManagementController@index'));
 });
 
-// VirtualDesktop > Create group
+// usersmanagement > Create group
 Breadcrumbs::register('create_group', function ($breadcrumbs) {
-    $breadcrumbs->parent('virtualdesktop');
-    $breadcrumbs->push(trans('breadcrumbs.group-creation'), action('OsjsGroupsController@create'));
+    $breadcrumbs->parent('usersmanagement');
+    $breadcrumbs->push(trans('breadcrumbs.group-creation'), action('GroupsController@create'));
 });
 
-// VirtualDesktop > Create user
+// usersmanagement > Create user
 Breadcrumbs::register('create_user', function ($breadcrumbs) {
-    $breadcrumbs->parent('virtualdesktop');
-    $breadcrumbs->push(trans('breadcrumbs.user-creation'), action('OsjsUsersController@create'));
+    $breadcrumbs->parent('usersmanagement');
+    $breadcrumbs->push(trans('breadcrumbs.user-creation'), action('UsersController@create'));
 });
 
 
-// VirtualDesktop > Show group
+// usersmanagement > Show group
 Breadcrumbs::register('show_group', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('virtualdesktop');
-    $breadcrumbs->push(trans('breadcrumbs.show-group'), action('OsjsGroupsController@show', $id));
+    $breadcrumbs->parent('usersmanagement');
+    $breadcrumbs->push(trans('breadcrumbs.show-group'), action('GroupsController@show', $id));
 });
 
-// VirtualDesktop > Show user
+// usersmanagement > Show user
 Breadcrumbs::register('show_user', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('virtualdesktop');
-    $breadcrumbs->push(trans('breadcrumbs.show-user'), action('OsjsUsersController@show', $id));
+    $breadcrumbs->parent('usersmanagement');
+    $breadcrumbs->push(trans('breadcrumbs.show-user'), action('UsersController@show', $id));
 });
 
 
-// VirtualDesktop > Edit group
+// usersmanagement > Edit group
 Breadcrumbs::register('edit_group', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('virtualdesktop', $id);
-    $breadcrumbs->push(trans('breadcrumbs.edit-group'), action('OsjsGroupsController@edit', $id));
+    $breadcrumbs->parent('usersmanagement', $id);
+    $breadcrumbs->push(trans('breadcrumbs.edit-group'), action('GroupsController@edit', $id));
 });
 
-// VirtualDesktop > Edit user
+// usersmanagement > Edit user
 Breadcrumbs::register('edit_user', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('virtualdesktop', $id);
-    $breadcrumbs->push(trans('breadcrumbs.edit-user'), action('OsjsUsersController@edit', $id));
+    $breadcrumbs->parent('usersmanagement', $id);
+    $breadcrumbs->push(trans('breadcrumbs.edit-user'), action('UsersController@edit', $id));
 });

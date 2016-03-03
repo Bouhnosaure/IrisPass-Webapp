@@ -15,8 +15,8 @@ class UserProfileTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_profiles')->delete();
-        $statement = "ALTER TABLE user_profiles AUTO_INCREMENT = 1;";
+        DB::table('users_profiles')->delete();
+        $statement = "ALTER TABLE users_profiles AUTO_INCREMENT = 1;";
         DB::unprepared($statement);
 
         UserProfile::create([
