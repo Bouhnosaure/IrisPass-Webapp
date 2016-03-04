@@ -43,7 +43,7 @@ class CrmService
         $filesystem = new Filesystem($adapter);
         $filesystem->createDir($identifier);
 
-        $source = "/var/www/crm-master-00";
+        $source = "/var/www/crm_master";
         $dest = "/var/www/crm_container/" . $identifier;
         $permissions = 0755;
 
@@ -60,16 +60,16 @@ class CrmService
     public function copyDatabase($identifier)
     {
 
-        $user = 'revive';
-        $pwd = 'ZZdue2MZDrf7hfam';
-        $source_db = 'crmmasterdb';
+        $user = env('DB_USERNAME');
+        $pwd = env('DB_PASSWORD');
+        $source_db = 'db_master_crm';
         $target_db = 'crm' . $identifier;
         $target_db = str_replace('-', '', $target_db);
 
-        $command = 'echo "create database ' . $target_db . '" | mysql -h mysql-master -u' . $user . ' -p' . $pwd;
+        $command = 'echo "create database ' . $target_db . '" | mysql -h '.env('DB_HOST_WRITE').' -P '.env('DB_PORT_WRITE').' -u' . $user . ' -p' . $pwd;
         exec($command);
 
-        $command = 'mysqldump -h mysql-master -u' . $user . ' -p' . $pwd . ' ' . $source_db . ' | mysql -h mysql-master -u' . $user . ' -p' . $pwd . ' ' . $target_db;
+        $command = 'mysqldump -h '.env('DB_HOST_WRITE').' -P '.env('DB_PORT_WRITE').' -u' . $user . ' -p' . $pwd . ' ' . $source_db . ' | mysql -h '.env('DB_HOST_WRITE').' -P '.env('DB_PORT_WRITE').' -u' . $user . ' -p' . $pwd . ' ' . $target_db;
         exec($command);
 
     }
@@ -87,9 +87,9 @@ class CrmService
         $path_to_file = $path_to_directory . 'config.inc.php';
         $file_contents = file_get_contents($path_to_file);
 
-        $file_contents = str_replace('$dbconfig[\'db_name\'] = \'crmmasterdb\'', '$dbconfig[\'db_name\'] = \'' . $target_db . '\'', $file_contents);
-        $file_contents = str_replace('$site_URL = \'http://master.bziiit.com/\'', '$site_URL = \'http://' . $identifier . '.crm.bziiit.com/\'', $file_contents);
-        $file_contents = str_replace('$root_directory = \'/var/www/crm-master-00/\'', '$root_directory = \'' . $path_to_directory . '\'', $file_contents);
+        $file_contents = str_replace('$dbconfig[\'db_name\'] = \'db_master_crm\'', '$dbconfig[\'db_name\'] = \'' . $target_db . '\'', $file_contents);
+        $file_contents = str_replace('$site_URL = \'http://master.crm.irispass.fr/\'', '$site_URL = \'http://' . $identifier . '.crm.irispass.fr/\'', $file_contents);
+        $file_contents = str_replace('$root_directory = \'/var/www/crm_master/\'', '$root_directory = \'' . $path_to_directory . '\'', $file_contents);
         file_put_contents($path_to_file, $file_contents);
     }
 
@@ -98,7 +98,7 @@ class CrmService
      */
     public function createUser($identifier, $user_data)
     {
-        $client = new VtigerClient('http://' . $identifier . '.crm.bziiit.com');
+        $client = new VtigerClient('http://' . $identifier . '.crm.irispass.fr');
         $login = $client->login('admin', 'W6zx4j1xNIgqRoi6');
 
         $userData = Array(
@@ -218,8 +218,8 @@ class CrmService
         $target_db = 'crm' . $identifier;
         $target_db = str_replace('-', '', $target_db);
 
-        Config::set('database.connections.mysql-crm.database', $target_db);
-        $db = DB::connection('mysql-crm');
+        Config::set('database.connections.mysql_crm.database', $target_db);
+        $db = DB::connection('mysql_crm');
 
         $users = $db->table('vtiger_users')->select('id', 'user_name', 'first_name', 'last_name', 'email1', 'status')->where('id', '!=', 1)->get();
 
@@ -232,8 +232,8 @@ class CrmService
     {
         $target_db = 'crm' . $identifier;
         $target_db = str_replace('-', '', $target_db);
-        Config::set('database.connections.mysql-crm.database', $target_db);
-        $db = DB::connection('mysql-crm');
+        Config::set('database.connections.mysql_crm.database', $target_db);
+        $db = DB::connection('mysql_crm');
 
         $user = $db->table('vtiger_users')->where('id', $user_id)->first();
 

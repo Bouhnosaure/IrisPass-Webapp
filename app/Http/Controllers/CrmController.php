@@ -18,14 +18,20 @@ class CrmController extends Controller
     use DispatchesJobs;
 
     private $organization;
+    /**
+     * @var CrmService
+     */
+    private $crmService;
 
     /**
      * @internal param UserRepositoryInterface $userRepository
      */
-    public function __construct()
+    public function __construct(CrmService $crmService)
     {
         $this->middleware('auth');
         $this->middleware('hasOrganization');
+
+        $this->crmService = $crmService;
 
         $this->organization = Auth::user()->organization()->first();
         $this->crm = $this->organization->crm()->first();
@@ -43,10 +49,14 @@ class CrmController extends Controller
     {
 
         $organization = $this->organization;
-
+        $users = null;
         $crm = $this->crm;
 
-        return view('pages.crm.index')->with(compact('organization', 'crm'));
+        if ($crm && $crm->is_active) {
+            $users = $this->crmService->getUsers($crm->url);
+        }
+
+        return view('pages.crm.index')->with(compact('organization', 'crm', 'users'));
 
     }
 
@@ -56,7 +66,7 @@ class CrmController extends Controller
      * @param CRM $CRM
      * @param $id
      */
-    public function activateCRM(CrmService $CRM, $id)
+    public function activateCRM(CrmService $CRM)
     {
         $identifier = str_slug($this->organization->name, "-");
 
@@ -85,7 +95,7 @@ class CrmController extends Controller
      * @param CrmService $CRM
      * @param $id
      */
-    public function checkAvailabilityCRM(CrmService $CRM, $id)
+    public function checkAvailabilityCRM(CrmService $CRM)
     {
         $response = $CRM->isActive($this->crm->url);
         $identifier = $this->crm->url;
@@ -97,10 +107,20 @@ class CrmController extends Controller
      * @param CrmService $CRM
      * @param $id
      */
-    public function disableCRM(CrmService $CRM, $id)
+    public function disableCRM(CrmService $CRM)
     {
         $response = $CRM->disable($this->crm->url);
-        return $this->response->array(compact('response'));
+
+        if ($response == true) {
+            $this->crm->is_active = false;
+            $this->crm->save();
+            Flash::success(Lang::get('crm.disable-success'));
+        } else {
+            Flash::error(Lang::get('crm.disable-failed'));
+        }
+
+        return redirect(action('CrmController@index'));
+
     }
 
     /**
@@ -108,10 +128,19 @@ class CrmController extends Controller
      * @param $id
      * @return mixed
      */
-    public function reactivateCRM(CrmService $CRM, $id)
+    public function reactivateCRM(CrmService $CRM)
     {
         $response = $CRM->reactivate($this->crm->url);
-        return $this->response->array(compact('response'));
+
+        if ($response == true) {
+            $this->crm->is_active = true;
+            $this->crm->save();
+            Flash::success(Lang::get('crm.reactivate-success'));
+        } else {
+            Flash::error(Lang::get('crm.reactivate-failed'));
+        }
+
+        return redirect(action('CrmController@index'));
     }
 
     /**
@@ -120,21 +149,17 @@ class CrmController extends Controller
      * @param $id
      * @return mixed
      */
-    public function createUser(CrmService $CRM, UsersCrmRequest $request, $id)
+    public function createUser(CrmService $CRM, UsersCrmRequest $request)
     {
         $response = $CRM->createUser($this->crm->url, $request->all());
-        return $this->response->array(compact('response'));
-    }
 
-    /**
-     * @param CrmService $CRM
-     * @param $id
-     * @return mixed
-     */
-    public function getUsersCRM(CrmService $CRM, $id)
-    {
-        $users = $CRM->getUsers($this->crm->url);
-        return $this->response->array(compact('users'));
+        if ($response == true) {
+            Flash::success(Lang::get('crm.createuser-success'));
+        } else {
+            Flash::error(Lang::get('crm.createuser-failed'));
+        }
+
+        return redirect(action('CrmController@index'));
     }
 
     /**
@@ -143,10 +168,17 @@ class CrmController extends Controller
      * @param $id_user
      * @return mixed
      */
-    public function toogleUserCRM(CrmService $CRM, $id, $id_user)
+    public function toogleUserCRM(CrmService $CRM, $id_user)
     {
         $response = $CRM->toogleUserCRM($this->crm->url, $id_user);
-        return $this->response->array(compact('response'));
+
+        if ($response == true) {
+            Flash::success(Lang::get('crm.tooglecrm-success'));
+        } else {
+            Flash::error(Lang::get('crm.tooglecrm-failed'));
+        }
+
+        return redirect(action('CrmController@index'));
     }
 
 

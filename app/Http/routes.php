@@ -98,13 +98,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'crm'], function () {
 
         Route::get('/', array('uses' => 'CrmController@index'));
-        Route::post('crm/activate/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@activateCRM']);
+        Route::post('crm/activate', ['as' => 'crm.activate', 'uses' => 'CrmController@activateCRM']);
         Route::post('crm/create/user/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@createUser']);
-        Route::post('crm/disable/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@disableCRM']);
-        Route::post('crm/reactivate/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@reactivateCRM']);
-        Route::get('crm/status/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@checkAvailabilityCRM']);
-        Route::post('crm/users/{id}/toogle/{user}', ['as' => 'crm.activate', 'uses' => 'CrmController@toogleUserCRM']);
-        Route::get('crm/users/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@getUsersCRM']);
+        Route::post('crm/disable', ['as' => 'crm.activate', 'uses' => 'CrmController@disableCRM']);
+        Route::post('crm/reactivate', ['as' => 'crm.activate', 'uses' => 'CrmController@reactivateCRM']);
+        Route::get('crm/status', ['as' => 'crm.activate', 'uses' => 'CrmController@checkAvailabilityCRM']);
+        Route::post('crm/users/toogle/{id}', ['as' => 'crm.activate', 'uses' => 'CrmController@toogleUserCRM']);
+        Route::get('crm/users', ['as' => 'crm.activate', 'uses' => 'CrmController@getUsersCRM']);
 
     });
 
