@@ -71,6 +71,25 @@ return [
             'strict'    => false,
         ],
 
+        'mysql_crm' => [
+            'driver'    => 'mysql',
+            'read' => [
+                'host' => env('DB_HOST_READ', 'localhost'),
+                'port' => env('DB_PORT_READ', '3306'),
+            ],
+            'write' => [
+                'host' => env('DB_HOST_WRITE', 'localhost'),
+                'port' => env('DB_PORT_WRITE', '3306'),
+            ],
+            'database'  => '',
+            'username'  => env('DB_USERNAME', ''),
+            'password'  => env('DB_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'mysql_testing' => [
             'driver'    => 'mysql',
             'read' => [
