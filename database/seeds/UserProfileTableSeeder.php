@@ -21,22 +21,22 @@ class UserProfileTableSeeder extends Seeder
 
         UserProfile::create([
             'firstname' => 'Alexandre',
-            'lastname' => 'Mangin',
-            'phone' => '0616391876',
+            'lastname' => 'xxxxxxx',
+            'phone' => '0606060606',
             'user_id' => 1,
         ]);
 
         UserProfile::create([
             'firstname' => 'Alan',
-            'lastname' => 'Corbel',
-            'phone' => '0626381876',
+            'lastname' => 'xxxxxxx',
+            'phone' => '0606060606',
             'user_id' => 2,
         ]);
 
         UserProfile::create([
             'firstname' => 'Christophe',
-            'lastname' => 'Larquey',
-            'phone' => '0605040302',
+            'lastname' => 'xxxxxxx',
+            'phone' => '0606060606',
             'user_id' => 3,
         ]);
 
